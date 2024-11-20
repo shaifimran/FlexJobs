@@ -8,6 +8,15 @@ public class Opportunity {
 	private String opportunityID;
 	private String title;
 	private String description;
+	private String category;
+	
+	public void setCategory(String Category) {
+		this.category = Category;
+	}
+	
+	public String getCategory() {
+		return this.category;
+	}
 
 	public String getOpportunityID() {
 		return opportunityID;

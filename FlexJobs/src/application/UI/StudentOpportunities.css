@@ -1,0 +1,91 @@
+/* Root style for the entire application */
+.root {
+    -fx-background-color: #1e1e1e; /* Dark background */
+    -fx-padding: 20;
+}
+
+/* Styling the TableView */
+.table-view {
+    -fx-background-color: #2b2b2b; /* Table background */
+    -fx-border-color: #444; /* Table border */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-radius: 10px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, #909190, 6, 0.1, -2, 2); /* Glow effect */
+}
+
+/* Header row styling */
+.table-view .column-header {
+    -fx-background-color: #3c3c3c; /* Darker header background */
+    -fx-border-color: transparent transparent #555 transparent; /* Header border */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-padding: 8px;
+}
+
+/* Table rows styling */
+.table-row-cell {
+    -fx-background-color: #2b2b2b; /* Row background */
+    -fx-text-fill: #eeeeee; /* Row text color */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #00ffcc; /* Highlighted row background */
+    -fx-text-fill: #000000; /* Highlighted row text color */
+    -fx-font-weight: bold;
+}
+
+/* Cells styling */
+.table-cell {
+    -fx-border-color: #444; /* Cell borders */
+    -fx-padding: 8px;
+    -fx-font-size: 13px;
+    -fx-text-fill: #cccccc; /* Default cell text color */
+}
+
+.table-cell:selected {
+    -fx-background-color: #00ffcc; /* Selected cell background */
+    -fx-text-fill: #000; /* Selected cell text */
+}
+
+/* Apply button in each row */
+.button {
+    -fx-background-color: #00ffcc; /* Button background */
+    -fx-text-fill: #000000; /* Button text */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 5 10;
+}
+
+.button:hover {
+    -fx-background-color: #00cc99; /* Button hover effect */
+    -fx-text-fill: #ffffff;
+}
+
+.button:pressed {
+    -fx-background-color: #009966; /* Button pressed effect */
+}
+
+/* Scrollbars styling */
+.scroll-bar {
+    -fx-background-color: #444; /* Scrollbar background */
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #00ffcc; /* Scrollbar thumb color */
+    -fx-background-radius: 5px;
+}
+
+/* Glow effect for the TableView when focused */
+.table-view:focused {
+    -fx-effect: dropshadow(gaussian, #6a6a6b, 15, 0.6, 0, 0);
+}
+
+/* Labels styling */
+.label {
+    -fx-text-fill: #eeeeee; /* Label text color */
+    -fx-font-size: 16px;
+}

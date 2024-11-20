@@ -27,7 +27,7 @@
             </Label>
             <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="550.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="4.0">
                <image>
-                  <Image url="@add.png" />
+                  <Image url="@../resources/add.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -40,7 +40,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@arrow.png" />
+                        <Image url="@../resources/arrow.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -57,7 +57,7 @@
                      <children>
                         <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@magnifying-glass.png" />
+                              <Image url="@../resources/magnifying-glass.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="5.0" top="5.0" />

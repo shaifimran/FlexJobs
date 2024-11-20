@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <Label alignment="CENTER" layoutX="1062.0" layoutY="46.0" opacity="0.7" prefHeight="23.0" prefWidth="191.0" text="(Admin Username)" textFill="#f0f0f2">
+         <font>
+            <Font name="Lorin ExtraBold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Label>
+      <Label alignment="CENTER" layoutX="1048.0" layoutY="75.0" opacity="0.7" prefHeight="22.0" prefWidth="214.0" textFill="#f0f0f2">
+         <font>
+            <Font name="Lorin ExtraBold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Label>
+      <Line endX="1004.0" layoutX="248.0" layoutY="127.0" opacity="0.7" startX="-189.3333282470703" stroke="#f0f0f2" />
+      <Label alignment="CENTER" layoutX="42.0" layoutY="150.0" opacity="0.7" prefHeight="22.0" prefWidth="214.0" text="Dashboard" textFill="WHITE">
+         <font>
+            <Font name="Lorin ExtraBold" size="30.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Label>
+      <VBox layoutX="168.0" layoutY="287.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="356.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="255.0">
+               <children>
+                  <Label opacity="0.7" prefHeight="29.0" prefWidth="315.0" text="Verified Organisations" textFill="WHITE">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                     <padding>
+                        <Insets left="6.0" top="1.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="7.0" top="12.0" />
+               </padding>
+            </HBox>
+            <Label alignment="CENTER" opacity="0.7" prefHeight="248.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="34" textFill="#6863ff">
+               <font>
+                  <Font name="Lorin ExtraBold" size="60.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Label>
+            <Line endX="-79.72894287109375" endY="-8.625142097473145" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="214.0">
+               <children>
+                  <Hyperlink prefHeight="23.0" prefWidth="202.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Verify Organisations" textFill="#817dff">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="12.0" />
+                     </padding>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </Hyperlink>
+                  <ImageView fitHeight="16.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/arrow.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets right="17.0" top="18.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="535.0" layoutY="287.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="623.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="255.0">
+               <children>
+                  <Label opacity="0.7" prefHeight="40.0" prefWidth="284.0" text="Reports Generated" textFill="WHITE">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                     <padding>
+                        <Insets left="15.0" top="12.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" opacity="0.7" prefHeight="249.0" prefWidth="624.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+               <font>
+                  <Font name="Lorin ExtraBold" size="60.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Label>
+            <Line endX="187.27105712890625" endY="-9.918078422546387" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="624.0">
+               <children>
+                  <Hyperlink prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Generate Reports" textFill="#817dff">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="12.0" />
+                     </padding>
+                  </Hyperlink>
+                  <ImageView fitHeight="16.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/arrow.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets right="17.0" top="18.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

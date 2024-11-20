@@ -10,35 +10,35 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <TextField layoutX="285.0" layoutY="218.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField layoutX="280.0" layoutY="257.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></TextField>
-      <Label alignment="CENTER" layoutX="284.0" layoutY="181.0" opacity="0.7" prefHeight="30.0" prefWidth="208.0" text="Organization Name:" textFill="#f0f0f2">
+      <Label alignment="CENTER" layoutX="290.0" layoutY="220.0" opacity="0.7" prefHeight="22.0" prefWidth="68.0" stylesheets="@cupertino-dark.css" text="Name:" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></Label>
-      <Label alignment="CENTER" layoutX="289.0" layoutY="319.0" opacity="0.7" text="Industry:" textFill="#f0f1f2">
+      <Label alignment="CENTER" layoutX="723.0" layoutY="220.0" opacity="0.7" stylesheets="@cupertino-dark.css" text="Password:" textFill="#f0f1f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></Label>
-      <PasswordField layoutX="286.0" layoutY="352.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@application.css">
+      <PasswordField layoutX="720.0" layoutY="253.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font name="Lorin ExtraBold" size="12.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></PasswordField>
-      <Button alignment="CENTER" layoutX="585.0" layoutY="618.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Register" textAlignment="CENTER" textFill="WHITE">
+      <Button alignment="CENTER" layoutX="890.0" layoutY="591.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Register" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lorin Bold" size="17.0" />
          </font>
@@ -46,7 +46,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Button>
-      <Label alignment="CENTER" layoutX="426.0" layoutY="46.0" opacity="0.7" prefHeight="45.0" prefWidth="415.0" text="Organization Registration" textFill="#f0f0f0">
+      <Label alignment="CENTER" layoutX="220.0" layoutY="91.0" opacity="0.7" prefHeight="58.0" prefWidth="861.0" stylesheets="@cupertino-dark.css" text="Organisation Representative Registration" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="30.0" />
          </font>
@@ -54,7 +54,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <Label alignment="CENTER" layoutX="720.0" layoutY="181.0" opacity="0.7" text="Description:" textFill="#f0f1f2">
+      <Label alignment="CENTER" layoutX="289.0" layoutY="336.0" opacity="0.7" stylesheets="@cupertino-dark.css" text="Email:" textFill="#f0f1f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -62,7 +62,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <PasswordField layoutX="717.0" layoutY="214.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@application.css">
+      <PasswordField layoutX="281.0" layoutY="369.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font name="Lorin ExtraBold" size="12.0" />
          </font>
@@ -70,7 +70,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </PasswordField>
-      <Label alignment="CENTER" layoutX="720.0" layoutY="308.0" opacity="0.7" text="Location:" textFill="#f0f1f2">
+      <Label alignment="CENTER" layoutX="289.0" layoutY="451.0" opacity="0.7" stylesheets="@cupertino-dark.css" text="Organisation:" textFill="#f0f1f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -78,7 +78,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <PasswordField layoutX="717.0" layoutY="345.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@application.css">
+      <PasswordField layoutX="281.0" layoutY="484.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font name="Lorin ExtraBold" size="12.0" />
          </font>
@@ -86,7 +86,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </PasswordField>
-      <Label alignment="CENTER" layoutX="529.0" layoutY="462.0" opacity="0.7" text="Contact Email:" textFill="#f0f1f2">
+      <Label alignment="CENTER" layoutX="723.0" layoutY="451.0" opacity="0.7" stylesheets="@cupertino-dark.css" text="Position:" textFill="#f0f1f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -94,7 +94,23 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <PasswordField layoutX="526.0" layoutY="495.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@application.css">
+      <PasswordField layoutX="720.0" layoutY="484.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+         <font>
+            <Font name="Lorin ExtraBold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </PasswordField>
+      <Label alignment="CENTER" layoutX="723.0" layoutY="336.0" opacity="0.7" stylesheets="@cupertino-dark.css" text="Phone:" textFill="#f0f1f2">
+         <font>
+            <Font name="Lorin ExtraBold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Label>
+      <PasswordField layoutX="720.0" layoutY="369.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font name="Lorin ExtraBold" size="12.0" />
          </font>

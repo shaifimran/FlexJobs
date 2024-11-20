@@ -612,7 +612,7 @@ Text {
 }
 
 .check-box {
-  -fx-text-fill: -color-fg-default;
+  -fx-text-fill: #f0f0f2;
   -fx-label-padding: 2px 2px 0 6px;
 }
 .check-box > .box {
@@ -1367,6 +1367,11 @@ Add support for NO_HEADER tweak in tables .table-view.no-header > .column-header
   -fx-effect: dropshadow(three-pass-box, -color-shadow-default, 8px, 0.6, 0, 2);
   -fx-background-radius: 6px, 5px;
 }
+.combo-box .prompt-text {
+    -fx-fill: grey; /* Set the color of the prompt text */
+    -fx-font-size: 14px; /* Optional: Adjust font size */
+}
+
 
 .date-picker-popup {
   -color-date-bg: -color-bg-default;
@@ -4399,12 +4404,20 @@ Add support for NO_HEADER tweak in tables .table-view.no-header > .column-header
 }
 
 .text-area {
-  -fx-padding: 2px;
-  -fx-cursor: default;
+    -fx-background-color:  #121212; /* Black background */
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-border-color: #444; /* Border color */
+    -fx-border-radius: 10px; /* Rounded corners for border */
+    -fx-background-radius: 10px; /* Rounded corners for background */
+    -fx-padding: 10px; /* Padding inside the TextArea */
+    -fx-font-size: 14px; /* Font size */
+    -fx-cursor: text; /* Text cursor for usability */
 }
+
 .text-area .content {
-  -fx-cursor: text;
-  -fx-padding: 6px 12px 6px 12px;
+    -fx-background-color: transparent; /* Transparent background for the text content */
+	-fx-cursor: text;
+	 -fx-padding: 6px 12px 6px 12px;
 }
 
 .password-field {
