@@ -10,7 +10,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("./UI/ChatBox.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("./UI/StudentDashboard.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("./UI/application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -18,6 +18,7 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// commeennntttt
 	}
 
 	public static void main(String[] args) {
