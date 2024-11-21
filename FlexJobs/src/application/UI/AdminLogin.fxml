@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authController">
    <children>
-      <TextField layoutX="508.0" layoutY="327.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="adminEmail" layoutX="508.0" layoutY="327.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -31,14 +31,14 @@
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></Label>
-      <PasswordField layoutX="508.0" layoutY="420.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <PasswordField fx:id="adminPassword" layoutX="508.0" layoutY="420.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font name="Lorin ExtraBold" size="12.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></PasswordField>
-      <Button alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="adminLoginButton" onAction="#handleLogin" alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lorin Bold" size="17.0" />
          </font>
