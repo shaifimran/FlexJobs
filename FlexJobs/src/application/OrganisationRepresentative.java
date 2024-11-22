@@ -1,21 +1,12 @@
 package application;
 
 public class OrganisationRepresentative {
-	private String repID;
 	private String name;
 	private String password;
 	private String email;
 	private String position;
 	private String phone;
 	private String orgID;
-
-	public String getRepID() {
-		return repID;
-	}
-
-	public void setRepID(String repID) {
-		this.repID = repID;
-	}
 
 	public String getName() {
 		return name;
@@ -65,9 +56,7 @@ public class OrganisationRepresentative {
 		this.orgID = orgID;
 	}
 
-	public OrganisationRepresentative(String repID, String name, String password, String email, String position,
-			String phone, String orgID) {
-		this.repID = repID;
+	public OrganisationRepresentative(String name, String password, String email, String position, String phone, String orgID) {
 		this.name = name;
 		this.password = password;
 		this.email = email;
@@ -78,6 +67,6 @@ public class OrganisationRepresentative {
 
 	public Chat openChatBox() {
 		// Open chat box logic
-		return new Chat();
+		return new Chat(email, null, email, email, null);
 	}
 }

@@ -36,16 +36,14 @@ CREATE TABLE Organisation (
 
 -- Organisation Representative Table
 CREATE TABLE OrganisationRepresentative (
-    repID VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255),
     password VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) PRIMARY KEY,
     position VARCHAR(255),
     phone VARCHAR(20),
     orgID VARCHAR(255),
     FOREIGN KEY (orgID) REFERENCES Organisation(name)
 );
-
 -- Registration Table
 CREATE TABLE Registration (
     registrationId INT PRIMARY KEY AUTO_INCREMENT,
@@ -56,7 +54,7 @@ CREATE TABLE Registration (
     orgRepresentativeId VARCHAR(255),
     isNewOrg BOOLEAN,
     FOREIGN KEY (organizationId) REFERENCES Organisation(name),
-    FOREIGN KEY (orgRepresentativeId) REFERENCES OrganisationRepresentative(repID)
+    FOREIGN KEY (orgRepresentativeId) REFERENCES OrganisationRepresentative(email)
 );
 
 -- Opportunity Table
@@ -154,8 +152,12 @@ CREATE TABLE Report (
 );
 
 show tables;
+select * from FlexJobs.Registration;
+select * from FlexJobs.OrganisationRepresentative;
+select * from FlexJobs.Organisation;
+DROP TABLE FlexJobs.OrganisationRepresentative;
+DROP TABLE FlexJobs.Organisation;
+DROP TABLE FlexJobs.Registration;
+DELETE FROM FlexJobs.Organisation WHERE name = "Devsinc";
+DELETE FROM FlexJobs.OrganisationRepresentative WHERE repID = "REP-fdcd9b8c-cc2e-4182-a3ab-436489335c01" || repID = "REP-fe5ef4f6-6d79-436c-8101-d8b38a694500";
 
-Select * from admin;
-
-INSERT INTO Admin (name, email, password)
-VALUES ('admin', 'admin@gmail.com', '1234');

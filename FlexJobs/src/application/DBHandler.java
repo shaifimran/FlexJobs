@@ -44,8 +44,9 @@ public class DBHandler {
     public OrganisationRepresentative verifyOrganisationRepresentativeCredentials(String email, String password) {
         String query = "SELECT * FROM OrganisationRepresentative WHERE email = ? AND password = ?";
 
-        try (Connection connection = getConnection(); 
-             PreparedStatement stmt = connection.prepareStatement(query)) {
+        try {
+        	this.getConnection(); 
+            PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.setString(1, email);
             stmt.setString(2, password);
@@ -73,9 +74,9 @@ public class DBHandler {
     public void addOrgRepresentative(String name, String phone, String password, String email, String organisation, String position) {
         String query = "INSERT INTO OrganisationRepresentative (name, password, email, position, phone, orgID) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
+        try {
+        	this.getConnection(); 
+            PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, name);
             statement.setString(2, password);
             statement.setString(3, email);
@@ -95,9 +96,9 @@ public class DBHandler {
     public void addOrganisation(String name, String industry, String description, String location, String contactEmail, Boolean isVerified) {
         String orgQuery = "INSERT INTO Organisation (name, industry, description, location, contactEmail, isVerified) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = getConnection();
-             PreparedStatement orgStatement = connection.prepareStatement(orgQuery)) {
-
+        try {
+        	this.getConnection(); 
+            PreparedStatement orgStatement = conn.prepareStatement(orgQuery);
             orgStatement.setString(1, name);
             orgStatement.setString(2, industry);
             orgStatement.setString(3, description);
@@ -117,8 +118,9 @@ public class DBHandler {
         boolean exists = false;
         String query = "SELECT * FROM OrganisationRepresentative WHERE orgID = ? AND email = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try {
+        	this.getConnection(); 
+            PreparedStatement statement = conn.prepareStatement(query);
 
             statement.setString(1, organisation);
             statement.setString(2, email);
@@ -140,9 +142,9 @@ public class DBHandler {
         boolean exists = false;
         String query = "SELECT * FROM Organisation WHERE name = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
+        try {
+        	this.getConnection(); 
+            PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, organisationName);
 
             try (ResultSet resultSet = statement.executeQuery()) {
