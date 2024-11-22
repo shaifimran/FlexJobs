@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.ParallelCamera?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UI.StudentController">
    <children>
-      <TextField layoutX="508.0" layoutY="327.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentEmail" layoutX="508.0" layoutY="327.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -31,14 +33,14 @@
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></Label>
-      <PasswordField layoutX="508.0" layoutY="420.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@application.css">
+      <PasswordField fx:id="studentPassword" layoutX="508.0" layoutY="420.0" prefHeight="47.0" prefWidth="300.0" style="-fx-border-color: none;" stylesheets="@application.css">
          <font>
             <Font name="Lorin ExtraBold" size="12.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></PasswordField>
-      <Button alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="studentLoginButton" alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lorin Bold" size="17.0" />
          </font>
@@ -46,5 +48,20 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Button>
+      <Label layoutX="515.0" layoutY="151.0" text="Student Login">
+         <font>
+            <Font name="Lorin ExtraBold" size="40.0" />
+         </font>
+      </Label>
+      <ParallelCamera layoutX="164.0" layoutY="229.0" />
+      <HBox fx:id="studentErrorHbox" alignment="CENTER" layoutX="466.0" layoutY="16.0" prefHeight="47.0" prefWidth="384.0" style="-fx-background-color: #c94b42; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Label fx:id="studentErrorLabel" alignment="BOTTOM_RIGHT" contentDisplay="TOP" text="Please Enter a Valid Email">
+               <font>
+                  <Font name="Lorin ExtraBold" size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </Pane>
