@@ -154,3 +154,8 @@ CREATE TABLE Report (
 );
 
 show tables;
+
+Select * from admin;
+
+INSERT INTO Admin (name, email, password)
+VALUES ('admin', 'admin@gmail.com', '1234');

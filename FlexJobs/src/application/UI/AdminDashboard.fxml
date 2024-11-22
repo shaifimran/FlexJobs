@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -15,24 +16,20 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UI.AdminDashboardController">
    <children>
-      <Label alignment="CENTER" layoutX="1062.0" layoutY="46.0" opacity="0.7" prefHeight="23.0" prefWidth="191.0" text="(Admin Username)" textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
-      <Label alignment="CENTER" layoutX="1048.0" layoutY="75.0" opacity="0.7" prefHeight="22.0" prefWidth="214.0" textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
+      <HBox alignment="CENTER" layoutX="882.0" layoutY="43.0" prefHeight="100.0" prefWidth="404.0">
+         <children>
+            <Label fx:id="adminUsername" alignment="CENTER" opacity="0.7" prefHeight="100.0" prefWidth="468.0" text="(Admin Username)" textFill="#f0f0f2" wrapText="true" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Lorin ExtraBold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Label>
+         </children>
+      </HBox>
       <Line endX="1004.0" layoutX="248.0" layoutY="127.0" opacity="0.7" startX="-189.3333282470703" stroke="#f0f0f2" />
       <Label alignment="CENTER" layoutX="42.0" layoutY="150.0" opacity="0.7" prefHeight="22.0" prefWidth="214.0" text="Dashboard" textFill="WHITE">
          <font>
@@ -80,7 +77,7 @@
             <Line endX="-79.72894287109375" endY="-8.625142097473145" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="202.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Verify Organisations" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="202.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Verify Organisations" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -93,7 +90,7 @@
                   </Hyperlink>
                   <ImageView fitHeight="16.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@resources/arrow.png" />
+                        <Image url="@../resources/arrow.png" />
                      </image>
                   </ImageView>
                </children>
@@ -103,7 +100,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="535.0" layoutY="287.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="623.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox layoutX="535.0" layoutY="287.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="357.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -127,7 +124,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="249.0" prefWidth="624.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+            <Label alignment="CENTER" opacity="0.7" prefHeight="250.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -135,10 +132,10 @@
                   <Cursor fx:constant="DISAPPEAR" />
                </cursor>
             </Label>
-            <Line endX="187.27105712890625" endY="-9.918078422546387" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
-            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="624.0">
+            <Line endX="-76.13519287109375" endY="-28.7530517578125" fill="WHITE" startX="-432.42816162109375" startY="-29.63182830810547" stroke="#f0f0f2" />
+            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="358.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Generate Reports" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Generate Reports" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -148,7 +145,7 @@
                   </Hyperlink>
                   <ImageView fitHeight="16.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@resources/arrow.png" />
+                        <Image url="@../resources/arrow.png" />
                      </image>
                   </ImageView>
                </children>
@@ -158,5 +155,15 @@
             </HBox>
          </children>
       </VBox>
+      <ScrollPane layoutX="959.0" layoutY="194.0" opacity="0.7" prefHeight="562.0" prefWidth="294.0" style="-fx-background-color: gray; -fx-background-radius: 20;">
+         <content>
+            <VBox opacity="0.7" prefHeight="561.0" prefWidth="294.0" style="-fx-background-color: gray; -fx-background-radius: 20;" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="969.0" layoutY="146.0" opacity="0.7" prefHeight="42.0" prefWidth="138.0" text="Notifications" textFill="#f0f0f2">
+         <font>
+            <Font name="Lorin ExtraBold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
