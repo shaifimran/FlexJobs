@@ -1,10 +1,14 @@
-package application;
+package application.handlers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import application.Admin;
+import application.OrganisationRepresentative;
+import application.Student;
 
 public class DBHandler {
     private final String dbUrl = "jdbc:mysql://localhost:3306/flexjobs";
@@ -40,6 +44,78 @@ public class DBHandler {
         }
     }
     
+    public Student checkStudentExistence(String email) {
+		try {
+			this.getConnection();
+			String query = "SELECT 1 FROM Student WHERE email = ?;";
+			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+				preparedStatement.setString(1, email);
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+					if (resultSet.next()) {
+						return new Student();
+					} else {
+						return null;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Student authenticateStudent(String stdEmail, String password) {
+		try {
+			String query = "select * from student where email = ? and password = ?;";
+			this.getConnection();
+			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+				preparedStatement.setString(1, stdEmail);
+				preparedStatement.setString(2, password);
+				try (ResultSet resultSet1 = preparedStatement.executeQuery()) {
+					if (resultSet1.next()) {
+						String rollNo = resultSet1.getString("rollNo");
+						String email = resultSet1.getString("email");
+						String name = resultSet1.getString("name");
+						String department = resultSet1.getString("department");
+						int semester = resultSet1.getInt("semester");
+						double cgpa = resultSet1.getDouble("cgpa");
+						Student student = new Student(rollNo, email, name, department, semester, cgpa);
+						return student;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Boolean addStudent(String rollNo, String email, String name, String password, String department,
+			int semester, double cgpa) {
+		try {
+			this.getConnection();
+			System.out.println("Hello");
+			String query = "Insert into student(rollNo, email, name, password, department, semester, cgpa) values(?, ?, ?, ?, ?, ?, ?)";
+			try (PreparedStatement preparedStatement1 = conn.prepareStatement(query)) {
+				System.out.println("Hello");
+				preparedStatement1.setString(1, rollNo);
+				preparedStatement1.setString(2, email);
+				preparedStatement1.setString(3, name);
+				preparedStatement1.setString(4, password);
+				preparedStatement1.setString(5, department);
+				preparedStatement1.setInt(6, semester);
+				preparedStatement1.setDouble(7, cgpa);
+				preparedStatement1.executeUpdate();
+				return true;
+			} catch (Exception e) {
+				System.out.println("Erro in adding ");
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
     // Verify credentials of OrganisationRepresentative
     public OrganisationRepresentative verifyOrganisationRepresentativeCredentials(String email, String password) {
         String query = "SELECT * FROM OrganisationRepresentative WHERE email = ? AND password = ?";
@@ -146,6 +222,7 @@ public class DBHandler {
         	this.getConnection(); 
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, organisationName);
+            
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -159,8 +236,8 @@ public class DBHandler {
         return exists;
     }
     
-    public Admin getAdminInfo(String email) {
-    	String query = "SELECT * FROM Admin WHERE email = ?";
+    public Admin getAdminInfo(String email, String password) {
+    	String query = "SELECT * FROM Admin WHERE email = ? AND password = ?";
     	ResultSet rs = null;
         PreparedStatement stmt;
 		try {
@@ -168,11 +245,12 @@ public class DBHandler {
 			stmt = conn.prepareStatement(query);
 			// Set parameters for the query
 			stmt.setString(1, email);
+			stmt.setString(2, password);
 			// Execute the query
 			rs = stmt.executeQuery();
 			
 			if (rs.next()) {
-				Admin a = new Admin(rs.getString("name"),rs.getString("email"),rs.getString("password"));
+				Admin a = new Admin(rs.getString("name"),rs.getString("email"));
 				return a;
 			}
 		} catch (SQLException e) {

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AuthController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentRegistrationController">
    <children>
       <Label alignment="CENTER" layoutX="296.0" layoutY="298.0" opacity="0.7" prefHeight="0.0" prefWidth="59.0" text="Email" textFill="#f0f0f2">
          <font>
@@ -16,14 +19,7 @@
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></Label>
-      <Label alignment="CENTER" layoutX="689.0" layoutY="298.0" opacity="0.7" text="Password" textFill="#f0f1f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor></Label>
-      <Button alignment="CENTER" layoutX="844.0" layoutY="624.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="134.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Register" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="studentRegisterButton" alignment="CENTER" layoutX="844.0" layoutY="624.0" mnemonicParsing="false" onAction="#registerStudent" prefHeight="48.0" prefWidth="134.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Register" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lorin Bold" size="17.0" />
          </font>
@@ -31,7 +27,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Button>
-      <TextField layoutX="291.0" layoutY="234.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentRollNo" layoutX="291.0" layoutY="234.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -55,7 +51,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField layoutX="684.0" layoutY="230.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentName" layoutX="684.0" layoutY="230.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -63,7 +59,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </TextField>
-      <TextField layoutX="289.0" layoutY="331.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentEmail" layoutX="289.0" layoutY="331.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -71,14 +67,15 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </TextField>
-      <TextField layoutX="682.0" layoutY="331.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <Label alignment="CENTER" layoutX="690.0" layoutY="297.0" opacity="0.7" text="Password" textFill="#f0f1f2">
          <font>
-            <Font size="17.0" />
+            <Font name="Lorin ExtraBold" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
-      </TextField>
+      </Label>
+      <PasswordField fx:id="studentPassword" layoutX="682.0" layoutY="331.0" prefHeight="43.0" prefWidth="304.0" />
       <Label alignment="CENTER" layoutX="287.0" layoutY="404.0" opacity="0.7" prefHeight="22.0" prefWidth="140.0" text="Department" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
@@ -87,7 +84,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField layoutX="289.0" layoutY="437.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentDepartment" layoutX="289.0" layoutY="437.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -103,7 +100,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField layoutX="684.0" layoutY="436.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentSemester" layoutX="684.0" layoutY="436.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -119,7 +116,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField layoutX="290.0" layoutY="538.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="studentCGPA" layoutX="290.0" layoutY="538.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -151,5 +148,17 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
+      <HBox fx:id="studentErrorHbox" alignment="CENTER" layoutX="292.0" layoutY="624.0" prefHeight="47.0" style="-fx-background-color: #c94b42; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Label fx:id="studentErrorLabel" alignment="BOTTOM_RIGHT" contentDisplay="TOP" text="Please Enter a Valid Email">
+               <font>
+                  <Font name="Lorin ExtraBold" size="22.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="40.0" right="40.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </Pane>

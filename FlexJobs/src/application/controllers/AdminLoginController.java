@@ -1,7 +1,7 @@
-package application.UI;
+package application.controllers;
 
 import application.Admin;
-import application.DBHandler;
+import application.handlers.DBHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
@@ -46,12 +46,10 @@ public class AdminLoginController {
     }
 
     private Admin authenticateAdmin(String email, String password) {
-    	Admin admin = dbHandler.getAdminInfo(email);
+    	Admin admin = dbHandler.getAdminInfo(email, password);
     	
     	if (admin != null) {
-    		if (password.equals(admin.getPassword())) {
-    			return admin;
-			}
+    		return admin;
     	}
    
         return null;

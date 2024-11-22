@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UI.OrgRepDashboardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.OrgRepDashboardController">
    <children>
       <Label alignment="CENTER" layoutX="916.0" layoutY="46.0" opacity="0.7" prefHeight="23.0" prefWidth="337.0" text="(Organisation Representative ID)" textFill="#f0f0f2">
          <font>
@@ -80,7 +80,7 @@
             <Line endX="-79.72894287109375" endY="-8.625142097473145" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="183.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Post Opportunity" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="183.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Post Opportunity" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -138,7 +138,7 @@
             <Line endX="187.27105712890625" endY="-9.918078422546387" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="624.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="442.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Verify, Filter and Update Status of Applicants" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="442.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Verify, Filter and Update Status of Applicants" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -189,7 +189,7 @@
             </Line>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="624.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="234.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Chat with Applicants" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="234.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Chat with Applicants" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>

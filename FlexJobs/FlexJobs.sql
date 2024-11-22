@@ -155,6 +155,7 @@ show tables;
 select * from FlexJobs.Registration;
 select * from FlexJobs.OrganisationRepresentative;
 select * from FlexJobs.Organisation;
+select * from admin;
 DROP TABLE FlexJobs.OrganisationRepresentative;
 DROP TABLE FlexJobs.Organisation;
 DROP TABLE FlexJobs.Registration;

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UI.StudentController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentLoginController">
    <children>
       <TextField fx:id="studentEmail" layoutX="508.0" layoutY="327.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
@@ -40,7 +40,7 @@
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></PasswordField>
-      <Button fx:id="studentLoginButton" alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="studentLoginButton" alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="47.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lorin Bold" size="17.0" />
          </font>

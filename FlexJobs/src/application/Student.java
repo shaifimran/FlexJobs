@@ -15,15 +15,19 @@ public class Student {
 	private double cgpa;
 
 	// Constructor
-	public Student(String rollNo, String email, String name, String password, String department, double cgpa) {
+	public Student(String rollNo, String email, String name, String department, int semester, double cgpa) {
 		this.rollNo = rollNo;
 		this.email = email;
 		this.name = name;
-		this.password = password;
 		this.department = department;
+		this.semester = semester;
 		this.cgpa = cgpa;
 	}
 
+	public Student(){
+
+	}
+	
 	public String getRollNo() {
 		return rollNo;
 	}

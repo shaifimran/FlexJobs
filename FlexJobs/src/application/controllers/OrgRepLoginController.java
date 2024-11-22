@@ -1,4 +1,4 @@
-package application.UI;
+package application.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,8 +11,9 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import application.DBHandler;
+
 import application.OrganisationRepresentative;
+import application.handlers.DBHandler;
 
 public class OrgRepLoginController {
 

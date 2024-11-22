@@ -9,10 +9,9 @@ public class Admin {
 	private String password;
 
 	// Constructor
-	public Admin(String name, String email, String password) {
+	public Admin(String name, String email) {
 		this.name = name;
 		this.email = email;
-		this.password = password;
 	}
 
 	// Getter and Setter for name

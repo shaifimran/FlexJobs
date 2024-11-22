@@ -10,7 +10,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("./UI/OrgRepLogin.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("./UI/StudentRegistration.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("./UI/application.css").toExternalForm());
 			primaryStage.setScene(scene);

@@ -1,6 +1,6 @@
-package application.UI;
+package application.controllers;
 import application.OrganisationRepresentative;
-
+import application.handlers.DBHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import application.DBHandler;
 
 public class OrgRepRegistrationController {
 
@@ -59,7 +58,7 @@ public class OrgRepRegistrationController {
             return;
         }
         
-        if (dbHandler.isOrganisationRepExists(organisation, email)) {
+        if (!dbHandler.isOrganisationRepExists(organisation, email)) {
         	showAlert(Alert.AlertType.ERROR, "Representative Exists", "An organization representative already exists for this organization with this email.");
         	return;
         }

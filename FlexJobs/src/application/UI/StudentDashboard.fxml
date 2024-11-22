@@ -15,17 +15,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AuthController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentDashboardController">
    <children>
-      <Label alignment="CENTER" layoutX="1082.0" layoutY="46.0" opacity="0.7" prefHeight="22.0" prefWidth="171.0" text="(Student Name)" textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
-      <Label alignment="CENTER" layoutX="1048.0" layoutY="75.0" opacity="0.7" prefHeight="22.0" prefWidth="214.0" text="(Desired Job Title)" textFill="#f0f0f2">
+      <Label fx:id="studentName" alignment="CENTER_RIGHT" layoutX="1082.0" layoutY="63.0" opacity="0.7" prefHeight="22.0" prefWidth="171.0" text="(Student Name)" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -90,7 +82,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="161.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Manage Profile" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="161.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Manage Profile" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -158,7 +150,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="View Opportunities" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="View Opportunities" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -223,7 +215,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="142.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Check Status" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="142.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Check Status" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -288,7 +280,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink prefHeight="23.0" prefWidth="210.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: none;" text="Conversation History" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="210.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Conversation History" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>

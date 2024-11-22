@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import application.handlers.ApplicationHandler;
+import application.handlers.ChatHandler;
+import application.handlers.DBHandler;
+
 public class FlexJobs {
 	private String portalName;
 	private String version;

@@ -1,7 +1,7 @@
-package application.UI;
+package application.controllers;
 
-import application.DBHandler;
 import application.OrganisationRepresentative;
+import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

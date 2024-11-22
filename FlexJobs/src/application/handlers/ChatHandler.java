@@ -1,4 +1,4 @@
-package application;
+package application.handlers;
 
 public class ChatHandler {
 
