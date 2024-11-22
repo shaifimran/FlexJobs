@@ -13,7 +13,7 @@ public class FlexJobs {
 	private List<Organisation> organizations;
 	private List<Admin> admins;
 	private DBHandler dbHandler;
-	private ChatHanlder chatHandler;
+	private ChatHandler chatHandler;
 	private ApplicationHandler applicationHandler;
 	private List<Registration> registrationList;
 
@@ -94,7 +94,7 @@ public class FlexJobs {
 
 	public Report generateReport() {
 		// Report generation logic
-		return new Report();
+		return new Report(portalName, portalName, portalName, launchDate);
 	}
 
 	public List<Application> trackApplications() {
@@ -109,7 +109,7 @@ public class FlexJobs {
 
 	public Chat manageChatBox() {
 		// Chat management logic
-		return new Chat();
+		return new Chat(portalName, launchDate, portalName, portalName, null);
 	}
 
 	public boolean applyForOpportunity(Map<String, Object> applicationData) {
