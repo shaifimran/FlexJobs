@@ -3,6 +3,7 @@ package application.controllers;
 import java.io.IOException;
 
 import application.handlers.DBHandler;
+import application.handlers.ResumeHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +36,8 @@ public class StudentRegistrationController {
 	private TextField studentSemester;
 	@FXML
 	private TextField studentCGPA;
+	@FXML
+	private TextField resume;
 	@FXML
 	private HBox studentErrorHbox;
 	@FXML
@@ -91,15 +94,22 @@ public class StudentRegistrationController {
 			studentErrorLabel.setText("Enter valid CGPA.");
 			showLabel();
 			return;
+		} else {
+			ResumeHandler.getInstance();
+			if (resume.getText().isEmpty() || !ResumeHandler.checkResumeValidity(resume.getText())) {
+				studentErrorLabel.setText("Enter valid resume path.");
+				showLabel();
+				return;
+			}
 		}
 
-		if (dbHandler.checkStudentExistence(studentEmail.getText()) == null) {
+		if (!dbHandler.checkStudentExistence(studentEmail.getText(), studentRollNo.getText())) {
 			Boolean success = dbHandler.addStudent(studentRollNo.getText(), studentEmail.getText(),
 					studentName.getText(), studentPassword.getText(), studentDepartment.getText(),
-					Integer.parseInt(studentSemester.getText()), Double.parseDouble(studentCGPA.getText()));
+					Integer.parseInt(studentSemester.getText()), Double.parseDouble(studentCGPA.getText()),
+					resume.getText());
 			if (success) {
 				try {
-
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/StudentLogin.fxml"));
 					Parent root = loader.load();
 					Stage stage = (Stage) studentRegisterButton.getScene().getWindow();

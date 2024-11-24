@@ -30,6 +30,8 @@ public class StudentLoginController {
 	private HBox studentErrorHbox;
 	@FXML
 	private Label studentErrorLabel;
+	@FXML
+	Button studentRegisterButton;
 
 	@FXML
 	public void handleLogin(ActionEvent event) {
@@ -72,5 +74,18 @@ public class StudentLoginController {
 		pause.setOnFinished(event -> studentErrorHbox.setVisible(false));
 
 		pause.playFromStart();
+	}
+
+	@FXML
+	public void handleRegistration(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/application/UI/StudentRegistration.fxml"));
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

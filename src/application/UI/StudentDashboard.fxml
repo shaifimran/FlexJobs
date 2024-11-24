@@ -34,7 +34,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <VBox layoutX="365.0" layoutY="217.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="ProfileSettingsVBox" layoutX="365.0" layoutY="217.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -71,7 +71,7 @@
                   <Insets left="7.0" top="12.0" />
                </padding>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="3.45" textFill="#6863ff">
+            <Label fx:id="studentCGPA" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="3.45" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -82,7 +82,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="161.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Manage Profile" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" onAction="#manageProfile" prefHeight="23.0" prefWidth="161.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Manage Profile" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -105,7 +105,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="720.0" layoutY="219.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="opportunitiesVBox" layoutX="720.0" layoutY="219.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -139,7 +139,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+            <Label fx:id="opportunitiesAvailable" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -150,7 +150,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="View Opportunities" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" onAction="#viewOpportunitiesButton" prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="View Opportunities" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -170,7 +170,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="364.0" layoutY="474.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="applicationsVBox" layoutX="364.0" layoutY="474.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -204,7 +204,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+            <Label fx:id="submittedApplications" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -215,7 +215,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="142.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Check Status" textFill="#817dff">
+                  <Hyperlink fx:id="checkStatusButton" focusTraversable="false" onAction="#checkStatus" prefHeight="23.0" prefWidth="142.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Check Status" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -235,7 +235,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="724.0" layoutY="473.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="messagesVBox" layoutX="724.0" layoutY="473.0" onSwipeLeft="#buttonControl" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -269,7 +269,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+            <Label fx:id="studentMessages" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -300,5 +300,17 @@
             </HBox>
          </children>
       </VBox>
+      <Hyperlink fx:id="studentNotificationButton" focusTraversable="false" layoutX="1206.0" layoutY="148.0" onAction="#viewStudentNotification">
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/notification.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.55" />
+               </effect>
+            </ImageView>
+         </graphic>
+      </Hyperlink>
    </children>
 </Pane>

@@ -1,6 +1,5 @@
 package application;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Notification {
@@ -30,6 +29,13 @@ public class Notification {
 	public int getNotificationId() {
 		return notificationId;
 	}
+	
+	public Notification(int notificationId, String message, boolean isRead) {
+		this.notificationId = notificationId;
+		this.message = message;
+		this.isRead = isRead;
+	}
+
 
 	public void setNotificationId(int notificationId) {
 		this.notificationId = notificationId;
@@ -60,12 +66,10 @@ public class Notification {
 	}
 
 	public boolean sendVerificationNotification(String orgId) {
-		// Logic to send verification notification
 		return true;
 	}
 
 	public boolean sendInterviewNotification(String studentId) {
-		// Logic to send interview notification
 		return true;
 	}
 

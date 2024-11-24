@@ -5,9 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import application.Admin;
 import application.Chat;
@@ -15,6 +18,13 @@ import application.ChatBox;
 import application.Message;
 import application.Notification;
 import application.Organisation;
+import application.Application;
+import application.ApplicationWithOpportunity;
+import application.EducationalOpportunity;
+import application.JobOpportunity;
+import application.Opportunity;
+import application.Application;
+
 import application.OrganisationRepresentative;
 import application.Student;
 import application.UnverifiedOrgs;
@@ -54,17 +64,18 @@ public class DBHandler {
 		}
 	}
 
-	public Student checkStudentExistence(String email) {
+	public Boolean checkStudentExistence(String email, String rollNo) {
 		try {
 			this.getConnection();
-			String query = "SELECT 1 FROM Student WHERE email = ?;";
+			String query = "SELECT 1 FROM Student WHERE email = ? and rollNo=?;";
 			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 				preparedStatement.setString(1, email);
+				preparedStatement.setString(2, rollNo);
 				try (ResultSet resultSet = preparedStatement.executeQuery()) {
 					if (resultSet.next()) {
-						return new Student();
+						return true;
 					} else {
-						return null;
+						return false;
 					}
 				}
 			}
@@ -101,11 +112,11 @@ public class DBHandler {
 	}
 
 	public Boolean addStudent(String rollNo, String email, String name, String password, String department,
-			int semester, double cgpa) {
+			int semester, double cgpa, String resume) {
 		try {
 			this.getConnection();
-			System.out.println("Hello");
-			String query = "Insert into student(rollNo, email, name, password, department, semester, cgpa) values(?, ?, ?, ?, ?, ?, ?)";
+//			System.out.println("Hello");
+			String query = "Insert into student(rollNo, email, name, password, department, semester, cgpa, resume) values(?, ?, ?, ?, ?, ?, ?, ?)";
 			try (PreparedStatement preparedStatement1 = conn.prepareStatement(query)) {
 				System.out.println("Hello");
 				preparedStatement1.setString(1, rollNo);
@@ -115,10 +126,47 @@ public class DBHandler {
 				preparedStatement1.setString(5, department);
 				preparedStatement1.setInt(6, semester);
 				preparedStatement1.setDouble(7, cgpa);
+				preparedStatement1.setString(8, resume);
 				preparedStatement1.executeUpdate();
 				return true;
 			} catch (Exception e) {
-				System.out.println("Erro in adding ");
+				System.out.println("Error in adding ");
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public Boolean updateStudentData(String email, Map<String, Object> updates) {
+		StringBuilder queryBuilder = new StringBuilder("UPDATE Student SET ");
+
+		// Append column placeholders dynamically
+		for (String column : updates.keySet()) {
+			queryBuilder.append(column).append(" = ?, ");
+		}
+		queryBuilder.setLength(queryBuilder.length() - 2);
+
+		// Add the WHERE clause
+		queryBuilder.append(" WHERE email = ?");
+		try {
+			this.getConnection();
+//			System.out.println("Hello");
+			String query = queryBuilder.toString();
+
+			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+				int index = 1;
+				for (Object value : updates.values()) {
+					preparedStatement.setObject(index++, value);
+				}
+
+				// Set the email for the WHERE clause
+				preparedStatement.setString(index, email);
+				int rowsUpdated = preparedStatement.executeUpdate();
+				return rowsUpdated > 0;
+			} catch (Exception e) {
+				System.out.println("Error in adding.");
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
@@ -269,8 +317,314 @@ public class DBHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	public void closeConnection(Connection connection) {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.err.println("Failed to close the connection: " + e.getMessage());
+			}
+		}
+	}
+
+	public Map<Integer, String> fetchJobTitles(String category) {
+		Map<Integer, String> jobTitles = new HashMap<>();
+
+		try {
+			String query;
+			this.getConnection();
+			ResultSet rs = null;
+			if (category.isEmpty()) {
+				query = "SELECT o.opportunityID, o.title FROM Opportunity o INNER JOIN Job j ON o.opportunityID = j.opportunityID";
+				Statement stmt = conn.createStatement();
+				rs = stmt.executeQuery(query);
+			} else {
+				query = "SELECT o.opportunityID, o.title FROM Opportunity o INNER JOIN Job j ON o.opportunityID = j.opportunityID WHERE LOWER(j.category) LIKE LOWER(?)";
+				PreparedStatement stmt;
+				stmt = conn.prepareStatement(query);
+				stmt.setString(1, "%" + category + "%");
+				rs = stmt.executeQuery();
+			}
+
+			while (rs != null && rs.next()) {
+				int opportunityID = rs.getInt("opportunityID");
+				String title = rs.getString("title");
+				jobTitles.put(opportunityID, title);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return jobTitles;
+	}
+
+	public Map<Integer, String> fetchEducationTitles() {
+		Map<Integer, String> jobTitles = new HashMap<>();
+		String query = "SELECT o.opportunityID, o.title FROM Opportunity o INNER JOIN Educational e ON o.opportunityID = e.opportunityID";
+
+		try {
+			this.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				int opportunityID = rs.getInt("opportunityID");
+				String title = rs.getString("title");
+				jobTitles.put(opportunityID, title);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return jobTitles;
+	}
+
+	public EducationalOpportunity getEducationalOppDetailsById(Integer oppId) {
+		String query = "SELECT o.title, o.description, o.postedBy FROM Opportunity o INNER JOIN Opportunity j ON o.opportunityID = j.opportunityID where o.opportunityID=?";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, (int) oppId);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				String title = rs.getString("title");
+				String postedBy = rs.getString("postedBy");
+				String desc = rs.getString("description");
+				Opportunity o = new EducationalOpportunity((int) oppId, title, desc, postedBy);
+				return (EducationalOpportunity) o;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
 
 		return null;
+	}
+
+	public JobOpportunity getJobById(Integer oppId) {
+		String query = "SELECT o.title, o.description, o.postedBy, j.category, j.requirements FROM Opportunity o INNER JOIN Job j ON o.opportunityID = j.opportunityID where o.opportunityID=?";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, (int) oppId);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				String title = rs.getString("title");
+				String postedBy = rs.getString("postedBy");
+				String desc = rs.getString("description");
+				String category = rs.getString("category");
+				String req = rs.getString("requirements");
+				JobOpportunity o = new JobOpportunity((int) oppId, title, desc, category, req, "open", postedBy);
+				return o;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public void closeConnection(Connection connection) {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.err.println("Failed to close the connection: " + e.getMessage());
+			}
+		}
+	}
+
+	public Boolean checkValidity(String rollNo, int oppId) {
+		String query = "select 1 from application where opportunityId=? and studentId=?";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, oppId);
+			stmt.setString(2, rollNo);
+			ResultSet rs = stmt.executeQuery();
+
+			if (!rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public Boolean applyForJob(String rollNo, int oppId) {
+		String query = "insert into Application(status, studentID, opportunityID) values ('submitted', ?, ?)";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, rollNo);
+			stmt.setInt(2, oppId);
+			int res = stmt.executeUpdate();
+			System.out.println(res);
+			if (res > 0) {
+				return true;
+			}
+			return false;
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public List<Application> retrieveApplications(String rollNo) {
+		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.interviewID, a.opportunityID, o.title FROM Application a WHERE a.studentID = ?";
+
+		try {
+			List<Application> applications = new ArrayList<>();
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, rollNo);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int applicationID = rs.getInt("applicationID");
+				String status = rs.getString("status");
+				String feedback = rs.getString("feedback");
+				String studentID = rs.getString("studentID");
+				String interviewID = rs.getString("interviewID");
+				int opportunityID = rs.getInt("opportunityID");
+				String opportunityTitle = rs.getString("title");
+				Application application = new Application(applicationID, status, feedback, studentID, interviewID,
+						opportunityID, opportunityTitle);
+				applications.add(application);
+				return applications;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public List<ApplicationWithOpportunity> retrieveApplicationsWithOpportunities(String rollNo) {
+		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.opportunityID,a.interviewId, o.title , o.description, o.postedBy "
+				+ "FROM Application a  INNER JOIN Opportunity o ON a.opportunityID = o.opportunityID WHERE a.studentID = ?";
+
+		List<ApplicationWithOpportunity> result = new ArrayList<>();
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, rollNo);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int applicationID = rs.getInt("applicationID");
+				String status = rs.getString("status");
+				String feedback = rs.getString("feedback");
+				int opportunityID = rs.getInt("opportunityID");
+				String interviewID = rs.getString("interviewId");
+				String opportunityTitle = rs.getString("title");
+				String opportunityDescription = rs.getString("description");
+				String postedBy = rs.getString("postedBy");
+
+				Application application = new Application(applicationID, status, feedback, rollNo, interviewID,
+						opportunityID, opportunityTitle);
+
+				Opportunity opportunity = new Opportunity(opportunityID, opportunityTitle, opportunityDescription,
+						postedBy);
+
+				result.add(new ApplicationWithOpportunity(application, opportunity));
+			}
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public List<Notification> fetchStudentNotifications(String rollNo) {
+		String query = "SELECT notificationId, senderId, receiverId, message, timestamp, isRead FROM Notification WHERE receiverId = ?";
+		List<Notification> notifications = new ArrayList<>();
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+
+			// Assuming `rollNo` is a String; no conversion needed here.
+			stmt.setString(1, rollNo);
+
+			ResultSet resultSet = stmt.executeQuery();
+
+			while (resultSet.next()) {
+				int notificationId = resultSet.getInt("notificationId");
+				String senderId = resultSet.getString("senderId");
+				String receiverId = resultSet.getString("receiverId");
+				String message = resultSet.getString("message");
+				Timestamp timestamp = resultSet.getTimestamp("timestamp");
+				boolean isRead = resultSet.getBoolean("isRead");
+
+				// Construct the Notification object with all fields
+				Notification notification = new Notification(notificationId, senderId, receiverId, message, timestamp,
+						isRead);
+				notifications.add(notification);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return notifications;
+	}
+
+	public Boolean markRead(String rollNo, int notifID) {
+		String query = "UPDATE Notification SET isRead = TRUE WHERE receiverId = ? AND notificationId = ?";
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, rollNo);
+			stmt.setInt(2, notifID);
+			stmt.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public Map<String, Integer> getStdDashBoardInfo(String stdID) {
+
+		try {
+			this.getConnection();
+			String totalApplicationsQuery = "SELECT COUNT(*) AS totalApplications FROM Application where studentID=?";
+			String totalOpportunitiesQuery = "SELECT COUNT(*) AS totalOpportunities FROM Opportunity";
+
+			Map<String, Integer> result = new HashMap<>();
+			PreparedStatement stmtApp = conn.prepareStatement(totalApplicationsQuery);
+			stmtApp.setString(1, stdID);
+			ResultSet resultSetApp = stmtApp.executeQuery();
+			if (resultSetApp.next()) {
+				result.put("applications", resultSetApp.getInt("totalApplications"));
+			}
+
+			PreparedStatement stmtOpp = conn.prepareStatement(totalOpportunitiesQuery);
+			ResultSet resultSetOpp = stmtOpp.executeQuery();
+			if (resultSetOpp.next()) {
+				result.put("opportunities", resultSetOpp.getInt("totalOpportunities"));
+			}
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	public UnverifiedOrgs getUnverifiedOrgsandInitialReps() {
@@ -325,21 +679,6 @@ public class DBHandler {
 		}
 
 		return unverifiedOrgs; // Return the populated UnverifiedOrgs object
-	}
-
-	/**
-	 * Closes the given connection if it is not null.
-	 * 
-	 * @param connection The connection to close
-	 */
-	public void closeConnection(Connection connection) {
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				System.err.println("Failed to close the connection: " + e.getMessage());
-			}
-		}
 	}
 
 	public void updateOrganisationVerificationStatus(Organisation org) {
