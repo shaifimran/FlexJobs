@@ -81,7 +81,7 @@ public class StudentNotificationController {
 		alert.setTitle("Notification Details");
 		alert.setHeaderText("Details of the Notifcation");
 
-		String content = "From: " + n.getSenderId() + "\n\n" + "Message: " + n.getMessage() + "\n\n" + "Received at: "
+		String content = "From: " + n.getSenderID() + "\n\n" + "Message: " + n.getMessage() + "\n\n" + "Received at: "
 				+ n.getTimestamp();
 
 		TextArea textArea = new TextArea(content);

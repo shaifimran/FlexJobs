@@ -19,7 +19,6 @@ public class FlexJobs {
 	private DBHandler dbHandler;
 	private ChatHandler chatHandler;
 	private ApplicationHandler applicationHandler;
-	private List<Registration> registrationList;
 
 	public String getPortalName() {
 		return portalName;
