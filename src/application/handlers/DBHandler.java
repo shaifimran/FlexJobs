@@ -433,15 +433,7 @@ public class DBHandler {
 		return null;
 	}
 
-	public void closeConnection(Connection connection) {
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				System.err.println("Failed to close the connection: " + e.getMessage());
-			}
-		}
-	}
+
 
 	public Boolean checkValidity(String rollNo, int oppId) {
 		String query = "select 1 from application where opportunityId=? and studentId=?";

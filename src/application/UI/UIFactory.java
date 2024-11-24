@@ -19,7 +19,6 @@ import application.UnverifiedOrgs;
 import application.controllers.AdminDashboardController;
 import application.controllers.AdminVerifyOrganisationController;
 import application.controllers.ChatBoxController;
-import application.controllers.StudentOpportunitiesController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -220,7 +219,7 @@ public class UIFactory {
 				hBox.setPrefWidth(1114);
 				hBox.setStyle("-fx-background-color: none;");
 
-				Label notifLabel = new Label(n.getSenderId());
+				Label notifLabel = new Label(n.getSenderID());
 				notifLabel.setPrefHeight(28);
 				notifLabel.setPrefWidth(509);
 				notifLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-family: 'Lorin Bold';");
