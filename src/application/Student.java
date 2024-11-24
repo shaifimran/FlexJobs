@@ -89,11 +89,7 @@ public class Student {
 	public boolean applyForOpportunity(String opportunityId) {
 		return true;
 	}
-
-//	public Chat openChatBox() {
-//		return new Chat();
-//	}
-
+	
 	public List<Application> getApplications() {
 		return new ArrayList<>();
 	}
