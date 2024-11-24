@@ -3,24 +3,27 @@ package application;
 import java.util.List;
 
 public class Organisation {
-	private String orgID;
 	private String name;
 	private String industry;
 	private String description;
 	private String location;
 	private String contactEmail;
 	private boolean isVerified;
+	private ChatBox myChatBox;
 	private List<OrganisationRepresentative> representatives; // List of representatives
 
-	public Organisation(String orgID, String name, String industry, String description, String location,
+	public Organisation(String name, String industry, String description, String location,
 			String contactEmail, boolean isVerified) {
-		this.setOrgID(orgID);
 		this.name = name;
 		this.industry = industry;
 		this.description = description;
 		this.location = location;
 		this.contactEmail = contactEmail;
 		this.isVerified = isVerified;
+	}
+
+	public Organisation() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
@@ -75,14 +78,6 @@ public class Organisation {
 		return representatives;
 	}
 
-	public String getOrgID() {
-		return orgID;
-	}
-
-	public void setOrgID(String orgID) {
-		this.orgID = orgID;
-	}
-
 	public void setRepresentatives(List<OrganisationRepresentative> representatives) {
 		this.representatives = representatives;
 	}
@@ -96,6 +91,14 @@ public class Organisation {
 			List<String> eligibleDepartments) {
 		// Create opportunity logic
 		return new Opportunity();
+	}
+
+	public ChatBox getMyChatBox() {
+		return myChatBox;
+	}
+
+	public void setMyChatBox(ChatBox myChatBox) {
+		this.myChatBox = myChatBox;
 	}
 
 }

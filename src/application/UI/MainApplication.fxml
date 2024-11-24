@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainApplicationController">
+   <children>
+      <Label alignment="CENTER" layoutX="552.0" layoutY="71.0" opacity="0.7" prefHeight="44.0" prefWidth="208.0" text="FlexJobs" textFill="WHITE">
+         <font>
+            <Font name="Lorin ExtraBold" size="40.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Label>
+      <VBox  alignment="TOP_CENTER" layoutX="338.0" layoutY="197.0"  prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label alignment="CENTER" opacity="0.7" prefHeight="61.0" prefWidth="241.0" text="Admin" textFill="WHITE">
+               <font>
+                  <Font name="Lorin ExtraBold" size="40.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Label>
+            <Region prefHeight="12.0" prefWidth="247.0" />
+            <ImageView fitHeight="53.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/gear%20icon.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.79" />
+               </effect>
+            </ImageView>
+            <Region prefHeight="27.0" prefWidth="247.0" />
+            <Button fx:id="adminNavButton" alignment="CENTER" mnemonicParsing="false" onAction="#navigateToAdmin" prefHeight="48.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 20;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Continue" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <Hyperlink focusTraversable="false" layoutX="1206.0" layoutY="148.0"  />
+      <VBox  alignment="TOP_CENTER" layoutX="735.0" layoutY="197.0"  prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label alignment="CENTER" opacity="0.7" prefHeight="61.0" prefWidth="241.0" text="Organization" textFill="WHITE">
+               <font>
+                  <Font name="Lorin ExtraBold" size="33.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Label>
+            <Region prefHeight="12.0" prefWidth="247.0" />
+            <ImageView fitHeight="47.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/briefcase.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.79" />
+               </effect>
+            </ImageView>
+            <Region prefHeight="28.0" prefWidth="247.0" />
+            <Button fx:id="orgNavButton" alignment="CENTER" mnemonicParsing="false" onAction="#navigateToOrganization" prefHeight="48.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 20;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Continue" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="531.0" layoutY="484.0"  prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;" >
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label alignment="CENTER" opacity="0.7" prefHeight="61.0" prefWidth="241.0" text="Student" textFill="WHITE">
+               <font>
+                  <Font name="Lorin ExtraBold" size="40.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Label>
+            <Region prefHeight="12.0" prefWidth="247.0" />
+            <ImageView fitHeight="54.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/graduation.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.79" />
+               </effect>
+            </ImageView>
+            <Region prefHeight="27.0" prefWidth="247.0" />
+            <Button fx:id="studentNavButton" alignment="CENTER" mnemonicParsing="false" onAction="#navigateToStudent" prefHeight="48.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 20;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Continue" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</Pane>

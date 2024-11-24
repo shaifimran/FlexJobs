@@ -13,6 +13,7 @@ public class Student {
 	private String password;
 	private String department;
 	private double cgpa;
+	private ChatBox myChatBox;
 
 	// Constructor
 	public Student(String rollNo, String email, String name, String department, int semester, double cgpa) {
@@ -94,5 +95,13 @@ public class Student {
 
 	public List<Application> getApplications() {
 		return new ArrayList<>();
+	}
+
+	public ChatBox getMyChatBox() {
+		return myChatBox;
+	}
+
+	public void setMyChatBox(ChatBox myChatBox) {
+		this.myChatBox = myChatBox;
 	}
 }

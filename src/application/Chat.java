@@ -1,54 +1,54 @@
 package application;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Chat {
-	private String chatID;
-	private Date createdAt;
-	private String sender;
-	private String receiver;
+	private int chatID;
+	private Timestamp createdAt;
+	private String studentId;
+	private String orgId;
 	private List<Message> messages;
 
-	public Chat(String chatID, Date createdAt, String sender, String receiver, List<Message> messages) {
+	public Chat(int chatID, Timestamp createdAt, String orgId, String studentId) {
 		this.chatID = chatID;
 		this.createdAt = createdAt;
-		this.sender = sender;
-		this.receiver = receiver;
-		this.messages = messages;
+		this.studentId = studentId;
+		this.orgId = orgId;
 	}
 
-	public String getChatID() {
+	public int getChatID() {
 		return chatID;
 	}
 
-	public void setChatID(String chatID) {
+	public void setChatID(int chatID) {
 		this.chatID = chatID;
 	}
 
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public String getSender() {
-		return sender;
+	public String getStudentId() {
+		return studentId;
 	}
 
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
 
-	public String getReceiver() {
-		return receiver;
+	public String getOrgId() {
+		return orgId;
 	}
 
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
 	}
 
 	public List<Message> getMessages() {

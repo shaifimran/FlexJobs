@@ -7,6 +7,7 @@ public class OrganisationRepresentative {
 	private String position;
 	private String phone;
 	private String orgID;
+	private Boolean isVerified;
 
 	public String getName() {
 		return name;
@@ -68,5 +69,13 @@ public class OrganisationRepresentative {
 	public Chat openChatBox() {
 		// Open chat box logic
 		return new Chat(email, null, email, email, null);
+	}
+
+	public Boolean getVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(Boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 }

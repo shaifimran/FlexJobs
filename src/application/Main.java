@@ -1,5 +1,8 @@
 package application;
 
+import application.controllers.AdminDashboardController;
+import application.controllers.AdminVerifyOrganisationController;
+import application.controllers.ChatBoxController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +13,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("./UI/StudentRegistration.fxml"));
+			Student s = new Student();
+			s.setRollNo("S12345");
+			Organisation o = new Organisation();
+			o.setName("Org1");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/AdminLogin.fxml"));
+//            loader.setControllerFactory(c -> new ChatBoxController(o));
+            Parent root = loader.load();
+			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("./UI/application.css").toExternalForm());
 			primaryStage.setScene(scene);

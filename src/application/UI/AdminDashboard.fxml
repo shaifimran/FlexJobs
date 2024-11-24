@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -39,7 +40,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <VBox layoutX="168.0" layoutY="287.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="356.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox layoutX="168.0" layoutY="287.0" prefHeight="357.0" prefWidth="356.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -66,7 +67,7 @@
                   <Insets left="7.0" top="12.0" />
                </padding>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="248.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="34" textFill="#6863ff">
+            <Label fx:id="verifiedOrgNum" alignment="CENTER" opacity="0.7" prefHeight="248.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="34" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -77,7 +78,7 @@
             <Line endX="-79.72894287109375" endY="-8.625142097473145" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="202.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Verify Organisations" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" onAction="#openVerifyOrg" prefHeight="23.0" prefWidth="208.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Verify Organisations" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -100,7 +101,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="535.0" layoutY="287.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="357.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox layoutX="535.0" layoutY="287.0" prefHeight="357.0" prefWidth="357.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -124,18 +125,18 @@
                   </Label>
                </children>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="250.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
-               <font>
-                  <Font name="Lorin ExtraBold" size="60.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="DISAPPEAR" />
-               </cursor>
-            </Label>
-            <Line endX="-76.13519287109375" endY="-28.7530517578125" fill="WHITE" startX="-432.42816162109375" startY="-29.63182830810547" stroke="#f0f0f2" />
-            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="358.0">
+            <ImageView fitHeight="172.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/report.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="90.0" top="40.0" />
+               </VBox.margin>
+            </ImageView>
+            <Line endX="-81.80621337890625" endY="-49.01000213623047" fill="WHITE" startX="-440.2061767578125" startY="-49.71710968017578" stroke="#f0f0f2" />
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="358.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="199.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Generate Reports" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" onAction="#openGenerateReport" prefHeight="23.0" prefWidth="183.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Generate Reports" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -157,13 +158,41 @@
       </VBox>
       <ScrollPane layoutX="959.0" layoutY="194.0" opacity="0.7" prefHeight="562.0" prefWidth="294.0" style="-fx-background-color: gray; -fx-background-radius: 20;">
          <content>
-            <VBox opacity="0.7" prefHeight="561.0" prefWidth="294.0" style="-fx-background-color: gray; -fx-background-radius: 20;" />
+            <VBox fx:id="notificationVBox" opacity="0.7" prefHeight="561.0" prefWidth="294.0" style="-fx-background-color: gray; -fx-background-radius: 20;" />
          </content>
       </ScrollPane>
-      <Label layoutX="969.0" layoutY="146.0" opacity="0.7" prefHeight="42.0" prefWidth="138.0" text="Notifications" textFill="#f0f0f2">
+      <Label layoutX="946.0" layoutY="147.0" opacity="0.7" prefHeight="42.0" prefWidth="138.0" text="Notifications" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="markAllAsRead" alignment="CENTER" layoutX="1106.0" layoutY="152.0" mnemonicParsing="false" onAction="#markAllNotificationsAsRead" prefHeight="33.0" prefWidth="152.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@cupertino-dark.css" text="Mark all as read" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Lorin Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Button>
+      <HBox fx:id="notificationHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 20;">
+         <children>
+            <Label alignment="TOP_LEFT" prefHeight="100.0" prefWidth="254.0" style="-fx-background-radius: 20;" text="jdkfkldf kajdfkjsad dkjflkasdjfk jfalkdjflk" wrapText="true" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Lorin ExtraBold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="105.0" prefWidth="39.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 20; -fx-background-radius: 20;" stylesheets="@cupertino-dark.css" text="X" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </Pane>

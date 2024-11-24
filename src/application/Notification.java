@@ -1,25 +1,37 @@
 package application;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Notification {
-	private String notificationId;
+
+	private int notificationId;
+	private String senderID;
+	private String receiverID;
 	private String message;
-	private Date timestamp;
+	private Timestamp timestamp;
 	private boolean isRead;
 
-	public Notification(String notificationId, String message, Date timestamp, boolean isRead) {
+	
+	public Notification(int notificationId, String senderID, String receiverID, String message, Timestamp timestamp,
+			boolean isRead) {
 		this.notificationId = notificationId;
+		this.senderID = senderID;
+		this.receiverID = receiverID;
 		this.message = message;
 		this.timestamp = timestamp;
 		this.isRead = isRead;
 	}
+	
+	public Notification() {
+		
+	}
 
-	public String getNotificationId() {
+	public int getNotificationId() {
 		return notificationId;
 	}
 
-	public void setNotificationId(String notificationId) {
+	public void setNotificationId(int notificationId) {
 		this.notificationId = notificationId;
 	}
 
@@ -31,11 +43,11 @@ public class Notification {
 		this.message = message;
 	}
 
-	public Date getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
@@ -55,5 +67,21 @@ public class Notification {
 	public boolean sendInterviewNotification(String studentId) {
 		// Logic to send interview notification
 		return true;
+	}
+
+	public String getSenderID() {
+		return senderID;
+	}
+
+	public void setSenderID(String senderID) {
+		this.senderID = senderID;
+	}
+
+	public String getReceiverID() {
+		return receiverID;
+	}
+
+	public void setReceiverID(String receiverID) {
+		this.receiverID = receiverID;
 	}
 }
