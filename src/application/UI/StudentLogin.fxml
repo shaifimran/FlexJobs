@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.ParallelCamera?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -40,7 +41,7 @@
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor></PasswordField>
-      <Button fx:id="studentLoginButton" alignment="CENTER" layoutX="585.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="47.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="studentLoginButton" alignment="CENTER" layoutX="498.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="47.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Login" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lorin Bold" size="17.0" />
          </font>
@@ -63,5 +64,14 @@
             </Label>
          </children>
       </HBox>
+      <ButtonBar layoutX="56.0" layoutY="98.0" prefHeight="40.0" prefWidth="200.0" />
+      <Button fx:id="studentRegisterButton" alignment="CENTER" layoutX="693.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleRegistration" prefHeight="47.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Register" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Lorin Bold" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </Button>
    </children>
 </Pane>

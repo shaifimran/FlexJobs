@@ -14,20 +14,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentViewStatusController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentNotificationController">
    <children>
-      <Label layoutX="91.0" layoutY="72.0" text="View Status of Applications">
+      <Label layoutX="70.0" layoutY="75.0" text="Notifications">
          <font>
             <Font name="Lorin ExtraBold" size="40.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="82.0" layoutY="128.0" prefHeight="606.0" prefWidth="1137.0" style="-fx-background-color: #171616; -fx-background-radius: 15;">
+      <ScrollPane layoutX="59.0" layoutY="137.0" prefHeight="606.0" prefWidth="1175.0" style="-fx-background-color: #171616; -fx-background-radius: 15;">
          <content>
-            <VBox fx:id="statusVBox" prefHeight="103.0" prefWidth="1125.0">
+            <VBox fx:id="NotifVBox" prefHeight="103.0" prefWidth="1172.0">
                <children>
                   <HBox alignment="CENTER" maxHeight="100.0" minHeight="100.0" prefHeight="101.0" prefWidth="1114.0" style="-fx-background-color: none;">
                      <children>
-                        <Label prefHeight="28.0" prefWidth="676.0" text="Job Title" textFill="WHITE">
+                        <Label prefHeight="28.0" prefWidth="647.0" text="From" textFill="WHITE">
                            <font>
                               <Font name="Lorin Bold" size="26.0" />
                            </font>
@@ -37,7 +37,7 @@
                               <Insets />
                            </HBox.margin>
                         </Region>
-                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="78.0" prefWidth="130.0" style="-fx-background-color: transparent; -fx-background-radius: 40; -fx-border-color: #4A44F2; -fx-border-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Status" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="markAsReadButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#markAsRead" prefHeight="60.0" prefWidth="157.0" style="-fx-background-color: transparent; -fx-background-radius: 40; -fx-border-color: #4A44F2; -fx-border-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Mark as Read" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Lorin Bold" size="17.0" />
                            </font>
@@ -46,7 +46,7 @@
                            </cursor>
                         </Button>
                         <Region prefHeight="80.0" prefWidth="34.0" />
-                        <Button fx:id="viewJobStatusDetailsButton" alignment="CENTER_RIGHT" layoutX="907.0" layoutY="37.0" mnemonicParsing="false" onAction="#viewJobStatusDetail" prefHeight="58.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="View Details" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="expandNotificationButton" alignment="CENTER_RIGHT" layoutX="907.0" layoutY="37.0" mnemonicParsing="false" onAction="#expandNotification" prefHeight="58.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-background-radius: 40;" stylesheets="@../../../AtlantaFX/cupertino-dark.css" text="Expand" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Lorin Bold" size="17.0" />
                            </font>
@@ -66,7 +66,7 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Hyperlink focusTraversable="false" layoutX="24.0" layoutY="24.0" onAction="#goBackToDashBoard">
+      <Hyperlink focusTraversable="false" layoutX="17.0" layoutY="21.0" onAction="#goBackToDashBoard">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="67.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>

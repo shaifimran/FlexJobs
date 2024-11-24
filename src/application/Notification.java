@@ -1,25 +1,36 @@
 package application;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Notification {
-	private String notificationId;
+	private int notificationId;
 	private String message;
-	private Date timestamp;
+	private String senderID;
+	private String receiverID;
+	private Timestamp timestamp;
 	private boolean isRead;
 
-	public Notification(String notificationId, String message, Date timestamp, boolean isRead) {
+	public Notification(int notificationId, String senderId, String receiverId, String message, Timestamp timestamp,
+			boolean isRead) {
 		this.notificationId = notificationId;
 		this.message = message;
+		this.setSenderId(senderId);
+		this.setReceiverId(receiverId);
 		this.timestamp = timestamp;
 		this.isRead = isRead;
 	}
 
-	public String getNotificationId() {
+	public Notification(int notificationId, String message, boolean isRead) {
+		this.notificationId = notificationId;
+		this.message = message;
+		this.isRead = isRead;
+	}
+
+	public int getNotificationId() {
 		return notificationId;
 	}
 
-	public void setNotificationId(String notificationId) {
+	public void setNotificationId(int notificationId) {
 		this.notificationId = notificationId;
 	}
 
@@ -31,11 +42,11 @@ public class Notification {
 		this.message = message;
 	}
 
-	public Date getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
@@ -48,12 +59,26 @@ public class Notification {
 	}
 
 	public boolean sendVerificationNotification(String orgId) {
-		// Logic to send verification notification
 		return true;
 	}
 
 	public boolean sendInterviewNotification(String studentId) {
-		// Logic to send interview notification
 		return true;
+	}
+
+	public String getSenderId() {
+		return senderID;
+	}
+
+	public void setSenderId(String senderId) {
+		this.senderID = senderId;
+	}
+
+	public String getReceiverId() {
+		return receiverID;
+	}
+
+	public void setReceiverId(String receiverId) {
+		this.receiverID = receiverId;
 	}
 }

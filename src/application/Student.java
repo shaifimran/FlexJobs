@@ -12,6 +12,7 @@ public class Student {
 	private String name;
 	private String password;
 	private String department;
+	private String resume;
 	private double cgpa;
 
 	// Constructor
@@ -24,10 +25,10 @@ public class Student {
 		this.cgpa = cgpa;
 	}
 
-	public Student(){
+	public Student() {
 
 	}
-	
+
 	public String getRollNo() {
 		return rollNo;
 	}
@@ -88,11 +89,19 @@ public class Student {
 		return true;
 	}
 
-	public Chat openChatBox() {
-		return new Chat();
-	}
+//	public Chat openChatBox() {
+//		return new Chat();
+//	}
 
 	public List<Application> getApplications() {
 		return new ArrayList<>();
+	}
+
+	public String getResume() {
+		return resume;
+	}
+
+	public void setResume(String resume) {
+		this.resume = resume;
 	}
 }

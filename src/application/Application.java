@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
-	private String applicationID;
+	private int applicationID;
 	private Date submitDate;
 	private String status;
 	private String feedback;
 	private String studentID;
+	private int opportunityID;
 
-	public String getApplicationID() {
+	public int getApplicationID() {
 		return applicationID;
 	}
 
-	public void setApplicationID(String applicationID) {
+	public void setApplicationID(int applicationID) {
 		this.applicationID = applicationID;
 	}
 
@@ -52,20 +53,27 @@ public class Application {
 		this.studentID = studentID;
 	}
 
-	public String getOpportunityID() {
+	public int getOpportunityID() {
 		return opportunityID;
 	}
 
-	public void setOpportunityID(String opportunityID) {
+	public void setOpportunityID(int opportunityID) {
 		this.opportunityID = opportunityID;
 	}
 
-	private String opportunityID;
-
-	public Application(String applicationID, Date submitDate, String status, String feedback, String studentID,
-			String opportunityID) {
+	public Application(int applicationID, Date submitDate, String status, String feedback, String studentID,
+			int opportunityID) {
 		this.applicationID = applicationID;
 		this.submitDate = submitDate;
+		this.status = status;
+		this.feedback = feedback;
+		this.studentID = studentID;
+		this.opportunityID = opportunityID;
+	}
+
+	public Application(int applicationID, String status, String feedback, String studentID, String interviewID,
+			int opportunityID, String opportunityTitle) {
+		this.applicationID = applicationID;
 		this.status = status;
 		this.feedback = feedback;
 		this.studentID = studentID;
