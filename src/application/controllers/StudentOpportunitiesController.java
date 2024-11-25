@@ -1,6 +1,7 @@
 package application.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import application.JobOpportunity;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -42,6 +44,8 @@ public class StudentOpportunitiesController {
 	TextField filterTextField;
 	@FXML
 	Button filterCategoryButton;
+	@FXML
+	ComboBox<String> categoryComboBox;
 
 	public StudentOpportunitiesController(Student s) {
 		this.student = s;
@@ -51,19 +55,25 @@ public class StudentOpportunitiesController {
 
 	}
 
+	public void initialize() {
+		List<String> cat = dbHandler.getCategories();
+		if (cat != null) {
+			UIFactory.getInstance();
+			UIFactory.populateCategories(cat, categoryComboBox);
+		}
+	}
+
 	@FXML
 	public void filterJobs(ActionEvent event) {
 		isInJobSection = true;
 		categoryFilterHBox.setVisible(true);
 		Map<Integer, String> jobTitles;
-		if (filterTextField.getText().isEmpty())
+		if (categoryComboBox.getSelectionModel().getSelectedItem() == null)
 			jobTitles = dbHandler.fetchJobTitles("");
 		else {
 			JobVBox.getChildren().clear();
-			jobTitles = dbHandler.fetchJobTitles(filterTextField.getText());
-			filterTextField.setText("");
-//			System.out.println(jobTitles);
-
+			jobTitles = dbHandler.fetchJobTitles(categoryComboBox.getSelectionModel().getSelectedItem());
+			categoryComboBox.getSelectionModel().clearSelection();
 		}
 
 		if (jobTitles.isEmpty()) {
@@ -179,11 +189,11 @@ public class StudentOpportunitiesController {
 
 	@FXML
 	public void filterJobsbyCategory(ActionEvent event) {
-		if (filterTextField.getText().isEmpty()) {
-			showAlert(AlertType.ERROR, "Invalid", "Please enter a valid category");
+		if (categoryComboBox.getSelectionModel().getSelectedItem() == null) {
+			showAlert(AlertType.ERROR, "Invalid", "Please select a category!");
 			return;
 		}
-//		System.out.println(filterTextField.getText());
+
 		filterJobs(event);
 	}
 

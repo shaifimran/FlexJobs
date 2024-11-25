@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import application.ApplicationWithOpportunity;
-import application.controllers.StudentNotificationController;
-import application.controllers.StudentOpportunitiesController;
-import application.controllers.StudentViewStatusController;
 import application.Chat;
 import application.ChatBox;
 import application.Message;
@@ -19,11 +16,15 @@ import application.UnverifiedOrgs;
 import application.controllers.AdminDashboardController;
 import application.controllers.AdminVerifyOrganisationController;
 import application.controllers.ChatBoxController;
+import application.controllers.StudentNotificationController;
+import application.controllers.StudentOpportunitiesController;
+import application.controllers.StudentViewStatusController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -31,7 +32,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 
 public class UIFactory {
@@ -531,11 +531,9 @@ public class UIFactory {
 			// Determine if the organisation is the sender or receiver
 			if (message.getSenderId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the sender, use sent message template
-				System.out.println(message.getText());
 				addMsgToVBox(message, sentMsgHBox, msgVBox);
 			} else if (message.getReceiverId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the receiver, use received message template
-				System.out.println(message.getText());
 
 				addMsgToVBox(message, receivedMsgHBox, msgVBox);
 			}
@@ -586,6 +584,17 @@ public class UIFactory {
 		} catch (Exception e) {
 			e.printStackTrace(); // Log any errors
 		}
+	}
+
+	public static void populateDeps(List<String> deps, ComboBox<String> depComboBox) {
+		ObservableList<String> observableDeps = FXCollections.observableList(deps);
+		depComboBox.setItems(observableDeps);
+	}
+
+	public static void populateCategories(List<String> cat, ComboBox<String> categoryComboBox) {
+		ObservableList<String> observableDeps = FXCollections.observableList(cat);
+		categoryComboBox.setItems(observableDeps);
+
 	}
 
 }

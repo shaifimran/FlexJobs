@@ -2,13 +2,21 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F; -fx-background-image: ..\resources\gpt8.jpg;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentRegistrationController">
    <children>
+      <ImageView fitHeight="821.0" fitWidth="1372.0" layoutX="-69.0" opacity="0.58" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/v882-kul-52.jpg" />
+         </image>
+      </ImageView>
       <Label alignment="CENTER" layoutX="296.0" layoutY="298.0" opacity="0.7" prefHeight="0.0" prefWidth="59.0" text="Email" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
@@ -87,14 +95,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField layoutX="289.0" layoutY="437.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </TextField>
+      <ComboBox layoutX="290.0" layoutY="436.0" prefHeight="43.0" prefWidth="304.0" />
       <Label alignment="CENTER" layoutX="668.0" layoutY="403.0" opacity="0.7" prefHeight="22.0" prefWidth="140.0" text="Semester" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
@@ -103,14 +104,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField layoutX="684.0" layoutY="436.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </TextField>
+      <ComboBox layoutX="683.0" layoutY="436.0" prefHeight="43.0" prefWidth="304.0" />
       <Label alignment="CENTER" layoutX="256.0" layoutY="506.0" opacity="0.7" prefHeight="22.0" prefWidth="140.0" text="CGPA" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />

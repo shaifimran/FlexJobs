@@ -36,7 +36,7 @@ public class StudentNotificationController {
 
 	@FXML
 	private void initialize() {
-		List<Notification> notifications = dbHandler.fetchStudentNotifications(student.getRollNo());
+		List<Notification> notifications = dbHandler.fetchStudentNotifications(student.getEmail());
 		if (notifications != null) {
 			UIFactory.getInstance();
 			UIFactory.generateNotificationUI(notifications, this, NotifVBox);
@@ -47,7 +47,7 @@ public class StudentNotificationController {
 	public void markAsRead(ActionEvent event) {
 		Button b = (Button) event.getSource();
 		int notifID = (int) b.getUserData();
-		Boolean success = dbHandler.markRead(student.getRollNo(), notifID);
+		Boolean success = dbHandler.markRead(student.getEmail(), notifID);
 		if (success) {
 			showAlert(AlertType.INFORMATION, "Successful", "Marked as Read.");
 			this.initialize();

@@ -1,8 +1,10 @@
 package application.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import application.ChatBox;
+import application.UI.UIFactory;
 import application.handlers.DBHandler;
 import application.handlers.ResumeHandler;
 import javafx.animation.PauseTransition;
@@ -12,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,8 +46,26 @@ public class StudentRegistrationController {
 	private HBox studentErrorHbox;
 	@FXML
 	private Label studentErrorLabel;
+	@FXML
+	ComboBox<String> depComboBox;
 
 	@FXML
+	ComboBox<Integer> semComboBox;
+
+	@FXML
+	public void initialize() {
+		List<String> deps = dbHandler.getDepartments();
+		if (deps != null) {
+			UIFactory.getInstance();
+			UIFactory.populateDeps(deps, depComboBox);
+		} else {
+			return;
+		}
+		semComboBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
+		depComboBox.setPromptText("Select a Department");
+		semComboBox.setPromptText("Choose a Semester");
+	}
+
 	public void registerStudent(ActionEvent event) {
 
 		if (studentRollNo.getText().isEmpty() || !studentRollNo.getText().matches("^\\d{2}i-\\d{4}$")) {
@@ -68,20 +89,14 @@ public class StudentRegistrationController {
 			return;
 		}
 
-		else if (studentDepartment.getText().isEmpty()) {
-			studentErrorLabel.setText("Enter the department.");
+		else if (depComboBox.getSelectionModel().getSelectedItem() == null) {
+			studentErrorLabel.setText("Select the department.");
 			showLabel();
 			return;
 		}
 
-		else if (studentSemester.getText().isEmpty() || !studentSemester.getText().matches("^\\d+$")) {
-			studentErrorLabel.setText("Semester must be a number.");
-			showLabel();
-			return;
-		}
-
-		else if (Integer.parseInt(studentSemester.getText()) < 1 || Integer.parseInt(studentSemester.getText()) > 8) {
-			studentErrorLabel.setText("Enter a valid Semester.");
+		else if (semComboBox.getSelectionModel().getSelectedItem() == null) {
+			studentErrorLabel.setText("Choose a semester.");
 			showLabel();
 			return;
 		}
@@ -109,9 +124,9 @@ public class StudentRegistrationController {
 			int id = dbHandler.createChatBox("Student");
 			chatBox.setChatBoxId(id);
 			Boolean success = dbHandler.addStudent(studentRollNo.getText(), studentEmail.getText(),
-					studentName.getText(), studentPassword.getText(), studentDepartment.getText(),
-					Integer.parseInt(studentSemester.getText()), Double.parseDouble(studentCGPA.getText()),
-					resume.getText(),chatBox.getChatBoxId());
+					studentName.getText(), studentPassword.getText(), depComboBox.getSelectionModel().getSelectedItem(),
+					semComboBox.getSelectionModel().getSelectedItem(), Double.parseDouble(studentCGPA.getText()),
+					resume.getText(), chatBox.getChatBoxId());
 			if (success) {
 				try {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/StudentLogin.fxml"));
