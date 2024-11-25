@@ -19,6 +19,10 @@ public class Chat {
 		this.orgId = orgId;
 	}
 
+	public Chat() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getChatID() {
 		return chatID;
 	}

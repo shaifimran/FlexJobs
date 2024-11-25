@@ -78,9 +78,7 @@ CREATE TABLE Job (
     opportunityID INT PRIMARY KEY,
     category VARCHAR(255),
     requirements TEXT, -- Added this column
-    applicationID INT,
-    FOREIGN KEY (opportunityID) REFERENCES Opportunity(opportunityID),
-    FOREIGN KEY (applicationID) REFERENCES Application(applicationID)
+    FOREIGN KEY (opportunityID) REFERENCES Opportunity(opportunityID)
 );
 
 
@@ -125,7 +123,7 @@ CREATE TABLE ChatBox (
 -- Chat Table
 CREATE TABLE Chat (
     chatID INT PRIMARY KEY AUTO_INCREMENT,
-    createdAt DATETIME,
+    createdAt Timestamp,
     orgId VARCHAR(255),
     studentId VARCHAR(255),
     FOREIGN KEY (orgId) REFERENCES Organisation(name),
@@ -315,3 +313,5 @@ VALUES
 update notification set isRead=False;
 select * from student;
 delete from student where rollNo="22i-1024";
+
+update flexjobs.organisation set isVerified=true where name = "TechCorp" 

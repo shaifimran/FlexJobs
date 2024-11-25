@@ -1,5 +1,7 @@
 package application;
 
+import application.controllers.ChatBoxController;
+import application.controllers.StudentDashboardController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +12,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("./UI/StudentLogin.fxml"));
+//			Organisation o = new Organisation();
+//			o.setName("Org1");
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/ChatBox.fxml"));
+//			loader.setControllerFactory(c -> new ChatBoxController(o));
+//			Parent root = loader.load();
+			Parent root = FXMLLoader.load(getClass().getResource("./UI/MainApplication.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("./UI/application.css").toExternalForm());
 			primaryStage.setScene(scene);

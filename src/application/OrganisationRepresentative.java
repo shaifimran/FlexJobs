@@ -57,13 +57,14 @@ public class OrganisationRepresentative {
 		this.orgID = orgID;
 	}
 
-	public OrganisationRepresentative(String name, String password, String email, String position, String phone, String orgID) {
+	public OrganisationRepresentative(String name, String password, String email, String position, String phone, String orgID, Boolean isVerified ) {
 		this.name = name;
 		this.password = password;
 		this.email = email;
 		this.position = position;
 		this.phone = phone;
 		this.orgID = orgID;
+		this.isVerified = isVerified;
 	}
 
 	public Chat openChatBox() {
@@ -71,6 +72,14 @@ public class OrganisationRepresentative {
 		return new Chat(email, null, email, email, null);
 	}
 
+	public Boolean getIsVerified() {
+		return isVerified;
+	}
+
+	public void setIsVerified(Boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+	
 	public Boolean getVerified() {
 		return isVerified;
 	}
@@ -79,3 +88,4 @@ public class OrganisationRepresentative {
 		this.isVerified = isVerified;
 	}
 }
+

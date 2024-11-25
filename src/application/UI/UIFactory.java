@@ -426,7 +426,7 @@ public class UIFactory {
 
 		// Add each chat to the VBox
 		for (Chat chat : student.getMyChatBox().getChats()) {
-			addChatToVBox(chat, chatsHBox, chatsVBox, student.getMyChatBox(), controller);
+			addChatToVBox(chat, chatsHBox, chatsVBox, student.getMyChatBox(), controller, true);
 		}
 	}
 
@@ -439,12 +439,12 @@ public class UIFactory {
 
 		// Add each chat to the VBox
 		for (Chat chat : organisation.getMyChatBox().getChats()) {
-			addChatToVBox(chat, chatsHBox, chatsVBox, organisation.getMyChatBox(), controller);
+			addChatToVBox(chat, chatsHBox, chatsVBox, organisation.getMyChatBox(), controller, false);
 		}
 	}
 
-	private void addChatToVBox(Chat chat, HBox chatsHBox, VBox chatsVBox, ChatBox chatBox,
-			ChatBoxController controller) {
+	private void addChatToVBox(Chat chat, HBox chatsHBox, VBox chatsVBox, ChatBox chatBox, ChatBoxController controller,
+			Boolean isStudent) {
 		try {
 			// Clone the HBox
 			HBox newChatHBox = new HBox();
@@ -466,7 +466,12 @@ public class UIFactory {
 
 			// Clone the Label (template label from the original HBox)
 			Label templateLabel = (Label) chatsHBox.getChildren().get(0);
-			Label chatLabel = new Label(chat.getOrgId()); // Set label text to Org name or Student name here
+			Label chatLabel;
+			if (isStudent) {
+				chatLabel = new Label(chat.getOrgId());
+			} else {
+				chatLabel = new Label(chat.getStudentId());
+			}
 			chatLabel.setPrefWidth(templateLabel.getPrefWidth());
 			chatLabel.setPrefHeight(templateLabel.getPrefHeight());
 			chatLabel.setMinWidth(templateLabel.getMinWidth());
@@ -523,12 +528,14 @@ public class UIFactory {
 
 		// Iterate through messages in the chat
 		for (Message message : chat.getMessages()) {
+			
 			// Determine if the organisation is the sender or receiver
-			if (message.getSenderId().equals(organisation.getName())) {
+			if (message.getSenderId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the sender, use sent message template
 				addMsgToVBox(message, sentMsgHBox, msgVBox);
-			} else if (message.getReceiverId().equals(organisation.getName())) {
+			} else if (message.getReceiverId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the receiver, use received message template
+
 				addMsgToVBox(message, receivedMsgHBox, msgVBox);
 			}
 		}

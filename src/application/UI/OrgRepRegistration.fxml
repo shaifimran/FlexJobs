@@ -94,7 +94,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </TextField>
-      <TextField fx:id="positionField" layoutX="716.0" layoutY="493.0" prefHeight="42.0" prefWidth="302.0" promptText="e.g Software Engineer" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="phoneField" layoutX="716.0" layoutY="373.0" prefHeight="42.0" prefWidth="302.0" promptText="e.g (123) 123-1234" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -110,7 +110,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </TextField>
-      <TextField fx:id="phoneField" layoutX="716.0" layoutY="373.0" prefHeight="42.0" prefWidth="302.0" promptText="e.g (123) 123-1234" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="positionField" layoutX="716.0" layoutY="493.0" prefHeight="42.0" prefWidth="302.0" promptText="e.g Software Engineer" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>

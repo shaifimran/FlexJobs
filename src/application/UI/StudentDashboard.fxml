@@ -274,13 +274,20 @@
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="studentMessages" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+            <Label fx:id="studentMessages" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="DISAPPEAR" />
                </cursor>
+               <graphic>
+                  <ImageView fitHeight="108.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/msg.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Label>
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">

@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Organisation {
@@ -20,10 +21,13 @@ public class Organisation {
 		this.location = location;
 		this.contactEmail = contactEmail;
 		this.isVerified = isVerified;
+		representatives = new ArrayList<OrganisationRepresentative>();
 	}
 
 	public Organisation() {
 		// TODO Auto-generated constructor stub
+		representatives = new ArrayList<OrganisationRepresentative>();
+
 	}
 
 	public String getName() {
