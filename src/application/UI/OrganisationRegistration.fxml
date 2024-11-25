@@ -56,14 +56,6 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <TextField fx:id="orgDescriptionField" layoutX="716.0" layoutY="218.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </TextField>
       <TextField fx:id="orgIndustryField" layoutX="294.0" layoutY="219.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
@@ -72,7 +64,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </TextField>
-      <TextField fx:id="orgLocationField" layoutX="716.0" layoutY="353.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+      <TextField fx:id="orgDescriptionField" layoutX="716.0" layoutY="218.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>
@@ -81,6 +73,14 @@
          </cursor>
       </TextField>
       <TextField fx:id="orgContactEmailField" layoutX="294.0" layoutY="353.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+      </TextField>
+      <TextField fx:id="orgLocationField" layoutX="716.0" layoutY="353.0" prefHeight="42.0" prefWidth="302.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
          <font>
             <Font size="17.0" />
          </font>

@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.Admin;
+import application.ChatBox;
 import application.OrgRepTableRow;
 import application.Organisation;
 import application.OrganisationRepresentative;
@@ -28,7 +29,7 @@ public class AdminVerifyOrganisationController {
 	private DBHandler dbHandler = new DBHandler();
 
 	private UnverifiedOrgs unverifiedOrgs;
-	
+
 	private Admin admin;
 	@FXML
 	private TableView<OrgRepTableRow> verifyOrgTable;
@@ -75,7 +76,12 @@ public class AdminVerifyOrganisationController {
 
 				// Remove the row from the TableView
 				verifyOrgTable.getItems().remove(row);
+				ChatBox chatBox = new ChatBox();
+				int id = dbHandler.createChatBox("Organisation");
+				chatBox.setChatBoxId(id);
 
+				org.setMyChatBox(chatBox);
+				
 				// Optionally, update the database with the new "isVerified" status
 				dbHandler.updateOrganisationVerificationStatus(org);
 				dbHandler.updateRepresentativeVerificationStatus(rep);

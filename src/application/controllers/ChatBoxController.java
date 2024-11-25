@@ -102,8 +102,8 @@ public class ChatBoxController {
 			addNewChatButton.setVisible(false);
 			addNewChatButton.setManaged(false);
 
-			organisation.setMyChatBox(dbHandler.getOrganisationChatBox(organisation.getName()));
-			organisation.getMyChatBox().setChats(dbHandler.getOrganisationChats(organisation.getName()));
+			organisation.setMyChatBox(dbHandler.getOrganisationChatBox(organisation.getName().toLowerCase()));
+			organisation.getMyChatBox().setChats(dbHandler.getOrganisationChats(organisation.getName().toLowerCase()));
 			UIFactory.getInstance().displayOrganisationChats(chatsVBox, chatsHBox, organisation, this);
 		}
 
@@ -209,6 +209,15 @@ public class ChatBoxController {
 				stage.setScene(scene);
 				stage.show();
 			} else if (student == null && organisation != null) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/OrgRepDashboard.fxml"));
+				loader.setControllerFactory(c -> new OrgRepDashboardController(organisation.getRepresentatives().getLast()));
+				Parent root = loader.load();
+				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+				Scene scene = new Scene(root);
+
+				stage.setScene(scene);
+				stage.show();
 
 			}
 		} catch (IOException e) {

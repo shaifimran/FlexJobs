@@ -78,9 +78,7 @@ CREATE TABLE Job (
     opportunityID INT PRIMARY KEY,
     category VARCHAR(255),
     requirements TEXT, -- Added this column
-    applicationID INT,
-    FOREIGN KEY (opportunityID) REFERENCES Opportunity(opportunityID),
-    FOREIGN KEY (applicationID) REFERENCES Application(applicationID)
+    FOREIGN KEY (opportunityID) REFERENCES Opportunity(opportunityID)
 );
 
 
@@ -315,3 +313,5 @@ VALUES
 update notification set isRead=False;
 select * from student;
 delete from student where rollNo="22i-1024";
+
+update flexjobs.organisation set isVerified=true where name = "TechCorp" 

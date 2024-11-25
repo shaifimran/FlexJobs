@@ -58,19 +58,22 @@ public class OrgRepRegistrationController {
             return;
         }
         
-        if (!dbHandler.isOrganisationRepExists(organisation, email)) {
+        System.out.println(dbHandler.isOrganisationRepExists(organisation, email));
+        if (dbHandler.isOrganisationRepExists(organisation, email)) {
         	showAlert(Alert.AlertType.ERROR, "Representative Exists", "An organization representative already exists for this organization with this email.");
         	return;
         }
         
-        OrgRep = new OrganisationRepresentative(name,password,email,position,phone,organisation);
+        OrgRep = new OrganisationRepresentative(name,password,email,position,phone,organisation,false);
         
         if (!dbHandler.isOrganisationExists(organisation)) {      
             redirectToOrganisationRegistration();
+            dbHandler.addNotification(organisation,"admin","Organisation: " + organisation + " and its Organisation Representative: " + email + " needs verification.");
             return;
         }
             
         dbHandler.addOrgRepresentative(name, phone, password, email, organisation, position);
+        dbHandler.addNotification(email,organisation,"Organisation Representative: " + email + " needs verification.");
 		showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Organisation Representative registered successfully.");
 		clearFields();
 		redirectToLoginPage();
@@ -96,8 +99,8 @@ public class OrgRepRegistrationController {
     
     private void redirectToLoginPage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/OrgRepLogin.fxml"));
-            Pane root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/OrgRepLogin.fxml"));                       
+            Pane root = loader.load();                     
             Stage stage = (Stage) nameField.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -11,7 +11,15 @@ public class Application {
 	private String status;
 	private String feedback;
 	private String studentID;
+	private String interviewID;
 	private int opportunityID;
+	
+	public String getInterviewID() {
+		return this.interviewID;
+	}
+	public void setInterviewID(String InterviewID) {
+		this.interviewID = InterviewID;
+	}
 
 	public int getApplicationID() {
 		return applicationID;
@@ -62,24 +70,25 @@ public class Application {
 	}
 
 	public Application(int applicationID, Date submitDate, String status, String feedback, String studentID,
-			int opportunityID) {
+			String interviewID, int opportunityID) {
 		this.applicationID = applicationID;
 		this.submitDate = submitDate;
 		this.status = status;
 		this.feedback = feedback;
 		this.studentID = studentID;
+		this.interviewID = interviewID;
 		this.opportunityID = opportunityID;
 	}
 
-	public Application(int applicationID, String status, String feedback, String studentID, String interviewID,
-			int opportunityID, String opportunityTitle) {
+	public Application(int applicationID, String status, String feedback, String rollNo, String interviewID,
+			int opportunityID) {
+		// TODO Auto-generated constructor stub
 		this.applicationID = applicationID;
 		this.status = status;
 		this.feedback = feedback;
-		this.studentID = studentID;
+		this.interviewID = interviewID;
 		this.opportunityID = opportunityID;
 	}
-
 	public List<Application> applyFilters(Map<String, Object> criteria, List<Application> applicantList) {
 		// Apply filters to applications
 		return new ArrayList<>();

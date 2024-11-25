@@ -17,7 +17,18 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.OrgRepDashboardController">
    <children>
-      <Label alignment="CENTER" layoutX="916.0" layoutY="46.0" opacity="0.7" prefHeight="23.0" prefWidth="337.0" text="(Organisation Representative ID)" textFill="#f0f0f2">
+      <Hyperlink fx:id="GoBack" focusTraversable="false" layoutX="47.0" layoutY="43.0" onAction="#goback" prefHeight="23.0" prefWidth="117.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="&lt; GO BACK" textFill="#817dff">
+         <font>
+            <Font name="Lorin ExtraBold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="12.0" />
+         </padding>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </Hyperlink>
+      <Label fx:id="orgRepNameLabel" alignment="CENTER" layoutX="858.0" layoutY="43.0" opacity="0.7" prefHeight="23.0" prefWidth="442.0" text="(Organisation Representative Name)" textAlignment="RIGHT" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -25,7 +36,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <Label alignment="CENTER" layoutX="878.0" layoutY="79.0" opacity="0.7" prefHeight="23.0" prefWidth="375.0" text="(Organisation Representative Name)" textFill="#f0f0f2">
+      <Label fx:id="orgRepPositionLabel" alignment="CENTER" layoutX="858.0" layoutY="78.0" opacity="0.7" prefHeight="23.0" prefWidth="442.0" text="(Organisation Position)" textAlignment="RIGHT" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -42,7 +53,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <VBox layoutX="169.0" layoutY="211.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="356.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox layoutX="169.0" layoutY="211.0" prefHeight="357.0" prefWidth="356.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -69,7 +80,7 @@
                   <Insets left="7.0" top="12.0" />
                </padding>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="248.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="34" textFill="#6863ff">
+            <Label fx:id="OpportunityPostedLabel" alignment="CENTER" opacity="0.7" prefHeight="248.0" prefWidth="358.0" style="-fx-text-fill: #817dff;" text="34" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -80,7 +91,7 @@
             <Line endX="-79.72894287109375" endY="-8.625142097473145" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="183.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Post Opportunity" textFill="#817dff">
+                  <Hyperlink fx:id="postOpportunityLink" focusTraversable="false" onAction="#handlePostOpportunity" prefHeight="23.0" prefWidth="183.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Post Opportunity" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -103,7 +114,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="536.0" layoutY="211.0" onSwipeLeft="#buttonControl" prefHeight="357.0" prefWidth="623.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox layoutX="536.0" layoutY="211.0" prefHeight="357.0" prefWidth="623.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -114,7 +125,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="45.0" prefWidth="255.0">
                <children>
-                  <Label opacity="0.7" prefHeight="40.0" prefWidth="272.0" text="Applicants Selected" textFill="WHITE">
+                  <Label opacity="0.7" prefHeight="40.0" prefWidth="236.0" text="Total Applicants" textFill="WHITE">
                      <font>
                         <Font name="Lorin ExtraBold" size="25.0" />
                      </font>
@@ -127,7 +138,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label alignment="CENTER" opacity="0.7" prefHeight="249.0" prefWidth="624.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
+            <Label fx:id="ApplicantsLabel" alignment="CENTER" opacity="0.7" prefHeight="249.0" prefWidth="624.0" style="-fx-text-fill: #817dff;" text="54" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -138,7 +149,7 @@
             <Line endX="187.27105712890625" endY="-9.918078422546387" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="624.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="442.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Verify, Filter and Update Status of Applicants" textFill="#817dff">
+                  <Hyperlink fx:id="verifyApplicantsLink" focusTraversable="false" onAction="#handleVerifyApplicants" prefHeight="23.0" prefWidth="442.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Verify, Filter and Update Status of Applicants" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
@@ -158,7 +169,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="175.0" layoutY="586.0" onSwipeLeft="#buttonControl" prefHeight="136.0" prefWidth="985.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox layoutX="175.0" layoutY="586.0" prefHeight="136.0" prefWidth="985.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -189,7 +200,7 @@
             </Line>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="624.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="234.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Chat with Applicants" textFill="#817dff">
+                  <Hyperlink fx:id="chatWithApplicantsLink" focusTraversable="false" onAction="#handleChatWithApplicants" prefHeight="23.0" prefWidth="234.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Chat with Applicants" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>

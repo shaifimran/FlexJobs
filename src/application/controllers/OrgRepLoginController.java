@@ -17,6 +17,7 @@ import application.handlers.DBHandler;
 
 public class OrgRepLoginController {
 
+	OrganisationRepresentative OrgRep;
     @FXML
     private TextField emailField; // Field for email input
 
@@ -34,6 +35,10 @@ public class OrgRepLoginController {
     public OrgRepLoginController() {
         dbHandler = new DBHandler();  // Initialize DBHandler to interact with the database
     }
+    
+    public void setOrgRep(OrganisationRepresentative OrgRep) {
+    	this.OrgRep = OrgRep;
+    }
 
     /**
      * Handles the login action when the login button is clicked.
@@ -50,14 +55,14 @@ public class OrgRepLoginController {
         }
 
         // Check the credentials in the database
-        OrganisationRepresentative orgRep = dbHandler.verifyOrganisationRepresentativeCredentials(email, password);
+        OrganisationRepresentative orgRep = dbHandler.verifyOrganisationRepresentativeCredentials(email, password, true);
         if (orgRep != null) {
-            // If credentials are valid, proceed to the next page (dashboard or home page)
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + orgRep.getName() + "!");
+        	
+        	OrgRep = dbHandler.getOrganisationRepresentative(email,password);
             // Redirect to the main page, dashboard or home page
             redirectToDashboard();
         } else {
-            showAlert(Alert.AlertType.ERROR, "Invalid Login", "Incorrect email or password.");
+            showAlert(Alert.AlertType.ERROR, "Invalid Login", "Incorrect email or password or the Organisation Representative is not verified!");
         }
     }
 
@@ -100,12 +105,16 @@ public class OrgRepLoginController {
             // Assuming "Dashboard.fxml" is the main page for the logged-in user
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/OrgRepDashboard.fxml"));
             Parent root = loader.load();
+            
+            OrgRepDashboardController orgrepdashboardcontroller = loader.getController();
+            orgrepdashboardcontroller.setOrganisationRepresentative(OrgRep);
+            
             Scene scene = new Scene(root);
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the dashboard: " + e.getMessage());
+        	e.printStackTrace();
         }
     }
 }

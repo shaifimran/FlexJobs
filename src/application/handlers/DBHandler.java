@@ -1,6 +1,7 @@
 package application.handlers;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,7 @@ import application.UnverifiedOrgs;
 public class DBHandler {
 	private final String dbUrl = "jdbc:mysql://localhost:3306/flexjobs";
 	private final String dbUser = "root";
-	private final String dbPassword = "wasay";
+	private final String dbPassword = "Shaif2004.";
 	private Connection conn;
 
 	/**
@@ -202,8 +203,9 @@ public class DBHandler {
 	}
 
 	// Verify credentials of OrganisationRepresentative
-	public OrganisationRepresentative verifyOrganisationRepresentativeCredentials(String email, String password) {
-		String query = "SELECT * FROM OrganisationRepresentative WHERE email = ? AND password = ?";
+	public OrganisationRepresentative verifyOrganisationRepresentativeCredentials(String email, String password,
+			Boolean isVerified) {
+		String query = "SELECT * FROM OrganisationRepresentative WHERE email = ? AND password = ? AND isVerified = ?";
 
 		try {
 			this.getConnection();
@@ -211,6 +213,7 @@ public class DBHandler {
 
 			stmt.setString(1, email);
 			stmt.setString(2, password);
+			stmt.setBoolean(3, isVerified);
 
 			try (ResultSet rs = stmt.executeQuery()) {
 				if (rs != null && rs.next()) {
@@ -220,8 +223,9 @@ public class DBHandler {
 					String position = rs.getString("position");
 					String phone = rs.getString("phone");
 					String orgID = rs.getString("orgID");
+					isVerified = rs.getBoolean("isVerified");
 
-					return new OrganisationRepresentative(name, pass, emailFromDb, position, phone, orgID);
+					return new OrganisationRepresentative(name, pass, emailFromDb, position, phone, orgID, isVerified);
 				}
 			}
 
@@ -234,7 +238,7 @@ public class DBHandler {
 	// Add a new Organisation Representative to the database
 	public void addOrgRepresentative(String name, String phone, String password, String email, String organisation,
 			String position) {
-		String query = "INSERT INTO OrganisationRepresentative (name, password, email, position, phone, orgID) VALUES (?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO OrganisationRepresentative (name, password, email, position, phone, orgID, isVerified) VALUES (?, ?, ?, ?, ?, ?,?)";
 
 		try {
 			this.getConnection();
@@ -245,6 +249,8 @@ public class DBHandler {
 			statement.setString(4, position);
 			statement.setString(5, phone);
 			statement.setString(6, organisation);
+			statement.setBoolean(7, false );
+
 
 			statement.executeUpdate();
 			System.out.println("Organisation Representative added successfully.");
@@ -254,7 +260,6 @@ public class DBHandler {
 		}
 	}
 
-	// Add a new Organisation to the database
 	public void addOrganisation(String name, String industry, String description, String location, String contactEmail,
 			Boolean isVerified) {
 		String orgQuery = "INSERT INTO Organisation (name, industry, description, location, contactEmail, isVerified) VALUES (?, ?, ?, ?, ?, ?)";
@@ -262,7 +267,7 @@ public class DBHandler {
 		try {
 			this.getConnection();
 			PreparedStatement orgStatement = conn.prepareStatement(orgQuery);
-			orgStatement.setString(1, name);
+			orgStatement.setString(1, name.toLowerCase());
 			orgStatement.setString(2, industry);
 			orgStatement.setString(3, description);
 			orgStatement.setString(4, location);
@@ -279,13 +284,13 @@ public class DBHandler {
 	// Check if an Organisation Representative exists in the database
 	public boolean isOrganisationRepExists(String organisation, String email) {
 		boolean exists = false;
-		String query = "SELECT * FROM OrganisationRepresentative WHERE orgID = ? AND email = ?";
+		String query = "SELECT * FROM OrganisationRepresentative WHERE ((email) = LOWER(?)) OR (email = ?)";
 
 		try {
 			this.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
-			statement.setString(1, organisation);
+			statement.setString(1, email);
 			statement.setString(2, email);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -298,6 +303,143 @@ public class DBHandler {
 			e.printStackTrace();
 		}
 		return exists;
+	}
+
+	public boolean setFeedback(int applicationID, String feedback) {
+		String query = "UPDATE Application SET feedback = ? WHERE applicationID = ?";
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			// Establish connection
+			conn = this.getConnection();
+
+			// Prepare the statement
+			stmt = conn.prepareStatement(query);
+
+			// Set the query parameters
+			stmt.setString(1, feedback);
+			stmt.setInt(2, applicationID);
+
+			// Execute the update and check if rows were affected
+			int rowsAffected = stmt.executeUpdate();
+			return rowsAffected > 0; // Return true if the update succeeded
+		} catch (SQLException e) {
+			// Log the exception for debugging purposes
+			e.printStackTrace();
+			return false; // Return false if an exception occurs
+		}
+	}
+
+	public boolean addNotification(String senderId, String receiverId, String message) {
+		String query = "INSERT INTO Notification (senderId, receiverId, isRead, message, timestamp) VALUES (?, ?, false, ?, NOW())";
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			// Establish connection
+			conn = this.getConnection();
+
+			// Prepare the statement
+			stmt = conn.prepareStatement(query);
+			// Set parameters
+			stmt.setString(1, senderId);
+			stmt.setString(2, receiverId);
+			stmt.setString(3, message);
+
+			// Execute the query
+			int rowsInserted = stmt.executeUpdate();
+
+			// Return true if insertion was successful
+			return rowsInserted > 0;
+
+		} catch (SQLException e) {
+			e.printStackTrace(); // Log the exception
+			return false;
+		}
+	}
+
+	public List<Application> getApplicationList() {
+		List<Application> applicationList = new ArrayList<>();
+		String query = "SELECT applicationID, submitDate, status, feedback, studentID, interviewID, opportunityID FROM Application";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Application application = new Application(rs.getInt("applicationID"), rs.getDate("submitDate"),
+						rs.getString("status"), rs.getString("feedback"), rs.getString("studentID"),
+						rs.getString("interviewID"), rs.getInt("opportunityID"));
+				applicationList.add(application);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return applicationList;
+	}
+
+	public List<Application> getApplicationsByStatus(String status) {
+		List<Application> applicationList = new ArrayList<>();
+		String query = "SELECT applicationID, submitDate, status, feedback, studentID, interviewID, opportunityID FROM Application WHERE status = ?";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, status); // Set the status parameter
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Application application = new Application(rs.getInt("applicationID"), rs.getDate("submitDate"),
+						rs.getString("status"), rs.getString("feedback"), rs.getString("studentID"),
+						rs.getString("interviewID"), rs.getInt("opportunityID"));
+				applicationList.add(application);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return applicationList;
+	}
+
+	public boolean updateApplicationStatus(int applicationID, String status) {
+		String query = "UPDATE Application SET status = ? WHERE applicationID = ?";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, status); // Set the new status
+			stmt.setInt(2, applicationID); // Set the application ID
+
+			int rowsAffected = stmt.executeUpdate();
+			return rowsAffected > 0; // Return true if the update was successful, false otherwise
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false; // Return false if an error occurs or no rows are updated
+	}
+
+	public List<String> getVerifiedOrganisations() {
+		List<String> organisations = new ArrayList<>();
+		String query = "SELECT name FROM Organisation WHERE isVerified = true";
+
+		try {
+			this.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet resultSet = statement.executeQuery();
+			// Loop through the result set and add organisation names to the list
+			while (resultSet.next()) {
+				String organisationName = resultSet.getString("name");
+				organisations.add(organisationName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Log the error for debugging purposes
+		}
+
+		return organisations;
 	}
 
 	// Check if an Organisation exists in the database
@@ -341,6 +483,90 @@ public class DBHandler {
 		return false;
 	}
 
+	public int insertIntoOpportunity(String title, String description, String type) throws SQLException {
+		String query = "INSERT INTO Opportunity (title, description, type) VALUES (?, ?, ?)";
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+			statement.setString(1, title);
+			statement.setString(2, description);
+			statement.setString(3, type);
+
+			int affectedRows = statement.executeUpdate();
+
+			if (affectedRows > 0) {
+				try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						return generatedKeys.getInt(1);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public void insertIntoJob(int opportunityID, String category) throws SQLException {
+		String query = "INSERT INTO Job (opportunityID, category) VALUES (?, ?)";
+		try {
+			this.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+
+			statement.setInt(1, opportunityID);
+			statement.setString(2, category);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace(); // Log the error for debugging purposes
+		}
+	}
+
+	public void insertIntoEducational(int opportunityID) throws SQLException {
+		String query = "INSERT INTO Educational (opportunityID) VALUES (?)";
+		try {
+			this.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+
+			statement.setInt(1, opportunityID);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace(); // Log the error for debugging purposes
+		}
+	}
+
+	public OrganisationRepresentative getOrganisationRepresentative(String email, String password) {
+		String query = "SELECT * FROM OrganisationRepresentative WHERE LOWER(email) = LOWER(?) AND password = ?";
+		OrganisationRepresentative representative = null;
+
+		try {
+			this.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, email);
+			statement.setString(2, password);
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					// Extracting data from the result set
+					String name = resultSet.getString("name");
+					String emailFromDb = resultSet.getString("email");
+					String position = resultSet.getString("position");
+					String phone = resultSet.getString("phone");
+					String orgID = resultSet.getString("orgID");
+					boolean isVerified = resultSet.getBoolean("isVerified");
+
+					// Creating the OrganisationRepresentative object
+					representative = new OrganisationRepresentative(name, password, emailFromDb, position, phone, orgID,
+							isVerified);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return representative;
+	}
+
 	public Admin getAdminInfo(String email, String password) {
 		String query = "SELECT * FROM Admin WHERE email = ? AND password = ?";
 		ResultSet rs = null;
@@ -364,33 +590,33 @@ public class DBHandler {
 		}
 		return null;
 	}
-	
+
 	public int createChat(Chat chat) {
-	    String query = "INSERT INTO Chat (createdAt, orgId, studentId) VALUES (?, ?, ?)";
-	    int chatId = -1;
+		String query = "INSERT INTO Chat (createdAt, orgId, studentId) VALUES (?, ?, ?)";
+		int chatId = -1;
 
-	    try (Connection connection = getConnection();
-	         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query,
+						Statement.RETURN_GENERATED_KEYS)) {
 
-	        preparedStatement.setTimestamp(1, chat.getCreatedAt()); // Pass the timestamp directly
-	        preparedStatement.setString(2, chat.getOrgId());
-	        preparedStatement.setString(3, chat.getStudentId());
+			preparedStatement.setTimestamp(1, chat.getCreatedAt()); // Pass the timestamp directly
+			preparedStatement.setString(2, chat.getOrgId());
+			preparedStatement.setString(3, chat.getStudentId());
 
-	        int affectedRows = preparedStatement.executeUpdate();
+			int affectedRows = preparedStatement.executeUpdate();
 
-	        if (affectedRows > 0) {
-	            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-	                if (generatedKeys.next()) {
-	                    chatId = generatedKeys.getInt(1); // Retrieve the auto-generated chat ID
-	                }
-	            }
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return chatId;
+			if (affectedRows > 0) {
+				try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						chatId = generatedKeys.getInt(1); // Retrieve the auto-generated chat ID
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return chatId;
 	}
-
 
 	public void closeConnection(Connection connection) {
 		if (connection != null) {
@@ -547,36 +773,6 @@ public class DBHandler {
 		return false;
 	}
 
-	public List<Application> retrieveApplications(String rollNo) {
-		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.interviewID, a.opportunityID, o.title FROM Application a WHERE a.studentID = ?";
-
-		try {
-			List<Application> applications = new ArrayList<>();
-			this.getConnection();
-			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, rollNo);
-
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				int applicationID = rs.getInt("applicationID");
-				String status = rs.getString("status");
-				String feedback = rs.getString("feedback");
-				String studentID = rs.getString("studentID");
-				String interviewID = rs.getString("interviewID");
-				int opportunityID = rs.getInt("opportunityID");
-				String opportunityTitle = rs.getString("title");
-				Application application = new Application(applicationID, status, feedback, studentID, interviewID,
-						opportunityID, opportunityTitle);
-				applications.add(application);
-				return applications;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-
-	}
-
 	public List<ApplicationWithOpportunity> retrieveApplicationsWithOpportunities(String rollNo) {
 		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.opportunityID,a.interviewId, o.title , o.description, o.postedBy "
 				+ "FROM Application a  INNER JOIN Opportunity o ON a.opportunityID = o.opportunityID WHERE a.studentID = ?";
@@ -599,8 +795,8 @@ public class DBHandler {
 				String opportunityDescription = rs.getString("description");
 				String postedBy = rs.getString("postedBy");
 
-				Application application = new Application(applicationID, status, feedback, rollNo, interviewID,
-						opportunityID, opportunityTitle);
+				Application application = new Application(applicationID,status, feedback, rollNo, interviewID,
+						opportunityID);
 
 				Opportunity opportunity = new Opportunity(opportunityID, opportunityTitle, opportunityDescription,
 						postedBy);
@@ -729,7 +925,7 @@ public class DBHandler {
 					String repPhone = repResultSet.getString("phone");
 
 					OrganisationRepresentative rep = new OrganisationRepresentative(repName, null, repEmail,
-							repPosition, repPhone, orgName);
+							repPosition, repPhone, orgName, false);
 
 					// Add the representative to the list
 					unverifiedOrgs.addRepresentative(rep);
@@ -744,13 +940,14 @@ public class DBHandler {
 
 	public void updateOrganisationVerificationStatus(Organisation org) {
 		// TODO Auto-generated method stub
-		String query = "UPDATE Organisation SET isVerified = ? WHERE name = ?";
+		String query = "UPDATE Organisation SET isVerified = ?, chatBoxId=? WHERE name = ?";
 
 		try {
 			this.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setBoolean(1, true); // Set isVerified to true
-			stmt.setString(2, org.getName());
+			stmt.setInt(2, org.getMyChatBox().getChatBoxId()); // Set isVerified to true
+			stmt.setString(3, org.getName());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -945,6 +1142,7 @@ public class DBHandler {
 			if (resultSet.next()) {
 				int chatBoxId = resultSet.getInt("chatBoxId");
 				chatBox = getChatBoxById(chatBoxId);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
