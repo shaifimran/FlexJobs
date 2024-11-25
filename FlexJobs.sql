@@ -125,7 +125,7 @@ CREATE TABLE ChatBox (
 -- Chat Table
 CREATE TABLE Chat (
     chatID INT PRIMARY KEY AUTO_INCREMENT,
-    createdAt DATETIME,
+    createdAt Timestamp,
     orgId VARCHAR(255),
     studentId VARCHAR(255),
     FOREIGN KEY (orgId) REFERENCES Organisation(name),

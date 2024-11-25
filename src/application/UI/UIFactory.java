@@ -34,7 +34,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 
-
 public class UIFactory {
 
 	private static UIFactory instance;
@@ -48,7 +47,7 @@ public class UIFactory {
 		}
 		return instance;
 	}
-	
+
 	public static VBox createJobOpportunitiesUI(Map<Integer, String> jobData, VBox vbox,
 			StudentOpportunitiesController controller) {
 
@@ -274,6 +273,7 @@ public class UIFactory {
 		Label applications = (Label) applicationsVBox.getChildren().get(1);
 		applications.setText(String.valueOf(externalInfo.get("applications")));
 	}
+
 	public static void createVerifyOrganisationTable(TableView<OrgRepTableRow> verifyOrgTable,
 			TableColumn<OrgRepTableRow, String> orgCol, TableColumn<OrgRepTableRow, String> repCol,
 			TableColumn<OrgRepTableRow, HBox> verCol, UnverifiedOrgs unverifiedOrgs,
@@ -425,7 +425,7 @@ public class UIFactory {
 
 		// Add each chat to the VBox
 		for (Chat chat : student.getMyChatBox().getChats()) {
-			addChatToVBox(chat, chatsHBox, chatsVBox, student.getMyChatBox(), controller);
+			addChatToVBox(chat, chatsHBox, chatsVBox, student.getMyChatBox(), controller, true);
 		}
 	}
 
@@ -438,12 +438,12 @@ public class UIFactory {
 
 		// Add each chat to the VBox
 		for (Chat chat : organisation.getMyChatBox().getChats()) {
-			addChatToVBox(chat, chatsHBox, chatsVBox, organisation.getMyChatBox(), controller);
+			addChatToVBox(chat, chatsHBox, chatsVBox, organisation.getMyChatBox(), controller, false);
 		}
 	}
 
-	private void addChatToVBox(Chat chat, HBox chatsHBox, VBox chatsVBox, ChatBox chatBox,
-			ChatBoxController controller) {
+	private void addChatToVBox(Chat chat, HBox chatsHBox, VBox chatsVBox, ChatBox chatBox, ChatBoxController controller,
+			Boolean isStudent) {
 		try {
 			// Clone the HBox
 			HBox newChatHBox = new HBox();
@@ -465,7 +465,12 @@ public class UIFactory {
 
 			// Clone the Label (template label from the original HBox)
 			Label templateLabel = (Label) chatsHBox.getChildren().get(0);
-			Label chatLabel = new Label(chat.getOrgId()); // Set label text to Org name or Student name here
+			Label chatLabel;
+			if (isStudent) {
+				chatLabel = new Label(chat.getOrgId());
+			} else {
+				chatLabel = new Label(chat.getStudentId());
+			}
 			chatLabel.setPrefWidth(templateLabel.getPrefWidth());
 			chatLabel.setPrefHeight(templateLabel.getPrefHeight());
 			chatLabel.setMinWidth(templateLabel.getMinWidth());
@@ -497,7 +502,7 @@ public class UIFactory {
 
 	public static void showStudentMsgs(Student student, Chat chat, VBox msgVBox, HBox receivedMsgHBox, HBox sentMsgHBox,
 			ChatBoxController controller) {
-		
+
 		// Clear previous messages in the VBox
 		msgVBox.getChildren().clear();
 
@@ -517,18 +522,21 @@ public class UIFactory {
 	public static void showOrgMsgs(Organisation organisation, Chat chat, VBox msgVBox, HBox receivedMsgHBox,
 			HBox sentMsgHBox, ChatBoxController controller) {
 
-		
 		// Clear previous messages in the VBox
 		msgVBox.getChildren().clear();
 
 		// Iterate through messages in the chat
 		for (Message message : chat.getMessages()) {
+			
 			// Determine if the organisation is the sender or receiver
-			if (message.getSenderId().equals(organisation.getName())) {
+			if (message.getSenderId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the sender, use sent message template
+				System.out.println(message.getText());
 				addMsgToVBox(message, sentMsgHBox, msgVBox);
-			} else if (message.getReceiverId().equals(organisation.getName())) {
+			} else if (message.getReceiverId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the receiver, use received message template
+				System.out.println(message.getText());
+
 				addMsgToVBox(message, receivedMsgHBox, msgVBox);
 			}
 		}

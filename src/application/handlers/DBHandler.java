@@ -324,6 +324,25 @@ public class DBHandler {
 		return exists;
 	}
 
+	public boolean organisationExists(String orgName) {
+		String query = "SELECT COUNT(*) FROM Organisation WHERE LOWER(name) = ?";
+		try {
+			this.getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+
+			preparedStatement.setString(1, orgName);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return resultSet.getInt(1) > 0; // Returns true if the count is greater than 0
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public Admin getAdminInfo(String email, String password) {
 		String query = "SELECT * FROM Admin WHERE email = ? AND password = ?";
 		ResultSet rs = null;
@@ -347,6 +366,33 @@ public class DBHandler {
 		}
 		return null;
 	}
+	
+	public int createChat(Chat chat) {
+	    String query = "INSERT INTO Chat (createdAt, orgId, studentId) VALUES (?, ?, ?)";
+	    int chatId = -1;
+
+	    try (Connection connection = getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+
+	        preparedStatement.setTimestamp(1, chat.getCreatedAt()); // Pass the timestamp directly
+	        preparedStatement.setString(2, chat.getOrgId());
+	        preparedStatement.setString(3, chat.getStudentId());
+
+	        int affectedRows = preparedStatement.executeUpdate();
+
+	        if (affectedRows > 0) {
+	            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+	                if (generatedKeys.next()) {
+	                    chatId = generatedKeys.getInt(1); // Retrieve the auto-generated chat ID
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return chatId;
+	}
+
 
 	public void closeConnection(Connection connection) {
 		if (connection != null) {
