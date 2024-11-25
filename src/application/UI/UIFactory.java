@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import application.ApplicationWithOpportunity;
-import application.controllers.StudentNotificationController;
-import application.controllers.StudentOpportunitiesController;
-import application.controllers.StudentViewStatusController;
 import application.Chat;
 import application.ChatBox;
 import application.Message;
@@ -19,11 +16,15 @@ import application.UnverifiedOrgs;
 import application.controllers.AdminDashboardController;
 import application.controllers.AdminVerifyOrganisationController;
 import application.controllers.ChatBoxController;
+import application.controllers.StudentNotificationController;
+import application.controllers.StudentOpportunitiesController;
+import application.controllers.StudentViewStatusController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -31,9 +32,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
-
+import javafx.scene.layout.VBox;
 
 public class UIFactory {
 
@@ -48,7 +48,7 @@ public class UIFactory {
 		}
 		return instance;
 	}
-	
+
 	public static VBox createJobOpportunitiesUI(Map<Integer, String> jobData, VBox vbox,
 			StudentOpportunitiesController controller) {
 
@@ -274,6 +274,7 @@ public class UIFactory {
 		Label applications = (Label) applicationsVBox.getChildren().get(1);
 		applications.setText(String.valueOf(externalInfo.get("applications")));
 	}
+
 	public static void createVerifyOrganisationTable(TableView<OrgRepTableRow> verifyOrgTable,
 			TableColumn<OrgRepTableRow, String> orgCol, TableColumn<OrgRepTableRow, String> repCol,
 			TableColumn<OrgRepTableRow, HBox> verCol, UnverifiedOrgs unverifiedOrgs,
@@ -497,7 +498,7 @@ public class UIFactory {
 
 	public static void showStudentMsgs(Student student, Chat chat, VBox msgVBox, HBox receivedMsgHBox, HBox sentMsgHBox,
 			ChatBoxController controller) {
-		
+
 		// Clear previous messages in the VBox
 		msgVBox.getChildren().clear();
 
@@ -517,7 +518,6 @@ public class UIFactory {
 	public static void showOrgMsgs(Organisation organisation, Chat chat, VBox msgVBox, HBox receivedMsgHBox,
 			HBox sentMsgHBox, ChatBoxController controller) {
 
-		
 		// Clear previous messages in the VBox
 		msgVBox.getChildren().clear();
 
@@ -578,6 +578,17 @@ public class UIFactory {
 		} catch (Exception e) {
 			e.printStackTrace(); // Log any errors
 		}
+	}
+
+	public static void populateDeps(List<String> deps, ComboBox<String> depComboBox) {
+		ObservableList<String> observableDeps = FXCollections.observableList(deps);
+		depComboBox.setItems(observableDeps);
+	}
+
+	public static void populateCategories(List<String> cat, ComboBox<String> categoryComboBox) {
+		ObservableList<String> observableDeps = FXCollections.observableList(cat);
+		categoryComboBox.setItems(observableDeps);
+
 	}
 
 }

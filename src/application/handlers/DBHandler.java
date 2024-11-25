@@ -5,26 +5,24 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import application.Admin;
-import application.Chat;
-import application.ChatBox;
-import application.Message;
-import application.Notification;
-import application.Organisation;
 import application.Application;
 import application.ApplicationWithOpportunity;
+import application.Chat;
+import application.ChatBox;
 import application.EducationalOpportunity;
 import application.JobOpportunity;
+import application.Message;
+import application.Notification;
 import application.Opportunity;
-import application.Application;
-
+import application.Organisation;
 import application.OrganisationRepresentative;
 import application.Student;
 import application.UnverifiedOrgs;
@@ -32,7 +30,7 @@ import application.UnverifiedOrgs;
 public class DBHandler {
 	private final String dbUrl = "jdbc:mysql://localhost:3306/flexjobs";
 	private final String dbUser = "root";
-	private final String dbPassword = "Shaif2004.";
+	private final String dbPassword = "wasay";
 	private Connection conn;
 
 	/**
@@ -67,7 +65,7 @@ public class DBHandler {
 	public Boolean checkStudentExistence(String email, String rollNo) {
 		try {
 			this.getConnection();
-			String query = "SELECT 1 FROM Student WHERE email = ? and rollNo=?;";
+			String query = "SELECT 1 FROM Student WHERE email = ? or rollNo=?;";
 			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 				preparedStatement.setString(1, email);
 				preparedStatement.setString(2, rollNo);
@@ -571,15 +569,15 @@ public class DBHandler {
 
 	}
 
-	public List<Notification> fetchStudentNotifications(String rollNo) {
-		String query = "SELECT notificationId, senderId, receiverId, message, timestamp, isRead FROM Notification WHERE receiverId = ?";
+	public List<Notification> fetchStudentNotifications(String email) {
+		String query = "SELECT notificationId, senderId, receiverId, message, timestamp, isRead FROM Notification WHERE receiverId in (?, 'student')";
 		List<Notification> notifications = new ArrayList<>();
 		try {
 			this.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(query);
 
 			// Assuming `rollNo` is a String; no conversion needed here.
-			stmt.setString(1, rollNo);
+			stmt.setString(1, email);
 
 			ResultSet resultSet = stmt.executeQuery();
 
@@ -602,12 +600,12 @@ public class DBHandler {
 		return notifications;
 	}
 
-	public Boolean markRead(String rollNo, int notifID) {
-		String query = "UPDATE Notification SET isRead = TRUE WHERE receiverId = ? AND notificationId = ?";
+	public Boolean markRead(String email, int notifID) {
+		String query = "UPDATE Notification SET isRead = TRUE WHERE receiverId in (?, 'student') AND notificationId = ?";
 		try {
 			this.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, rollNo);
+			stmt.setString(1, email);
 			stmt.setInt(2, notifID);
 			stmt.executeUpdate();
 			return true;
@@ -618,7 +616,6 @@ public class DBHandler {
 	}
 
 	public Map<String, Integer> getStdDashBoardInfo(String stdID) {
-
 		try {
 			this.getConnection();
 			String totalApplicationsQuery = "SELECT COUNT(*) AS totalApplications FROM Application where studentID=?";
@@ -984,6 +981,45 @@ public class DBHandler {
 		} catch (SQLException e) {
 			e.printStackTrace(); // Handle SQL exceptions
 		}
+	}
+
+	public List<String> getDepartments() {
+		String sql = "Select * from departments";
+		try {
+
+			this.getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<String> deps = new ArrayList<String>();
+			while (resultSet.next()) {
+				deps.add(resultSet.getString("depName"));
+			}
+			return deps;
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle SQL exceptions
+		}
+		return null;
+	}
+
+	public List<String> getCategories() {
+
+		String sql = "select distinct(category) from job;";
+		try {
+
+			this.getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<String> cat = new ArrayList<String>();
+			while (resultSet.next()) {
+				cat.add(resultSet.getString("category"));
+			}
+			return cat;
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle SQL exceptions
+		}
+		return null;
 	}
 
 }
