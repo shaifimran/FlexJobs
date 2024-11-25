@@ -110,7 +110,7 @@ public class StudentOpportunitiesController {
 			int oppId = (int) sourceButton.getUserData();
 			JobOpportunity o = dbHandler.getJobById(oppId);
 			if (o != null) {
-				showJobDetails(o.getTitle(), o.getDescription(), o.getRequirements(), o.getStatus(), o.getPostedBy());
+				showJobDetails(o.getTitle(), o.getDescription(), o.getStatus(), o.getPostedBy());
 			}
 		} else {
 			Button sourceButton = (Button) event.getSource();
@@ -122,14 +122,14 @@ public class StudentOpportunitiesController {
 		}
 	}
 
-	private void showJobDetails(String title, String description, String requirements, String status, String postedBy) {
+	private void showJobDetails(String title, String description, String status, String postedBy) {
 
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Job Opportunity Details");
 		alert.setHeaderText("Details of the Job Opportunity");
 
-		String content = "Title: " + title + "\n\n" + "Description: " + description + "\n\n" + "Requirements: "
-				+ requirements + "\n\n" + "Status: " + status + "\n\n" + "Posted By: " + postedBy;
+		String content = "Title: " + title + "\n\n" + "Description: " + description + "\n\n" + "\n\n" + "Status: "
+				+ status + "\n\n" + "Posted By: " + postedBy;
 
 		TextArea textArea = new TextArea(content);
 		textArea.setEditable(false);

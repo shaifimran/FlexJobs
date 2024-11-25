@@ -56,24 +56,23 @@ public class StudentViewStatusController {
 
 		String content = "";
 
-		// Customize message based on the status
 		switch (status.toLowerCase()) {
-		case "submitted":
+		case "In Progress":
 			content = "Your application has been successfully submitted.\n\n"
 					+ "You will be notified once the recruiter reviews your application.";
 			break;
 
-		case "interview_scheduled":
+		case "Call For Interview":
 			content = "Congratulations! Your interview has been scheduled.\n\n"
 					+ "Please make sure to prepare for your interview on the scheduled date.";
 			break;
 
-		case "accepted":
+		case "Approved":
 			content = "You have been accepted for the position!\n\n"
 					+ "Next, we will provide you with more details about the offer.";
 			break;
 
-		case "rejected":
+		case "Rejected":
 			content = "Unfortunately, your application has been rejected.\n\n"
 					+ "Thank you for your time and effort. Keep applying to other opportunities!";
 			break;
@@ -83,17 +82,14 @@ public class StudentViewStatusController {
 			break;
 		}
 
-		// Create a TextArea to hold the message
 		TextArea textArea = new TextArea(content);
 		textArea.setEditable(false);
 		textArea.setWrapText(true);
 		textArea.setMaxWidth(Double.MAX_VALUE);
 		textArea.setMaxHeight(Double.MAX_VALUE);
 
-		// Set the content of the alert
 		alert.getDialogPane().setContent(textArea);
 
-		// Show the alert and wait for user interaction
 		alert.showAndWait();
 	}
 

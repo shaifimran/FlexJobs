@@ -72,7 +72,7 @@ public class Application {
 	}
 
 	public Application(int applicationID, String status, String feedback, String studentID, String interviewID,
-			int opportunityID, String opportunityTitle) {
+			int opportunityID) {
 		this.applicationID = applicationID;
 		this.status = status;
 		this.feedback = feedback;

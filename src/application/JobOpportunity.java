@@ -21,6 +21,13 @@ public class JobOpportunity extends Opportunity {
 		this.status = status;
 	}
 
+	public JobOpportunity(int opportunityID, String title, String description, String category, String status,
+			String postedBy) {
+		super(opportunityID, title, description, postedBy);
+		this.category = category;
+		this.status = status;
+	}
+
 	public JobOpportunity(int opportunityID, String title, String description) {
 		super(opportunityID, title, description, "");
 		this.category = "";
@@ -51,16 +58,4 @@ public class JobOpportunity extends Opportunity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-//    // Example Method to Apply Filters
-//    public List<JobOpportunity> applyFilters(Map<String, Object> criteria, List<JobOpportunity> opportunitiesList) {
-//        // Implement filtering logic here
-//        return new ArrayList<>();
-//    }
-//
-//    // Example Method to Display Opportunities
-//    public List<JobOpportunity> showOpportunities() {
-//        // Implement display logic here
-//        return new ArrayList<>();
-//    }
 }

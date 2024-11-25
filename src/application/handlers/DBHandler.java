@@ -434,7 +434,7 @@ public class DBHandler {
 	}
 
 	public JobOpportunity getJobById(Integer oppId) {
-		String query = "SELECT o.title, o.description, o.postedBy, j.category, j.requirements FROM Opportunity o INNER JOIN Job j ON o.opportunityID = j.opportunityID where o.opportunityID=?";
+		String query = "SELECT o.title, o.description, o.postedBy, j.category FROM Opportunity o INNER JOIN Job j ON o.opportunityID = j.opportunityID where o.opportunityID=?";
 
 		try {
 			this.getConnection();
@@ -447,8 +447,7 @@ public class DBHandler {
 				String postedBy = rs.getString("postedBy");
 				String desc = rs.getString("description");
 				String category = rs.getString("category");
-				String req = rs.getString("requirements");
-				JobOpportunity o = new JobOpportunity((int) oppId, title, desc, category, req, "open", postedBy);
+				JobOpportunity o = new JobOpportunity((int) oppId, title, desc, category, "open", postedBy);
 				return o;
 			}
 		} catch (SQLException e) {
@@ -502,7 +501,7 @@ public class DBHandler {
 	}
 
 	public List<Application> retrieveApplications(String rollNo) {
-		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.interviewID, a.opportunityID, o.title FROM Application a WHERE a.studentID = ?";
+		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.interviewID, a.opportunityID,  FROM Application a WHERE a.studentID = ?";
 
 		try {
 			List<Application> applications = new ArrayList<>();
@@ -518,9 +517,9 @@ public class DBHandler {
 				String studentID = rs.getString("studentID");
 				String interviewID = rs.getString("interviewID");
 				int opportunityID = rs.getInt("opportunityID");
-				String opportunityTitle = rs.getString("title");
+
 				Application application = new Application(applicationID, status, feedback, studentID, interviewID,
-						opportunityID, opportunityTitle);
+						opportunityID);
 				applications.add(application);
 				return applications;
 			}
@@ -554,7 +553,7 @@ public class DBHandler {
 				String postedBy = rs.getString("postedBy");
 
 				Application application = new Application(applicationID, status, feedback, rollNo, interviewID,
-						opportunityID, opportunityTitle);
+						opportunityID);
 
 				Opportunity opportunity = new Opportunity(opportunityID, opportunityTitle, opportunityDescription,
 						postedBy);
