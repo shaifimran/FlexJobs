@@ -111,14 +111,41 @@ public class DBHandler {
 		return null;
 	}
 
+	public int createChatBox(String ownerType) {
+		int chatBoxId = -1; // Default value in case of failure
+		String query = "INSERT INTO ChatBox (ownerType) VALUES (?)";
+
+		try {
+			this.getConnection(); // Assume getConnection() provides a valid DB connection
+			PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+			// Set the ownerType parameter
+			preparedStatement.setString(1, ownerType);
+
+			// Execute the query
+			int affectedRows = preparedStatement.executeUpdate();
+
+			if (affectedRows > 0) {
+				// Retrieve the generated key
+				try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						chatBoxId = generatedKeys.getInt(1); // Get the generated chatBoxId
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Log any SQL exceptions for debugging
+		}
+
+		return chatBoxId; // Return the generated chatBoxId
+	}
+
 	public Boolean addStudent(String rollNo, String email, String name, String password, String department,
-			int semester, double cgpa, String resume) {
+			int semester, double cgpa, String resume, int chatBoxId) {
 		try {
 			this.getConnection();
-//			System.out.println("Hello");
-			String query = "Insert into student(rollNo, email, name, password, department, semester, cgpa, resume) values(?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "Insert into student(rollNo, email, name, password, department, semester, cgpa, resume,chatBoxId) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try (PreparedStatement preparedStatement1 = conn.prepareStatement(query)) {
-				System.out.println("Hello");
 				preparedStatement1.setString(1, rollNo);
 				preparedStatement1.setString(2, email);
 				preparedStatement1.setString(3, name);
@@ -127,6 +154,7 @@ public class DBHandler {
 				preparedStatement1.setInt(6, semester);
 				preparedStatement1.setDouble(7, cgpa);
 				preparedStatement1.setString(8, resume);
+				preparedStatement1.setInt(9, chatBoxId);
 				preparedStatement1.executeUpdate();
 				return true;
 			} catch (Exception e) {
@@ -138,7 +166,7 @@ public class DBHandler {
 		}
 		return false;
 	}
-	
+
 	public Boolean updateStudentData(String email, Map<String, Object> updates) {
 		StringBuilder queryBuilder = new StringBuilder("UPDATE Student SET ");
 
@@ -432,8 +460,6 @@ public class DBHandler {
 
 		return null;
 	}
-
-
 
 	public Boolean checkValidity(String rollNo, int oppId) {
 		String query = "select 1 from application where opportunityId=? and studentId=?";
@@ -941,24 +967,23 @@ public class DBHandler {
 			e.printStackTrace(); // Log exception
 		}
 	}
-	
+
 	public void storeMessage(Message message) {
-        String sql = "INSERT INTO Message (senderId, receiverId, text, transmittedAt, chatID) VALUES (?, ?, ?, ?, ?)";
-        try {
-        	
+		String sql = "INSERT INTO Message (senderId, receiverId, text, transmittedAt, chatID) VALUES (?, ?, ?, ?, ?)";
+		try {
 
-        	this.getConnection();
-        	PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, message.getSenderId());
-            preparedStatement.setString(2, message.getReceiverId());
-            preparedStatement.setString(3, message.getText());
-            preparedStatement.setTimestamp(4, message.getTransmittedAt());
-            preparedStatement.setInt(5, message.getChatId());
+			this.getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, message.getSenderId());
+			preparedStatement.setString(2, message.getReceiverId());
+			preparedStatement.setString(3, message.getText());
+			preparedStatement.setTimestamp(4, message.getTransmittedAt());
+			preparedStatement.setInt(5, message.getChatId());
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle SQL exceptions
-        }
-    }
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle SQL exceptions
+		}
+	}
 
 }

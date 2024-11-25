@@ -25,18 +25,22 @@
                   <Font name="Lorin ExtraBold" size="30.0" />
                </font>
             </Label>
-            <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="550.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="4.0">
-               <image>
-                  <Image url="@../resources/add.png" />
-               </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-               <effect>
-                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
-               </effect>
-            </ImageView>
-            <Hyperlink focusTraversable="false" layoutY="9.0" prefHeight="29.0" prefWidth="47.0" AnchorPane.leftAnchor="0.0">
+            <Hyperlink fx:id="addNewChatButton" focusTraversable="false" onAction="#addNewChat" prefHeight="50.0" prefWidth="45.0" AnchorPane.rightAnchor="9.0">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/add.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+            </Hyperlink>
+            <Hyperlink fx:id="goBackButton" focusTraversable="false" layoutY="9.0" onAction="#goBackToDashboard" prefHeight="29.0" prefWidth="47.0" AnchorPane.leftAnchor="0.0">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>

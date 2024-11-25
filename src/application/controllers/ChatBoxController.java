@@ -1,5 +1,7 @@
 package application.controllers;
 
+import java.io.IOException;
+
 import application.Chat;
 import application.Organisation;
 import application.Student;
@@ -8,10 +10,15 @@ import application.handlers.ChatHandler;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ChatBoxController {
 	DBHandler dbHandler = new DBHandler();
@@ -44,6 +51,12 @@ public class ChatBoxController {
 
 	@FXML
 	private TextField msgContainer;
+
+	@FXML
+	private Hyperlink goBackButton;
+	
+	@FXML
+	private Hyperlink addNewChatButton;
 
 	public ChatBoxController(Student s) {
 		this.student = s;
@@ -78,7 +91,6 @@ public class ChatBoxController {
 
 	public void handleChatClick(Chat chat) {
 		currentChat = chat;
-		
 
 		// TODO Auto-generated method stub
 		if (student != null && organisation == null) {
@@ -100,12 +112,36 @@ public class ChatBoxController {
 				dbHandler.storeMessage(chatHandler.sendMsg(msgContainer.getText(), currentChat, student));
 				handleChatClick(currentChat);
 			} else if (student == null && organisation != null) {
-		
+
 				dbHandler.storeMessage(chatHandler.sendMsg(msgContainer.getText(), currentChat, organisation));
 				handleChatClick(currentChat);
 
 			}
 		}
+	}
+
+	public void goBackToDashboard(ActionEvent event) {
+		try {
+			if (student != null && organisation == null) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/StudentDashboard.fxml"));
+				loader.setControllerFactory(c -> new StudentDashboardController(student));
+				Parent root = loader.load();
+				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+				
+				Scene scene = new Scene(root);
+				
+				stage.setScene(scene);
+				stage.show();
+			} else if(student == null && organisation != null) {
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addNewChat(ActionEvent event) {
+		
 	}
 
 }

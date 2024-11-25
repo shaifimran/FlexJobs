@@ -47,6 +47,9 @@ public class StudentDashboardController {
 	VBox applicationsVBox;
 	@FXML
 	VBox messagesVBox;
+	
+	@FXML
+	private Hyperlink chatBoxButton;
 
 	@FXML
 	public void initialize() {
@@ -141,6 +144,22 @@ public class StudentDashboardController {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/StudentNotification.fxml"));
 			loader.setControllerFactory(c -> new StudentNotificationController(student));
+			Parent root = loader.load();
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+			Scene scene = new Scene(root);
+
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void openChatBox(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/ChatBox.fxml"));
+			loader.setControllerFactory(c -> new ChatBoxController(student));
 			Parent root = loader.load();
 			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 

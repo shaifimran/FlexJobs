@@ -280,7 +280,7 @@
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
                <children>
-                  <Hyperlink focusTraversable="false" prefHeight="23.0" prefWidth="210.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Conversation History" textFill="#817dff">
+                  <Hyperlink fx:id="chatBoxButton" focusTraversable="false" onAction="#openChatBox" prefHeight="23.0" prefWidth="210.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Conversation History" textFill="#817dff">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>

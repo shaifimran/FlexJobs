@@ -2,6 +2,7 @@ package application.controllers;
 
 import java.io.IOException;
 
+import application.ChatBox;
 import application.handlers.DBHandler;
 import application.handlers.ResumeHandler;
 import javafx.animation.PauseTransition;
@@ -104,10 +105,13 @@ public class StudentRegistrationController {
 		}
 
 		if (!dbHandler.checkStudentExistence(studentEmail.getText(), studentRollNo.getText())) {
+			ChatBox chatBox = new ChatBox();
+			int id = dbHandler.createChatBox("Student");
+			chatBox.setChatBoxId(id);
 			Boolean success = dbHandler.addStudent(studentRollNo.getText(), studentEmail.getText(),
 					studentName.getText(), studentPassword.getText(), studentDepartment.getText(),
 					Integer.parseInt(studentSemester.getText()), Double.parseDouble(studentCGPA.getText()),
-					resume.getText());
+					resume.getText(),chatBox.getChatBoxId());
 			if (success) {
 				try {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/StudentLogin.fxml"));
