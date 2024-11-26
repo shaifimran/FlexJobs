@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import application.ChatBox;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.DBHandler;
 import application.handlers.ResumeHandler;
 import javafx.animation.PauseTransition;
@@ -23,7 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class StudentRegistrationController {
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	@FXML
 	private Button studentRegisterButton;
 	@FXML

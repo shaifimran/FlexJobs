@@ -3,6 +3,7 @@ package application.controllers;
 import java.io.IOException;
 
 import application.Student;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class StudentLoginController {
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	@FXML
 	private TextField studentEmail;
 	@FXML

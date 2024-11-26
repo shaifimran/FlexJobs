@@ -1,5 +1,6 @@
 package application.controllers;
 import application.OrganisationRepresentative;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class OrgRepRegistrationController {
     @FXML
     private TextField positionField;
 
-    private DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
     /**
      * Handles the registration button click event.

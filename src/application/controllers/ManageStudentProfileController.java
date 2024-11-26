@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import application.Student;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -23,7 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ManageStudentProfileController {
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	@FXML
 	private Button studentRegisterButton;
 	@FXML

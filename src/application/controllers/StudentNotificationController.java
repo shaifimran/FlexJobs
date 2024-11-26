@@ -5,7 +5,8 @@ import java.util.List;
 
 import application.Notification;
 import application.Student;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class StudentNotificationController {
 	private Student student;
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
 	public StudentNotificationController(Student student) {
 		this.student = student;

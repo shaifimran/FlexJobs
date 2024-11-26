@@ -7,7 +7,8 @@ import java.util.Map;
 import application.JobOpportunity;
 import application.Opportunity;
 import application.Student;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 
 public class StudentOpportunitiesController {
 	private boolean isInJobSection = true;
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	Student student;
 	@FXML
 	private Button filterJobsButton;

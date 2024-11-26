@@ -6,7 +6,8 @@ import java.util.List;
 import application.ApplicationWithOpportunity;
 import application.Interview;
 import application.Student;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class StudentViewStatusController {
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
 	@FXML
 	private Button viewJobStatusDetailsButton;

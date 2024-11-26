@@ -203,8 +203,8 @@ VALUES
     ('Bob Smith', 'password456', 'bob@finserve.com', 'Senior Consultant', '0987654321', 'FinServe', false),
     ('Charlie Davis', 'password789', 'charlie@eduworld.com', 'Administrator', '1122334455', 'EduWorld', false);
 
-Update Organisation SET isVerified = 0 where name = 'FinServe' ;
-Update OrganisationRepresentative SET isVerified = 0 where orgID = 'FinServe' ;
+Update Organisation SET isVerified = 0 where name = 'google' ;
+Update OrganisationRepresentative SET isVerified = 0 where orgID = 'google' ;
 
 INSERT INTO Notification (senderId, receiverId, isRead, message, timestamp)
 VALUES 

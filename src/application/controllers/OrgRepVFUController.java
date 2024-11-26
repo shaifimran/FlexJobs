@@ -28,12 +28,13 @@ import java.util.stream.Collectors;
 
 import application.Application;
 import application.OrganisationRepresentative;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 
 public class OrgRepVFUController {
 	
 	OrganisationRepresentative OrgRep;
-    DBHandler dbHandler = new DBHandler(); 
+	private DBHandler dbHandler = DBFactory.getInstance();
 
     @FXML
     private TableView<Application> applicationTable;

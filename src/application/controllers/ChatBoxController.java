@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 import application.Chat;
 import application.Organisation;
 import application.Student;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.ChatHandler;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
@@ -32,7 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ChatBoxController {
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	ChatHandler chatHandler = new ChatHandler();
 
 	private Chat currentChat;
@@ -122,48 +123,48 @@ public class ChatBoxController {
 	}
 
 	private void filterAndReorderChats(String query) {
-	    // Get the HBox that contains the searchField, it should be part of chatsVBox
-	    HBox searchHBox = (HBox) searchField.getParent();  // Get the parent HBox of searchField
+		// Get the HBox that contains the searchField, it should be part of chatsVBox
+		HBox searchHBox = (HBox) searchField.getParent(); // Get the parent HBox of searchField
 
-	    // Filter out only chat items and exclude the search HBox
-	    List<Node> filteredChats = (List<Node>) originalChats.stream()
-	        .filter(node -> node != searchHBox)  // Exclude the HBox containing searchField
-	        .filter(node -> {
-	            if (node instanceof HBox) {
-	                HBox chatBox = (HBox) node;
-	                for (Node child : chatBox.getChildren()) {
-	                    if (child instanceof Label) {
-	                        Label chatLabel = (Label) child;
-	                        return chatLabel.getText().toLowerCase().contains(query.toLowerCase());
-	                    }
-	                }
-	            }
-	            return false;
-	        })
-	        .collect(Collectors.toList());
+		// Filter out only chat items and exclude the search HBox
+		List<Node> filteredChats = (List<Node>) originalChats.stream().filter(node -> node != searchHBox) // Exclude the
+																											// HBox
+																											// containing
+																											// searchField
+				.filter(node -> {
+					if (node instanceof HBox) {
+						HBox chatBox = (HBox) node;
+						for (Node child : chatBox.getChildren()) {
+							if (child instanceof Label) {
+								Label chatLabel = (Label) child;
+								return chatLabel.getText().toLowerCase().contains(query.toLowerCase());
+							}
+						}
+					}
+					return false;
+				}).collect(Collectors.toList());
 
-	    // Clear VBox and set it back with the search HBox and filtered chats
-	    chatsVBox.getChildren().setAll(searchHBox);  // Add the HBox with the searchField back
-	    chatsVBox.getChildren().addAll(filteredChats);
+		// Clear VBox and set it back with the search HBox and filtered chats
+		chatsVBox.getChildren().setAll(searchHBox); // Add the HBox with the searchField back
+		chatsVBox.getChildren().addAll(filteredChats);
 
-	    // Optional: Handle no matches (e.g., display a placeholder)
-	    if (filteredChats.isEmpty()) {
-	    	  Label noResultsLabel = new Label("No matching chats found.");
-	          noResultsLabel.setStyle("-fx-text-fill: black; -fx-font-style: italic; -fx-font-size: 14px;");
+		// Optional: Handle no matches (e.g., display a placeholder)
+		if (filteredChats.isEmpty()) {
+			Label noResultsLabel = new Label("No matching chats found.");
+			noResultsLabel.setStyle("-fx-text-fill: black; -fx-font-style: italic; -fx-font-size: 14px;");
 
-	          // Create a StackPane to center the label within the VBox
-	          StackPane centeredMessage = new StackPane(noResultsLabel);
-	          centeredMessage.setAlignment(Pos.CENTER);  // Align label to the center
+			// Create a StackPane to center the label within the VBox
+			StackPane centeredMessage = new StackPane(noResultsLabel);
+			centeredMessage.setAlignment(Pos.CENTER); // Align label to the center
 
-	          // Set the preferred height to take up the whole VBox space
-	          centeredMessage.setPrefHeight(chatsVBox.getHeight());
-	          centeredMessage.setPrefWidth(chatsVBox.getWidth());
+			// Set the preferred height to take up the whole VBox space
+			centeredMessage.setPrefHeight(chatsVBox.getHeight());
+			centeredMessage.setPrefWidth(chatsVBox.getWidth());
 
-	          // Add the centered StackPane to the VBox
-	          chatsVBox.getChildren().add(centeredMessage);
-	    }
+			// Add the centered StackPane to the VBox
+			chatsVBox.getChildren().add(centeredMessage);
+		}
 	}
-
 
 	public void handleChatClick(Chat chat) {
 		currentChat = chat;
@@ -210,7 +211,8 @@ public class ChatBoxController {
 				stage.show();
 			} else if (student == null && organisation != null) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/OrgRepDashboard.fxml"));
-				loader.setControllerFactory(c -> new OrgRepDashboardController(organisation.getRepresentatives().getLast()));
+				loader.setControllerFactory(
+						c -> new OrgRepDashboardController(organisation.getRepresentatives().getLast()));
 				Parent root = loader.load();
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
@@ -248,19 +250,27 @@ public class ChatBoxController {
 						newChat.setStudentId(student.getRollNo());
 						newChat.setCreatedAt(new Timestamp(System.currentTimeMillis())); // Use current timestamp
 
-						int chatId = dbHandler.createChat(newChat);
-						newChat.setChatID(chatId);
-						student.getMyChatBox().getChats().add(newChat);
+						if (dbHandler.isChatPresent(newChat)) {
+							int chatId = dbHandler.createChat(newChat);
+							newChat.setChatID(chatId);
+							student.getMyChatBox().getChats().add(newChat);
 
-						// Reload the scene to refresh chats
-						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/ChatBox.fxml"));
-						loader.setControllerFactory(c -> new ChatBoxController(student));
-						Parent root = loader.load();
+							// Reload the scene to refresh chats
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/ChatBox.fxml"));
+							loader.setControllerFactory(c -> new ChatBoxController(student));
+							Parent root = loader.load();
 
-						Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-						stage.setScene(new Scene(root));
-						stage.show();
-						break; // Exit the loop
+							Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+							stage.setScene(new Scene(root));
+							stage.show();
+							break; // Exit the loop
+						} else {
+							Alert alert = new Alert(Alert.AlertType.ERROR);
+							alert.setTitle("Error");
+							alert.setHeaderText("Duplicate Chat");
+							alert.setContentText("Chat already exists!");
+							alert.showAndWait();
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

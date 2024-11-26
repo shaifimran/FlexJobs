@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.Admin;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ import javafx.event.ActionEvent;
 
 public class AdminLoginController {
 
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	@FXML
 	private TextField adminEmail;
 	@FXML

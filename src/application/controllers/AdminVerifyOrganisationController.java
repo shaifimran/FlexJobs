@@ -6,7 +6,8 @@ import application.OrgRepTableRow;
 import application.Organisation;
 import application.OrganisationRepresentative;
 import application.UnverifiedOrgs;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.DBHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -26,7 +27,7 @@ import javafx.scene.control.TableColumn;
 
 public class AdminVerifyOrganisationController {
 
-	private DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
 	private UnverifiedOrgs unverifiedOrgs;
 
@@ -101,7 +102,7 @@ public class AdminVerifyOrganisationController {
 			Parent root = loader.load();
 
 			// Get current stage
-			Stage stage = (Stage) verifyOrgErrorLabel.getScene().getWindow();
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 			// Set new scene for Admin Dashboard
 			Scene dashboardScene = new Scene(root);
 			stage.setScene(dashboardScene);

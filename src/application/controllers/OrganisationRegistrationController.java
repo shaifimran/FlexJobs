@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.OrganisationRepresentative;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +29,7 @@ public class OrganisationRegistrationController {
 	@FXML
 	private TextField orgContactEmailField;
 
-	private DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
 	public void setOrganisationName(String organisationName) {
 		orgName = organisationName;

@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import application.OrganisationRepresentative;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 
 public class OrgRepPostOpportunityController {
@@ -41,7 +42,7 @@ public class OrgRepPostOpportunityController {
 	@FXML
 	private ComboBox<String> JobCategories;
 
-	private DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 	
 	public void setOrganisationRepresentative(OrganisationRepresentative orgRep) {
         this.OrgRep = orgRep;

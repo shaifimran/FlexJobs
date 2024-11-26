@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 import application.OrganisationRepresentative;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 
 public class OrgRepLoginController {
@@ -30,12 +31,9 @@ public class OrgRepLoginController {
     @FXML
     private Button registerButton; // Button to redirect to registration page
 
-    private DBHandler dbHandler; // Instance of DBHandler for database operations
+	private DBHandler dbHandler = DBFactory.getInstance();
 
-    public OrgRepLoginController() {
-        dbHandler = new DBHandler();  // Initialize DBHandler to interact with the database
-    }
-    
+   
     public void setOrgRep(OrganisationRepresentative OrgRep) {
     	this.OrgRep = OrgRep;
     }

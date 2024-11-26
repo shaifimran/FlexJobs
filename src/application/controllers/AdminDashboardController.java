@@ -4,7 +4,8 @@ import java.util.List;
 
 import application.Admin;
 import application.Notification;
-import application.UI.UIFactory;
+import application.factory.DBFactory;
+import application.factory.UIFactory;
 import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ import javafx.stage.Stage;
 
 public class AdminDashboardController {
 
-	DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
 	private Admin admin;
 
@@ -73,7 +74,7 @@ public class AdminDashboardController {
 			Parent root = loader.load();
 
 			// Get current stage
-			Stage stage = (Stage) verifiedOrgNum.getScene().getWindow();
+			Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
 			// Set new scene for Admin Dashboard
 			Scene dashboardScene = new Scene(root);
 			stage.setScene(dashboardScene);
@@ -89,10 +90,11 @@ public class AdminDashboardController {
 		try {
 			// Load Admin Dashboard FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/AdminGenerateReports.fxml"));
+			loader.setControllerFactory(c -> new AdminGenerateReportsController(admin));
 			Parent root = loader.load();
 
 			// Get current stage
-			Stage stage = (Stage) verifiedOrgNum.getScene().getWindow();
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 			// Set new scene for Admin Dashboard
 			Scene dashboardScene = new Scene(root);
 			stage.setScene(dashboardScene);

@@ -8,10 +8,16 @@ import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import application.Admin;
+import application.factory.DBFactory;
 import application.handlers.DBHandler;
 
 import jxl.Workbook;
@@ -21,8 +27,9 @@ import jxl.write.Number;
 
 public class AdminGenerateReportsController {
 
-	private DBHandler dbHandler = new DBHandler();
+	private DBHandler dbHandler = DBFactory.getInstance();
 
+	private Admin admin;
 	private String folderPath = "D:/git_repo/FlexJobs/Reports";
 	private String subFolderPath = folderPath;
 	@FXML
@@ -32,7 +39,9 @@ public class AdminGenerateReportsController {
 	@FXML
 	private Button orgRepReportButton;
 
-	public AdminGenerateReportsController() {
+	public AdminGenerateReportsController(Admin admin) {
+		
+		this.admin = admin;
 		File folder = new File(folderPath);
 
 		// Ensure the folder exists
@@ -230,6 +239,33 @@ public class AdminGenerateReportsController {
 			alert.setHeaderText("Error generating reports");
 			alert.showAndWait();
 		}
+	}
+	
+	public void goBackToAdminDashboard(ActionEvent event) {
+		try {
+			// Load Admin Dashboard FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/AdminDashboard.fxml"));
+			loader.setControllerFactory(c -> new AdminDashboardController(admin));
+			Parent root = loader.load();
+
+			// Get current stage
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			// Set new scene for Admin Dashboard
+			Scene dashboardScene = new Scene(root);
+			stage.setScene(dashboardScene);
+			stage.setTitle("Admin Dashboard");
+		} catch (Exception e) {
+			e.printStackTrace();
+			showAlert(AlertType.ERROR, "Error", "Failed to load Admin Dashboard.");
+		}
+	}
+	
+	private void showAlert(AlertType alertType, String title, String message) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
 	}
 
 }
