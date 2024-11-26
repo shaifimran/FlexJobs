@@ -1,7 +1,6 @@
 package application.handlers;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,6 +61,22 @@ public class DBHandler {
 			return conn;
 		}
 	}
+	
+	 public ResultSet executeQuery(String query) {
+	        try {
+	            // Create a Statement object
+	        	this.getConnection();
+	            Statement statement = conn.createStatement();
+
+	            // Execute the query and return the ResultSet
+	            return statement.executeQuery(query);
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            System.out.println("Query execution failed: " + query);
+	            return null;
+	        }
+	    }
 
 	public Boolean checkStudentExistence(String email, String rollNo) {
 		try {
@@ -772,7 +787,6 @@ public class DBHandler {
 		return false;
 	}
 
-<<<<<<< HEAD
 	public List<Application> retrieveApplications(String rollNo) {
 		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.interviewID, a.opportunityID,  FROM Application a WHERE a.studentID = ?";
 
@@ -803,8 +817,7 @@ public class DBHandler {
 
 	}
 
-=======
->>>>>>> c6703026341134fa10e142ef5bdf321d4c4da69a
+
 	public List<ApplicationWithOpportunity> retrieveApplicationsWithOpportunities(String rollNo) {
 		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.opportunityID,a.interviewId, o.title , o.description, o.postedBy "
 				+ "FROM Application a  INNER JOIN Opportunity o ON a.opportunityID = o.opportunityID WHERE a.studentID = ?";
@@ -827,11 +840,8 @@ public class DBHandler {
 				String opportunityDescription = rs.getString("description");
 				String postedBy = rs.getString("postedBy");
 
-<<<<<<< HEAD
 				Application application = new Application(applicationID, status, feedback, rollNo, interviewID,
-=======
-				Application application = new Application(applicationID,status, feedback, rollNo, interviewID,
->>>>>>> c6703026341134fa10e142ef5bdf321d4c4da69a
+
 						opportunityID);
 
 				Opportunity opportunity = new Opportunity(opportunityID, opportunityTitle, opportunityDescription,

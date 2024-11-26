@@ -96,7 +96,7 @@ CREATE TABLE Application (
     status VARCHAR(50) NOT NULL,
     feedback TEXT,
     studentID VARCHAR(255) NOT NULL,
-    interviewID VARCHAR(255),
+    interviewID int,
     opportunityID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES Student(rollNo),
     FOREIGN KEY (interviewID) REFERENCES Interview(interviewID),
@@ -107,12 +107,16 @@ CREATE TABLE Application (
 
 -- Interview Table
 CREATE TABLE Interview (
-    interviewID VARCHAR(255) PRIMARY KEY,
+    interviewID int PRIMARY KEY AUTO_INCREMENT,
     candidateID VARCHAR(255),
     timeSlot DATETIME,
+    type varchar(255),
+    status varchar(255),
     location VARCHAR(255),
     FOREIGN KEY (candidateID) REFERENCES Student(rollNo)
 );
+
+
 
 -- ChatBox Table
 CREATE TABLE ChatBox (

@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AdminGenerateReportsController">
    <children>
-      <Label alignment="CENTER" layoutX="20.0" layoutY="173.0" opacity="0.7" prefHeight="34.0" prefWidth="782.0" stylesheets="@cupertino-dark.css" text="Generate Report of Students that have applied for a specific Job Category." textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor></Label>
       <Label alignment="CENTER" layoutX="220.0" layoutY="60.0" opacity="0.7" prefHeight="58.0" prefWidth="861.0" stylesheets="@cupertino-dark.css" text="Generate Report" textFill="#f0f0f2">
          <font>
             <Font name="Lorin ExtraBold" size="30.0" />
@@ -24,82 +21,116 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <Button alignment="CENTER" layoutX="1120.0" layoutY="169.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Lorin Bold" size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Button>
-      <Label alignment="CENTER" layoutX="6.0" layoutY="240.0" opacity="0.7" prefHeight="34.0" prefWidth="761.0" stylesheets="@cupertino-dark.css" text="Generate Report of Students that have been selected for a certain Job." textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
-      <Button alignment="CENTER" layoutX="1120.0" layoutY="236.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Lorin Bold" size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Button>
-      <ComboBox layoutX="863.0" layoutY="169.0" prefHeight="42.0" prefWidth="222.0" promptText="Select Job Category" />
-      <ComboBox layoutX="863.0" layoutY="236.0" prefHeight="42.0" prefWidth="222.0" promptText="Select Job Category" />
-      <Label alignment="CENTER" layoutX="5.0" layoutY="302.0" opacity="0.7" prefHeight="34.0" prefWidth="823.0" stylesheets="@cupertino-dark.css" text="Generate Report of Organisation Representative that are in the Organisation." textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
-      <Button alignment="CENTER" layoutX="1120.0" layoutY="298.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Lorin Bold" size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Button>
-      <ComboBox layoutX="863.0" layoutY="298.0" prefHeight="42.0" prefWidth="222.0" promptText="Select Organisation" />
-      <Label alignment="CENTER" layoutX="20.0" layoutY="365.0" opacity="0.7" prefHeight="34.0" prefWidth="660.0" stylesheets="@cupertino-dark.css" text="Generate Report of Opportunities uploaded by the Organisation." textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
-      <Button alignment="CENTER" layoutX="1123.0" layoutY="361.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Lorin Bold" size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Button>
-      <ComboBox layoutX="866.0" layoutY="361.0" prefHeight="42.0" prefWidth="222.0" promptText="Select Organisation" />
-      <Label alignment="CENTER" layoutX="20.0" layoutY="425.0" opacity="0.7" prefHeight="34.0" prefWidth="823.0" stylesheets="@cupertino-dark.css" text="Generate Report of Opportunities uploaded by the Organisation Representative." textFill="#f0f0f2">
-         <font>
-            <Font name="Lorin ExtraBold" size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Label>
-      <Button alignment="CENTER" layoutX="1123.0" layoutY="421.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Lorin Bold" size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DISAPPEAR" />
-         </cursor>
-      </Button>
-      <ComboBox layoutX="866.0" layoutY="421.0" prefHeight="42.0" prefWidth="222.0" promptText="Select Organisation Representative" />
+      <VBox alignment="TOP_CENTER" layoutX="190.0" layoutY="235.0" prefHeight="178.0" prefWidth="385.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="127.0" prefWidth="386.0">
+               <padding>
+                  <Insets left="17.0" right="17.0" top="18.0" />
+               </padding>
+               <children>
+                  <Label lineSpacing="10.0" opacity="0.7" prefHeight="100.0" prefWidth="380.0" text="Generate Organisation Reports" textAlignment="CENTER" textFill="WHITE" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="orgReportButton" alignment="CENTER" mnemonicParsing="false" onAction="#genOrgReport" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="464.0" layoutY="514.0" prefHeight="178.0" prefWidth="372.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <HBox alignment="CENTER" prefHeight="122.0" prefWidth="377.0">
+               <padding>
+                  <Insets left="17.0" right="17.0" top="18.0" />
+               </padding>
+               <children>
+                  <Label lineSpacing="10.0" opacity="0.7" prefHeight="89.0" prefWidth="322.0" text="Generate Student Reports" textAlignment="CENTER" textFill="WHITE" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="studentReportButton" alignment="CENTER" mnemonicParsing="false" onAction="#genStudentReport" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="761.0" layoutY="235.0" prefHeight="178.0" prefWidth="385.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
+               <color>
+                  <Color red="0.14473684132099152" green="0.13803605735301971" blue="0.13803605735301971" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="118.0" prefWidth="386.0">
+               <padding>
+                  <Insets left="17.0" right="17.0" top="18.0" />
+               </padding>
+               <children>
+                  <Label lineSpacing="10.0" opacity="0.7" prefHeight="83.0" prefWidth="352.0" text="Generate Organisation Representative Reports" textAlignment="CENTER" textFill="WHITE" underline="true" wrapText="true">
+                     <font>
+                        <Font name="Lorin ExtraBold" size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="orgRepReportButton" alignment="CENTER" mnemonicParsing="false" onAction="#genOrgRepReport" prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15; -fx-background-radius: 40;" stylesheets="@cupertino-dark.css" text="Generate" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Lorin Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </Pane>
