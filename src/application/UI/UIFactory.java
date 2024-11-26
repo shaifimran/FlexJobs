@@ -165,6 +165,7 @@ public class UIFactory {
 			Label jobLabel = new Label(appO.getOpportunity().getTitle() + " | " + appO.getOpportunity().getPostedBy());
 			jobLabel.setPrefHeight(28);
 			jobLabel.setPrefWidth(509);
+			jobLabel.setMaxWidth(600);
 			jobLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-family: 'Lorin Bold';");
 
 			Region region1 = new Region();
@@ -174,26 +175,54 @@ public class UIFactory {
 			Region region2 = new Region();
 			region2.setPrefWidth(34);
 			region2.setPrefHeight(80);
-
 			Button viewStatus = new Button(appO.getApplication().getStatus());
 			viewStatus.setStyle("-fx-background-color: transparent; "
 					+ "-fx-border-color: #4A44F2; -fx-border-radius: 40; -fx-text-fill: white; "
 					+ "-fx-font-family: 'Lorin Bold'; -fx-font-size: 17px;");
 			viewStatus.setPrefHeight(50);
-			viewStatus.setPrefWidth(130);
 			viewStatus.setMaxHeight(50);
-//			viewStatus.setUserData(entry.getKey());
+			viewStatus.setMinWidth(Region.USE_COMPUTED_SIZE);
+			viewStatus.setPrefWidth(Region.USE_COMPUTED_SIZE);
 
-			Button viewDetails = new Button("View Status");
+			Button viewDetails = new Button();
 			viewDetails.setPrefHeight(58);
 			viewDetails.setPrefWidth(130);
 			viewDetails.setStyle("-fx-background-color: #4A44F2; -fx-background-radius: 40; "
 					+ "-fx-text-fill: white; -fx-font-family: 'Lorin Bold'; -fx-font-size: 17px;");
 
-			viewDetails.setUserData(appO.getApplication().getStatus());
-			viewDetails.setOnAction(event -> {
-				controller.viewJobStatusDetail(event);
-			});
+			if (appO.getApplication().getStatus().equalsIgnoreCase("rejected")) {
+				viewDetails.setText("View Feedback");
+				viewDetails.setPrefWidth(Region.USE_COMPUTED_SIZE);
+			} else if (appO.getApplication().getStatus().equalsIgnoreCase("in progress")
+					|| appO.getApplication().getStatus().equalsIgnoreCase("approved")) {
+				viewDetails.setText("View Details");
+			}
+			if (appO.getApplication().getStatus().equalsIgnoreCase("call for interview")) {
+				viewDetails.setText("Details");
+			}
+
+			viewDetails.setUserData(appO.getApplication());
+			if (appO.getApplication().getStatus().equalsIgnoreCase("call for interview")) {
+				viewDetails.setOnAction(event -> {
+					controller.viewInterviewDetail(event);
+				});
+
+			} else {
+
+				viewDetails.setOnAction(event -> {
+					controller.viewJobStatusDetail(event);
+				});
+			}
+//			Button viewDetails = new Button("View Details");
+//			viewDetails.setPrefHeight(58);
+//			viewDetails.setPrefWidth(130);
+//			viewDetails.setStyle("-fx-background-color: #4A44F2; -fx-background-radius: 40; "
+//					+ "-fx-text-fill: white; -fx-font-family: 'Lorin Bold'; -fx-font-size: 17px;");
+//
+//			viewDetails.setUserData(appO.getApplication().getStatus());
+//			viewDetails.setOnAction(event -> {
+//				controller.viewJobStatusDetail(event);
+//			});
 
 			// Add the Label and Buttons to HBox
 			hBox.getChildren().addAll(jobLabel, region1, viewStatus, region2, viewDetails);
@@ -528,7 +557,7 @@ public class UIFactory {
 
 		// Iterate through messages in the chat
 		for (Message message : chat.getMessages()) {
-			
+
 			// Determine if the organisation is the sender or receiver
 			if (message.getSenderId().equalsIgnoreCase(organisation.getName())) {
 				// Organisation is the sender, use sent message template

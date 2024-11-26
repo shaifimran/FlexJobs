@@ -1,7 +1,6 @@
 package application.handlers;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +18,7 @@ import application.ApplicationWithOpportunity;
 import application.Chat;
 import application.ChatBox;
 import application.EducationalOpportunity;
+import application.Interview;
 import application.JobOpportunity;
 import application.Message;
 import application.Notification;
@@ -31,7 +31,7 @@ import application.UnverifiedOrgs;
 public class DBHandler {
 	private final String dbUrl = "jdbc:mysql://localhost:3306/flexjobs";
 	private final String dbUser = "root";
-	private final String dbPassword = "Shaif2004.";
+	private final String dbPassword = "wasay";
 	private Connection conn;
 
 	/**
@@ -249,8 +249,7 @@ public class DBHandler {
 			statement.setString(4, position);
 			statement.setString(5, phone);
 			statement.setString(6, organisation);
-			statement.setBoolean(7, false );
-
+			statement.setBoolean(7, false);
 
 			statement.executeUpdate();
 			System.out.println("Organisation Representative added successfully.");
@@ -751,7 +750,7 @@ public class DBHandler {
 	}
 
 	public Boolean applyForJob(String rollNo, int oppId) {
-		String query = "insert into Application(status, studentID, opportunityID) values ('submitted', ?, ?)";
+		String query = "insert into Application(status, studentID, opportunityID) values ('In Progress', ?, ?)";
 
 		try {
 			this.getConnection();
@@ -772,10 +771,8 @@ public class DBHandler {
 		return false;
 	}
 
-<<<<<<< HEAD
 	public List<Application> retrieveApplications(String rollNo) {
 		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.interviewID, a.opportunityID,  FROM Application a WHERE a.studentID = ?";
-
 		try {
 			List<Application> applications = new ArrayList<>();
 			this.getConnection();
@@ -803,8 +800,6 @@ public class DBHandler {
 
 	}
 
-=======
->>>>>>> c6703026341134fa10e142ef5bdf321d4c4da69a
 	public List<ApplicationWithOpportunity> retrieveApplicationsWithOpportunities(String rollNo) {
 		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.opportunityID,a.interviewId, o.title , o.description, o.postedBy "
 				+ "FROM Application a  INNER JOIN Opportunity o ON a.opportunityID = o.opportunityID WHERE a.studentID = ?";
@@ -827,11 +822,7 @@ public class DBHandler {
 				String opportunityDescription = rs.getString("description");
 				String postedBy = rs.getString("postedBy");
 
-<<<<<<< HEAD
 				Application application = new Application(applicationID, status, feedback, rollNo, interviewID,
-=======
-				Application application = new Application(applicationID,status, feedback, rollNo, interviewID,
->>>>>>> c6703026341134fa10e142ef5bdf321d4c4da69a
 						opportunityID);
 
 				Opportunity opportunity = new Opportunity(opportunityID, opportunityTitle, opportunityDescription,
@@ -1302,4 +1293,26 @@ public class DBHandler {
 		return null;
 	}
 
+	public Interview retrieveInterviewDetails(Application application) {
+		String sql = "SELECT i.interviewID, i.timeslot, i.location, i.type, i.status FROM application a "
+				+ "INNER JOIN interview i ON a.interviewID = i.interviewID WHERE a.applicationID = ?";
+
+		try {
+			this.getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setInt(1, application.getApplicationID());
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				Interview interview = new Interview(resultSet.getInt("interviewID"), application.getStudentID(),
+						resultSet.getDate("timeslot"), resultSet.getString("location"), resultSet.getString("type"),
+						resultSet.getString("status"));
+				return interview;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

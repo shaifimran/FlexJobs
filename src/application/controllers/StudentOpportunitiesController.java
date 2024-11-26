@@ -128,8 +128,8 @@ public class StudentOpportunitiesController {
 		alert.setTitle("Job Opportunity Details");
 		alert.setHeaderText("Details of the Job Opportunity");
 
-		String content = "Title: " + title + "\n\n" + "Description: " + description + "\n\n" + "\n\n" + "Status: "
-				+ status + "\n\n" + "Posted By: " + postedBy;
+		String content = "Title: " + title + "\n\n" + "Description: " + description + "\n\n" + "Status: " + status
+				+ "\n\n" + "Posted By: " + postedBy;
 
 		TextArea textArea = new TextArea(content);
 		textArea.setEditable(false);

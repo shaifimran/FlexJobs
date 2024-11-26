@@ -16,6 +16,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainApplicationController">
    <children>
+      <ImageView fitHeight="805.0" fitWidth="1304.0" opacity="0.58" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/background.jpg" />
+         </image>
+      </ImageView>
       <Label alignment="CENTER" layoutX="552.0" layoutY="71.0" opacity="0.7" prefHeight="44.0" prefWidth="208.0" text="FlexJobs" textFill="WHITE">
          <font>
             <Font name="Lorin ExtraBold" size="40.0" />
@@ -24,7 +29,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <VBox  alignment="TOP_CENTER" layoutX="338.0" layoutY="197.0"  prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
+      <VBox alignment="TOP_CENTER" layoutX="338.0" layoutY="197.0" prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -61,8 +66,8 @@
             </Button>
          </children>
       </VBox>
-      <Hyperlink focusTraversable="false" layoutX="1206.0" layoutY="148.0"  />
-      <VBox  alignment="TOP_CENTER" layoutX="735.0" layoutY="197.0"  prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
+      <Hyperlink focusTraversable="false" layoutX="1206.0" layoutY="148.0" />
+      <VBox alignment="TOP_CENTER" layoutX="735.0" layoutY="197.0" prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -99,7 +104,7 @@
             </Button>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="531.0" layoutY="484.0"  prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;" >
+      <VBox alignment="TOP_CENTER" layoutX="531.0" layoutY="484.0" prefHeight="221.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-color: #6863ff; -fx-border-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
