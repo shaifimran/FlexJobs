@@ -18,6 +18,7 @@ import application.ApplicationWithOpportunity;
 import application.Chat;
 import application.ChatBox;
 import application.EducationalOpportunity;
+import application.Interview;
 import application.JobOpportunity;
 import application.Message;
 import application.Notification;
@@ -264,8 +265,7 @@ public class DBHandler {
 			statement.setString(4, position);
 			statement.setString(5, phone);
 			statement.setString(6, organisation);
-			statement.setBoolean(7, false );
-
+			statement.setBoolean(7, false);
 
 			statement.executeUpdate();
 			System.out.println("Organisation Representative added successfully.");
@@ -766,7 +766,7 @@ public class DBHandler {
 	}
 
 	public Boolean applyForJob(String rollNo, int oppId) {
-		String query = "insert into Application(status, studentID, opportunityID) values ('submitted', ?, ?)";
+		String query = "insert into Application(status, studentID, opportunityID) values ('In Progress', ?, ?)";
 
 		try {
 			this.getConnection();
@@ -817,7 +817,10 @@ public class DBHandler {
 
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ada2e203ea54988c58aecdcc472f6d24a5f03b1
 	public List<ApplicationWithOpportunity> retrieveApplicationsWithOpportunities(String rollNo) {
 		String query = "SELECT a.applicationID, a.status, a.feedback, a.studentID, a.opportunityID,a.interviewId, o.title , o.description, o.postedBy "
 				+ "FROM Application a  INNER JOIN Opportunity o ON a.opportunityID = o.opportunityID WHERE a.studentID = ?";
@@ -841,7 +844,10 @@ public class DBHandler {
 				String postedBy = rs.getString("postedBy");
 
 				Application application = new Application(applicationID, status, feedback, rollNo, interviewID,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ada2e203ea54988c58aecdcc472f6d24a5f03b1
 						opportunityID);
 
 				Opportunity opportunity = new Opportunity(opportunityID, opportunityTitle, opportunityDescription,
@@ -1312,4 +1318,26 @@ public class DBHandler {
 		return null;
 	}
 
+	public Interview retrieveInterviewDetails(Application application) {
+		String sql = "SELECT i.interviewID, i.timeslot, i.location, i.type, i.status FROM application a "
+				+ "INNER JOIN interview i ON a.interviewID = i.interviewID WHERE a.applicationID = ?";
+
+		try {
+			this.getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setInt(1, application.getApplicationID());
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				Interview interview = new Interview(resultSet.getInt("interviewID"), application.getStudentID(),
+						resultSet.getDate("timeslot"), resultSet.getString("location"), resultSet.getString("type"),
+						resultSet.getString("status"));
+				return interview;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

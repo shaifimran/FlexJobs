@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import application.ApplicationWithOpportunity;
+import application.Interview;
 import application.Student;
 import application.UI.UIFactory;
 import application.handlers.DBHandler;
@@ -44,11 +45,14 @@ public class StudentViewStatusController {
 	@FXML
 	public void viewJobStatusDetail(ActionEvent event) {
 		Button viewJobStatusDetailsButton = (Button) event.getSource();
-		String st = (String) viewJobStatusDetailsButton.getUserData();
-		showApplicationStatusDetails(st);
+		application.Application a = (application.Application) viewJobStatusDetailsButton.getUserData();
+		if (a == null) {
+			System.out.println("Im here");
+		}
+		showApplicationStatusDetails(a);
 	}
 
-	public void showApplicationStatusDetails(String status) {
+	public void showApplicationStatusDetails(application.Application a) {
 
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Application Status Details");
@@ -56,12 +60,11 @@ public class StudentViewStatusController {
 
 		String content = "";
 
-		switch (status.toLowerCase()) {
+		switch (a.getStatus()) {
 		case "In Progress":
 			content = "Your application has been successfully submitted.\n\n"
 					+ "You will be notified once the recruiter reviews your application.";
 			break;
-
 		case "Call For Interview":
 			content = "Congratulations! Your interview has been scheduled.\n\n"
 					+ "Please make sure to prepare for your interview on the scheduled date.";
@@ -69,12 +72,15 @@ public class StudentViewStatusController {
 
 		case "Approved":
 			content = "You have been accepted for the position!\n\n"
-					+ "Next, we will provide you with more details about the offer.";
+					+ "You will be contacted by the HR with the onboarding details soon!.";
 			break;
-
 		case "Rejected":
-			content = "Unfortunately, your application has been rejected.\n\n"
-					+ "Thank you for your time and effort. Keep applying to other opportunities!";
+			content = "Unfortunately, your application has been rejected.\n\n";
+			if (a.getFeedback() != null) {
+				content += "Feedback: " + a.getFeedback();
+			} else {
+				content += "Feedback: No Feedback Provided.";
+			}
 			break;
 
 		default:
@@ -108,6 +114,51 @@ public class StudentViewStatusController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void viewInterviewDetail(ActionEvent event) {
+		Button viewJobStatusDetailsButton = (Button) event.getSource();
+		application.Application a = (application.Application) viewJobStatusDetailsButton.getUserData();
+		if (a != null) {
+			Interview i = dbHandler.retrieveInterviewDetails(a);
+			if (i != null) {
+				showApplicationStatusDetails(i);
+				return;
+			}
+		}
+	}
+
+	public void showApplicationStatusDetails(Interview i) {
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Interview Status Details");
+		alert.setHeaderText("Status of Your Interview");
+
+		String content = "Date: " + i.getTimeSlot() + "\n\n" + "Location: " + i.getLocation() + "\n\n" + "Type: "
+				+ i.getType() + "\n\n" + "Status: " + i.getStatus();
+
+		switch (i.getStatus()) {
+		case "Scheduled":
+			content += "\n\nYour interview is scheduled. Please be on time.";
+			break;
+		case "Delayed":
+			content += "\n\nThe interview has been delayed. Please check for further updates.";
+			break;
+		default:
+			content += "\n\nThe interview status is unknown. Please check again later.";
+			break;
+		}
+
+		TextArea textArea = new TextArea(content);
+		textArea.setEditable(false);
+		textArea.setWrapText(true);
+		textArea.setMaxWidth(Double.MAX_VALUE);
+		textArea.setMaxHeight(Double.MAX_VALUE);
+
+		alert.getDialogPane().setContent(textArea);
+
+		alert.showAndWait();
+
 	}
 
 }

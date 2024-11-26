@@ -3,16 +3,18 @@ package application;
 import java.sql.Date;
 
 public class Interview {
-	private String interviewID;
+	private int interviewID;
 	private String candidateID;
 	private Date timeSlot;
 	private String location;
+	private String type;
+	private String status;
 
-	public String getInterviewID() {
+	public int getInterviewID() {
 		return interviewID;
 	}
 
-	public void setInterviewID(String interviewID) {
+	public void setInterviewID(int interviewID) {
 		this.interviewID = interviewID;
 	}
 
@@ -56,11 +58,7 @@ public class Interview {
 		this.status = status;
 	}
 
-	private String type;
-	private String status;
-
-	public Interview(String interviewID, String candidateID, Date timeSlot, String location, String type,
-			String status) {
+	public Interview(int interviewID, String candidateID, Date timeSlot, String location, String type, String status) {
 		this.interviewID = interviewID;
 		this.candidateID = candidateID;
 		this.timeSlot = timeSlot;
