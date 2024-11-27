@@ -17,7 +17,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.OrgRepDashboardController">
    <children>
-      <Hyperlink fx:id="GoBack" focusTraversable="false" layoutX="47.0" layoutY="43.0" onAction="#goback" prefHeight="23.0" prefWidth="117.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="&lt; GO BACK" textFill="#817dff">
+      <ImageView fitHeight="805.0" fitWidth="1304.0" opacity="0.58" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/background.jpg" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="GoBack" focusTraversable="false" layoutX="47.0" layoutY="43.0" onAction="#goBackToMainApplication" prefHeight="23.0" prefWidth="117.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="&lt; GO BACK" textFill="#817dff">
          <font>
             <Font name="Lorin ExtraBold" size="18.0" />
          </font>

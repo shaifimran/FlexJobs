@@ -1,6 +1,5 @@
 -- Step 1: Create the Database
 CREATE DATABASE FlexJobs;
-
 -- Step 2: Use the Database
 USE FlexJobs;
 
@@ -51,17 +50,17 @@ CREATE TABLE OrganisationRepresentative (
     FOREIGN KEY (orgID) REFERENCES Organisation(name)
 );
 -- Registration Table
-CREATE TABLE Registration (
-    registrationId INT PRIMARY KEY AUTO_INCREMENT,
-    organizationId VARCHAR(255),
-    registrationDate DATE,
-    status BOOLEAN,
-    isApproved BOOLEAN,
-    orgRepresentativeId VARCHAR(255),
-    isNewOrg BOOLEAN,
-    FOREIGN KEY (organizationId) REFERENCES Organisation(name),
-    FOREIGN KEY (orgRepresentativeId) REFERENCES OrganisationRepresentative(email)
-);
+-- CREATE TABLE Registration (
+--     registrationId INT PRIMARY KEY AUTO_INCREMENT,
+--     organizationId VARCHAR(255),
+--     registrationDate DATE,
+--     status BOOLEAN,
+--     isApproved BOOLEAN,
+--     orgRepresentativeId VARCHAR(255),
+--     isNewOrg BOOLEAN,
+--     FOREIGN KEY (organizationId) REFERENCES Organisation(name),
+--     FOREIGN KEY (orgRepresentativeId) REFERENCES OrganisationRepresentative(email)
+-- );
 
 -- Opportunity Table
 CREATE TABLE Opportunity (
@@ -69,6 +68,7 @@ CREATE TABLE Opportunity (
     title VARCHAR(255),
     description TEXT,
     postedBy VARCHAR(255),
+    type ENUM('Job', 'Educational'),
     FOREIGN KEY (postedBy) REFERENCES Organisation(name)
 );
 
@@ -155,16 +155,29 @@ CREATE TABLE Notification (
     timestamp DATETIME
 );
 
--- Report Table
-CREATE TABLE Report (
-    reportID VARCHAR(255) PRIMARY KEY,
-    reportType VARCHAR(50),
-    content TEXT,
-    generatedDate DATE
+create table departments(
+depName varchar(255) PRIMARY KEY
 );
+INSERT INTO departments (depName) VALUES
+('Computer Science'),
+('Electrical Engineering'),
+('Mechanical Engineering'),
+('Civil Engineering'),
+('Biomedical Engineering'),
+('Mathematics'),
+('Physics'),
+('Chemistry'),
+('Economics'),
+('Business Administration');
+-- Report Table
+-- CREATE TABLE Report (
+--     reportID VARCHAR(255) PRIMARY KEY,
+--     reportType VARCHAR(50),
+--     content TEXT,
+--     generatedDate DATE
+-- );
 
 show tables;
-select * from FlexJobs.Registration;
 select * from FlexJobs.OrganisationRepresentative;
 select * from FlexJobs.Organisation;
 select * from admin;
@@ -173,6 +186,8 @@ select * from notification;
 select * from chatbox;
 select * from chat;
 select * from message;
+select * from opportunity;
+select * from job;
 DROP TABLE FlexJobs.OrganisationRepresentative;
 DROP TABLE FlexJobs.Organisation;
 DROP TABLE FlexJobs.Registration;
@@ -182,13 +197,17 @@ DROP Table flexjobs.message;
 DROP Table Student;
 DROP Table Interview;
 DROP Table application;
+drop table opportunity;
 DROP Table job;
+drop table educational;
+drop table application;
 drop table student;
 Truncate table flexjobs.organisation;
 DELETE FROM FlexJobs.Organisation WHERE name = "Devsinc";
 DELETE FROM FlexJobs.OrganisationRepresentative WHERE repID = "REP-fdcd9b8c-cc2e-4182-a3ab-436489335c01" || repID = "REP-fe5ef4f6-6d79-436c-8101-d8b38a694500";
 
-
+select * from admin;
+Insert into admin (name,email,password) VALUES ("admin","admin@gmail.com","1234");
 -- Insert Dummy Unverified Organizations
 INSERT INTO Organisation (name, industry, description, location, contactEmail, isVerified)
 VALUES 

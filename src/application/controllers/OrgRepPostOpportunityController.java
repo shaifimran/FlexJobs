@@ -105,17 +105,14 @@ public class OrgRepPostOpportunityController {
 			return;
 		}
 
-		int opportunityID = dbHandler.insertIntoOpportunity(title, description, type);
-		System.out.println(opportunityID);
+		int opportunityID = dbHandler.insertIntoOpportunity(title, description, type, organization);
 		if (type.equals("Job")) {
 			dbHandler.insertIntoJob(opportunityID, jobCategory); 
-			System.out.println(opportunityID);
 		} else if (type.equals("Educational")) {
 			dbHandler.insertIntoEducational(opportunityID); 
-			System.out.println(opportunityID);
 		}
 		
-		dbHandler.addNotification(OrgRep.getOrgID(),"student","Organisation: " + OrgRep.getOrgID() + " has posted a New " + type + " Job Opportunity.");
+		dbHandler.addNotification(OrgRep.getOrgID(),"student","Organisation: " + OrgRep.getOrgID() + " has posted a New " + type + " Opportunity.");
 		showAlert(AlertType.INFORMATION, "Success", "Opportunity posted successfully.");
 		clearFields();
 	}

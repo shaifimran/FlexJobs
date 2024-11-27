@@ -17,12 +17,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.StudentDashboardController">
    <children>
-      <ImageView fitHeight="805.0" fitWidth="1304.0" layoutX="-6.0" layoutY="-2.0" opacity="0.58" pickOnBounds="true">
+      <ImageView fitHeight="805.0" fitWidth="1304.0" layoutX="-18.0" layoutY="24.0" opacity="0.58" pickOnBounds="true">
          <image>
             <Image url="@../resources/background.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="studentName" layoutX="109.0" layoutY="82.0" opacity="0.7" prefHeight="22.0" prefWidth="176.0" text="(Student Name)" textFill="#f0f0f2">
+      <Label fx:id="studentName" layoutX="109.0" layoutY="82.0" opacity="0.7" prefHeight="22.0" prefWidth="594.0" text="(Student Name)" textFill="#f0f0f2" wrapText="true">
          <font>
             <Font name="Lorin ExtraBold" size="20.0" />
          </font>
@@ -39,7 +39,7 @@
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
       </Label>
-      <VBox fx:id="ProfileSettingsVBox" layoutX="365.0" layoutY="217.0"  prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="ProfileSettingsVBox" layoutX="365.0" layoutY="217.0" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -48,18 +48,15 @@
             </DropShadow>
          </effect>
          <children>
-            <HBox prefHeight="44.0" prefWidth="255.0">
+            <HBox alignment="TOP_CENTER" prefHeight="88.0" prefWidth="255.0">
                <children>
-                  <Label opacity="0.7" prefHeight="24.0" prefWidth="224.0" text="Profile Settings" textFill="WHITE">
+                  <Label opacity="0.7" prefHeight="58.0" prefWidth="248.0" text="Profile Settings" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Lorin ExtraBold" size="25.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="DISAPPEAR" />
                      </cursor>
-                     <padding>
-                        <Insets left="6.0" top="1.0" />
-                     </padding>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" x="-1.0">
                            <image>
@@ -70,13 +67,13 @@
                            </effect>
                         </ImageView>
                      </graphic>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
-               <padding>
-                  <Insets left="7.0" top="12.0" />
-               </padding>
             </HBox>
-            <Label fx:id="studentCGPA" alignment="CENTER" opacity="0.7" prefHeight="111.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="3.45" textFill="#6863ff">
+            <Label fx:id="studentCGPA" alignment="CENTER" opacity="0.7" prefHeight="139.0" prefWidth="255.0" style="-fx-text-fill: #817dff;" text="3.45" textFill="#6863ff">
                <font>
                   <Font name="Lorin ExtraBold" size="60.0" />
                </font>
@@ -85,14 +82,14 @@
                </cursor>
             </Label>
             <Line endX="-181.72894287109375" endY="-9.91801929473877" fill="WHITE" startX="-435.0218505859375" startY="-9.918035507202148" stroke="#f0f0f2" />
-            <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="214.0">
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="278.0">
                <children>
-                  <Hyperlink focusTraversable="false" onAction="#manageProfile" prefHeight="23.0" prefWidth="161.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Manage Profile" textFill="#817dff">
+                  <Hyperlink focusTraversable="false" onAction="#manageProfile" prefHeight="23.0" prefWidth="172.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="Manage Profile" textAlignment="CENTER" textFill="#817dff" wrapText="true">
                      <font>
                         <Font name="Lorin ExtraBold" size="18.0" />
                      </font>
                      <padding>
-                        <Insets left="12.0" />
+                        <Insets left="12.0" right="12.0" />
                      </padding>
                      <effect>
                         <ColorAdjust />
@@ -105,12 +102,15 @@
                   </ImageView>
                </children>
                <padding>
-                  <Insets right="17.0" top="18.0" />
+                  <Insets top="10.0" />
                </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="opportunitiesVBox" layoutX="720.0" layoutY="219.0"  prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="opportunitiesVBox" layoutX="720.0" layoutY="219.0" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -175,7 +175,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="applicationsVBox" layoutX="364.0" layoutY="474.0"  prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="applicationsVBox" layoutX="364.0" layoutY="474.0" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -240,7 +240,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="messagesVBox" layoutX="724.0" layoutY="473.0"  prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
+      <VBox fx:id="messagesVBox" layoutX="724.0" layoutY="473.0" prefHeight="209.0" prefWidth="234.0" style="-fx-background-color: #1B1B1C; -fx-background-radius: 20;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="34.19" offsetY="5.0" radius="12.565" width="18.07">
                <color>
@@ -323,5 +323,14 @@
                </effect>
             </ImageView>
          </graphic></Hyperlink>
+      <Hyperlink focusTraversable="false" layoutX="49.0" layoutY="14.0" onAction="#goBackToMainApplication">
+         <graphic>
+            <ImageView fitHeight="58.0" fitWidth="69.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Hyperlink>
    </children>
 </Pane>

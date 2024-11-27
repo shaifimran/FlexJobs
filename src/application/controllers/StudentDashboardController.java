@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.SwipeEvent;
@@ -149,5 +151,31 @@ public class StudentDashboardController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void goBackToMainApplication(ActionEvent event) {
+		try {
+			// Load Admin Dashboard FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/MainApplication.fxml"));
+			Parent root = loader.load();
+
+			// Get current stage
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			// Set new scene for Admin Dashboard
+			Scene dashboardScene = new Scene(root);
+			stage.setScene(dashboardScene);
+		} catch (Exception e) {
+			e.printStackTrace();
+			showAlert(AlertType.ERROR, "Error", "Failed to load Admin Dashboard.");
+		}
+	}
+	
+	private void showAlert(AlertType alertType, String title, String message) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
+
 
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import application.Organisation;
 import application.OrganisationRepresentative;
+import application.factory.DBFactory;
+import application.handlers.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -53,6 +56,8 @@ public class OrgRepDashboardController {
     @FXML
     private Hyperlink chatWithApplicantsLink;
     
+    private DBHandler dbHandler = DBFactory.getInstance();
+    
     public OrgRepDashboardController(OrganisationRepresentative orgRep) {
     	this.orgRep = orgRep;
     }
@@ -63,8 +68,21 @@ public class OrgRepDashboardController {
     
     @FXML
     public void initialize() {
-    	this.setOrganisationRepresentative(orgRep);
+        this.setOrganisationRepresentative(orgRep); 
+        updateLabels();
     }
+
+    
+    public void updateLabels() {
+
+        int opportunitiesCount = dbHandler.getOpportunitiesCount();
+        int applicantsCount = dbHandler.getApplicantsCount();
+
+        OpportunityPostedLabel.setText(String.valueOf(opportunitiesCount));
+        ApplicantsLabel.setText(String.valueOf(applicantsCount));
+    }
+
+
 
     public void setOrganisationRepresentative(OrganisationRepresentative orgRep) {
         this.orgRep = orgRep;
@@ -152,4 +170,30 @@ public class OrgRepDashboardController {
 			e.printStackTrace();
 		}
     }
+    
+    public void goBackToMainApplication(ActionEvent event) {
+		try {
+			// Load Admin Dashboard FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/MainApplication.fxml"));
+			Parent root = loader.load();
+
+			// Get current stage
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			// Set new scene for Admin Dashboard
+			Scene dashboardScene = new Scene(root);
+			stage.setScene(dashboardScene);
+		} catch (Exception e) {
+			e.printStackTrace();
+			showAlert(AlertType.ERROR, "Error", "Failed to load Admin Dashboard.");
+		}
+	}
+    
+	private void showAlert(AlertType alertType, String title, String message) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
+
 }

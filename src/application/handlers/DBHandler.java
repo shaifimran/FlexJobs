@@ -43,7 +43,7 @@ public interface DBHandler {
 
 	// Add a new Organisation Representative to the database
 	public void addOrgRepresentative(String name, String phone, String password, String email, String organisation,
-			String position);
+			String position, Boolean isVerified);
 
 	public void addOrganisation(String name, String industry, String description, String location, String contactEmail,
 			Boolean isVerified);
@@ -60,15 +60,27 @@ public interface DBHandler {
 	public List<Application> getApplicationsByStatus(String status);
 
 	public boolean updateApplicationStatus(int applicationID, String status);
+	
+	public String getStudentEmail(int applicationID, String studentID);
+	
+	public List<Integer> getAllApplicationIDs();
+	
+	public List<String> getAllStudentIDs();
+	
+	public boolean scheduleInterview(int applicationID, String candidateID, String dateTime, String type, String location);
 
 	public List<String> getVerifiedOrganisations();
+	
+	public int getOpportunitiesCount();
+	
+	public int getApplicantsCount();
 
 	// Check if an Organisation exists in the database
 	public boolean isOrganisationExists(String organisationName);
 
 	public boolean organisationExists(String orgName);
 
-	public int insertIntoOpportunity(String title, String description, String type) throws SQLException;
+	public int insertIntoOpportunity(String title, String description, String type, String orgName) throws SQLException;
 
 	public void insertIntoJob(int opportunityID, String category) throws SQLException;
 
@@ -148,5 +160,7 @@ public interface DBHandler {
 	public List<String> getCategories();
 
 	public Interview retrieveInterviewDetails(Application application);
+
+	public boolean isOrganisationRepExists(String organisation);
 
 }

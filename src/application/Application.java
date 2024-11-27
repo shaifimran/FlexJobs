@@ -11,14 +11,14 @@ public class Application {
 	private String status;
 	private String feedback;
 	private String studentID;
-	private String interviewID;
+	private int interviewID;
 	private int opportunityID;
 
-	public String getInterviewID() {
+	public int getInterviewID() {
 		return this.interviewID;
 	}
 
-	public void setInterviewID(String InterviewID) {
+	public void setInterviewID(int InterviewID) {
 		this.interviewID = InterviewID;
 	}
 
@@ -71,7 +71,7 @@ public class Application {
 	}
 
 	public Application(int applicationID, Date submitDate, String status, String feedback, String studentID,
-			String interviewID, int opportunityID) {
+			int interviewID, int opportunityID) {
 		this.applicationID = applicationID;
 		this.submitDate = submitDate;
 		this.status = status;
@@ -81,7 +81,7 @@ public class Application {
 		this.opportunityID = opportunityID;
 	}
 
-	public Application(int applicationID, String status, String feedback, String rollNo, String interviewID,
+	public Application(int applicationID, String status, String feedback, String rollNo, int interviewID,
 			int opportunityID) {
 		// TODO Auto-generated constructor stub
 

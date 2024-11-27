@@ -12,19 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-	prefWidth="1300.0" style="-fx-background-color: #0C0C0F;"
-	stylesheets="@cupertino-dark.css"
-	xmlns="http://javafx.com/javafx/23.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.controllers.OrgRepPostOpportunityController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #0C0C0F;" stylesheets="@cupertino-dark.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.OrgRepPostOpportunityController">
 	<children>
-		<Hyperlink fx:id="GoBack" focusTraversable="false"
-			layoutX="69.0" layoutY="57.0" onAction="#goback" prefHeight="23.0"
-			prefWidth="117.0"
-			style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;"
-			text="&lt; GO BACK" textFill="#817dff">
+		<Hyperlink fx:id="GoBack" focusTraversable="false" layoutX="69.0" layoutY="57.0" onAction="#goback" prefHeight="23.0" prefWidth="117.0" style="-fx-underline: false; -fx-text-fill: #f0f0f2; -fx-focus-traversable: false;" text="&lt; GO BACK" textFill="#817dff">
 			<font>
 				<Font name="Lorin ExtraBold" size="18.0" />
 			</font>
@@ -35,13 +25,9 @@
 				<ColorAdjust />
 			</effect>
 		</Hyperlink>
-		<ComboBox fx:id="selectOrganisation" layoutX="327.0"
-			layoutY="158.0" prefHeight="38.0" prefWidth="231.0" />
-		<ComboBox fx:id="oppCategory" layoutX="868.0" layoutY="158.0"
-			prefHeight="38.0" prefWidth="324.0" />
-		<TextField fx:id="opportunityTitle" layoutX="236.0"
-			layoutY="218.0" prefHeight="34.0" prefWidth="324.0"
-			style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
+		<ComboBox fx:id="selectOrganisation" layoutX="327.0" layoutY="158.0" prefHeight="38.0" prefWidth="231.0" />
+		<ComboBox fx:id="oppCategory" layoutX="868.0" layoutY="158.0" prefHeight="38.0" prefWidth="324.0" />
+		<TextField fx:id="opportunityTitle" layoutX="236.0" layoutY="218.0" prefHeight="34.0" prefWidth="324.0" style="-fx-border-color: none;" stylesheets="@cupertino-dark.css">
 			<font>
 				<Font size="17.0" />
 			</font>
@@ -49,14 +35,9 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</TextField>
-		<ComboBox fx:id="JobCategories" layoutX="868.0"
-			layoutY="218.0" prefHeight="38.0" prefWidth="324.0" />
-		<TextArea fx:id="opportunityDescription" layoutX="222.0"
-			layoutY="342.0" prefHeight="328.0" prefWidth="1019.0" wrapText="true" />
-		<Label alignment="CENTER" layoutX="81.0" layoutY="166.0"
-			opacity="0.7" prefHeight="13.0" prefWidth="210.0"
-			stylesheets="@cupertino-dark.css" text="Select Organisation:"
-			textFill="#f0f0f2">
+		<ComboBox fx:id="JobCategories" layoutX="868.0" layoutY="218.0" prefHeight="38.0" prefWidth="324.0" />
+		<TextArea fx:id="opportunityDescription" layoutX="222.0" layoutY="342.0" prefHeight="328.0" prefWidth="1019.0" wrapText="true" />
+		<Label alignment="CENTER" layoutX="81.0" layoutY="166.0" opacity="0.7" prefHeight="13.0" prefWidth="210.0" stylesheets="@cupertino-dark.css" text="Select Organisation:" textFill="#f0f0f2">
 			<font>
 				<Font name="Lorin ExtraBold" size="20.0" />
 			</font>
@@ -64,10 +45,7 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</Label>
-		<Label alignment="CENTER" layoutX="230.0" layoutY="57.0"
-			opacity="0.7" prefHeight="58.0" prefWidth="861.0"
-			stylesheets="@cupertino-dark.css" text="Port Opportunity"
-			textFill="#f0f0f2">
+		<Label alignment="CENTER" layoutX="230.0" layoutY="57.0" opacity="0.7" prefHeight="58.0" prefWidth="861.0" stylesheets="@cupertino-dark.css" text="Post Opportunity" textFill="#f0f0f2">
 			<font>
 				<Font name="Lorin ExtraBold" size="30.0" />
 			</font>
@@ -75,10 +53,7 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</Label>
-		<Label alignment="CENTER" layoutX="81.0" layoutY="226.0"
-			opacity="0.7" prefHeight="22.0" prefWidth="112.0"
-			stylesheets="@cupertino-dark.css" text="Enter Title:"
-			textFill="#f0f0f2">
+		<Label alignment="CENTER" layoutX="81.0" layoutY="226.0" opacity="0.7" prefHeight="22.0" prefWidth="112.0" stylesheets="@cupertino-dark.css" text="Enter Title:" textFill="#f0f0f2">
 			<font>
 				<Font name="Lorin ExtraBold" size="20.0" />
 			</font>
@@ -86,10 +61,7 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</Label>
-		<Label alignment="CENTER" layoutX="624.0" layoutY="166.0"
-			opacity="0.7" prefHeight="22.0" prefWidth="238.0"
-			stylesheets="@cupertino-dark.css" text="Opportunity Category:"
-			textFill="#f0f0f2">
+		<Label alignment="CENTER" layoutX="624.0" layoutY="166.0" opacity="0.7" prefHeight="22.0" prefWidth="238.0" stylesheets="@cupertino-dark.css" text="Opportunity Category:" textFill="#f0f0f2">
 			<font>
 				<Font name="Lorin ExtraBold" size="20.0" />
 			</font>
@@ -97,10 +69,7 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</Label>
-		<Label alignment="CENTER" layoutX="81.0" layoutY="351.0"
-			opacity="0.7" prefHeight="22.0" prefWidth="130.0"
-			stylesheets="@cupertino-dark.css" text="Description:"
-			textFill="#f0f0f2">
+		<Label alignment="CENTER" layoutX="81.0" layoutY="351.0" opacity="0.7" prefHeight="22.0" prefWidth="130.0" stylesheets="@cupertino-dark.css" text="Description:" textFill="#f0f0f2">
 			<font>
 				<Font name="Lorin ExtraBold" size="20.0" />
 			</font>
@@ -108,12 +77,7 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</Label>
-		<Button alignment="CENTER" layoutX="1062.0" layoutY="703.0"
-			mnemonicParsing="false" onAction="#postOpportunity" prefHeight="30.0"
-			prefWidth="130.0"
-			style="-fx-background-color: #4A44F2; -fx-border-radius: 15;"
-			stylesheets="@cupertino-dark.css" text="Post" textAlignment="CENTER"
-			textFill="WHITE">
+		<Button alignment="CENTER" layoutX="1062.0" layoutY="703.0" mnemonicParsing="false" onAction="#postOpportunity" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #4A44F2; -fx-border-radius: 15;" stylesheets="@cupertino-dark.css" text="Post" textAlignment="CENTER" textFill="WHITE">
 			<font>
 				<Font name="Lorin Bold" size="17.0" />
 			</font>
@@ -121,10 +85,7 @@
 				<Cursor fx:constant="DISAPPEAR" />
 			</cursor>
 		</Button>
-		<Label fx:id="JobLABEL" alignment="CENTER" layoutX="624.0"
-			layoutY="226.0" opacity="0.7" prefHeight="22.0" prefWidth="238.0"
-			stylesheets="@cupertino-dark.css" text="Job Category:"
-			textFill="#f0f0f2">
+		<Label fx:id="JobLABEL" alignment="CENTER" layoutX="624.0" layoutY="226.0" opacity="0.7" prefHeight="22.0" prefWidth="238.0" stylesheets="@cupertino-dark.css" text="Job Category:" textFill="#f0f0f2">
 			<font>
 				<Font name="Lorin ExtraBold" size="20.0" />
 			</font>

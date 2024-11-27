@@ -55,11 +55,11 @@ public class OrganisationRegistrationController {
 		}
 
 		// Register the organization
-		dbHandler.addOrganisation(orgName, orgIndustry, orgDescription, orgLocation, orgContactEmail, false);
+		dbHandler.addOrganisation(orgName.toLowerCase(), orgIndustry, orgDescription, orgLocation, orgContactEmail, false);
 
 		// Register Organisation Representative
 		dbHandler.addOrgRepresentative(OrgRep.getName(), OrgRep.getPhone(), OrgRep.getPassword(), OrgRep.getEmail(),
-				OrgRep.getOrgID(), OrgRep.getPosition());
+				OrgRep.getOrgID(), OrgRep.getPosition(), false);
 		
 		showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Organisation Representative and Organisation have been added successfully..");
 		

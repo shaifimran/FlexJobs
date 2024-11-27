@@ -128,4 +128,21 @@ public class AdminDashboardController {
 			}
 		}
 	}
+	
+	public void goBackToMainApplication(ActionEvent event) {
+		try {
+			// Load Admin Dashboard FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/UI/MainApplication.fxml"));
+			Parent root = loader.load();
+
+			// Get current stage
+			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			// Set new scene for Admin Dashboard
+			Scene dashboardScene = new Scene(root);
+			stage.setScene(dashboardScene);
+		} catch (Exception e) {
+			e.printStackTrace();
+			showAlert(AlertType.ERROR, "Error", "Failed to load Admin Dashboard.");
+		}
+	}
 }

@@ -1,12 +1,14 @@
 package application.handlers;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,15 +86,14 @@ public class MySQLHandler implements DBHandler {
 		try {
 			this.getConnection();
 			String query = "SELECT 1 FROM Student WHERE email = ? or rollNo=?;";
-			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-				preparedStatement.setString(1, email);
-				preparedStatement.setString(2, rollNo);
-				try (ResultSet resultSet = preparedStatement.executeQuery()) {
-					if (resultSet.next()) {
-						return true;
-					} else {
-						return false;
-					}
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, rollNo);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					return true;
+				} else {
+					return false;
 				}
 			}
 		} catch (Exception e) {
@@ -105,22 +106,22 @@ public class MySQLHandler implements DBHandler {
 		try {
 			String query = "select * from student where email = ? and password = ?;";
 			this.getConnection();
-			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-				preparedStatement.setString(1, stdEmail);
-				preparedStatement.setString(2, password);
-				try (ResultSet resultSet1 = preparedStatement.executeQuery()) {
-					if (resultSet1.next()) {
-						String rollNo = resultSet1.getString("rollNo");
-						String email = resultSet1.getString("email");
-						String name = resultSet1.getString("name");
-						String department = resultSet1.getString("department");
-						int semester = resultSet1.getInt("semester");
-						double cgpa = resultSet1.getDouble("cgpa");
-						Student student = new Student(rollNo, email, name, department, semester, cgpa);
-						return student;
-					}
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, stdEmail);
+			preparedStatement.setString(2, password);
+			try (ResultSet resultSet1 = preparedStatement.executeQuery()) {
+				if (resultSet1.next()) {
+					String rollNo = resultSet1.getString("rollNo");
+					String email = resultSet1.getString("email");
+					String name = resultSet1.getString("name");
+					String department = resultSet1.getString("department");
+					int semester = resultSet1.getInt("semester");
+					double cgpa = resultSet1.getDouble("cgpa");
+					Student student = new Student(rollNo, email, name, department, semester, cgpa);
+					return student;
 				}
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -161,7 +162,8 @@ public class MySQLHandler implements DBHandler {
 		try {
 			this.getConnection();
 			String query = "Insert into student(rollNo, email, name, password, department, semester, cgpa, resume,chatBoxId) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			try (PreparedStatement preparedStatement1 = conn.prepareStatement(query)) {
+			try {
+				PreparedStatement preparedStatement1 = conn.prepareStatement(query);
 				preparedStatement1.setString(1, rollNo);
 				preparedStatement1.setString(2, email);
 				preparedStatement1.setString(3, name);
@@ -199,7 +201,8 @@ public class MySQLHandler implements DBHandler {
 //			System.out.println("Hello");
 			String query = queryBuilder.toString();
 
-			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			try {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				int index = 1;
 				for (Object value : updates.values()) {
 					preparedStatement.setObject(index++, value);
@@ -254,7 +257,7 @@ public class MySQLHandler implements DBHandler {
 
 	// Add a new Organisation Representative to the database
 	public void addOrgRepresentative(String name, String phone, String password, String email, String organisation,
-			String position) {
+			String position, Boolean isVerified) {
 		String query = "INSERT INTO OrganisationRepresentative (name, password, email, position, phone, orgID, isVerified) VALUES (?, ?, ?, ?, ?, ?,?)";
 
 		try {
@@ -266,7 +269,7 @@ public class MySQLHandler implements DBHandler {
 			statement.setString(4, position);
 			statement.setString(5, phone);
 			statement.setString(6, organisation);
-			statement.setBoolean(7, false);
+			statement.setBoolean(7, isVerified);
 
 			statement.executeUpdate();
 			System.out.println("Organisation Representative added successfully.");
@@ -320,15 +323,36 @@ public class MySQLHandler implements DBHandler {
 		}
 		return exists;
 	}
+	
+	public boolean isOrganisationRepExists(String organisation) {
+		boolean exists = false;
+		String query = "SELECT * FROM OrganisationRepresentative WHERE orgID = ?";
+
+		try {
+			this.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+
+			statement.setString(1, organisation.toLowerCase());
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					exists = true;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exists;
+	}
 
 	public boolean setFeedback(int applicationID, String feedback) {
 		String query = "UPDATE Application SET feedback = ? WHERE applicationID = ?";
-		Connection conn = null;
 		PreparedStatement stmt = null;
 
 		try {
 			// Establish connection
-			conn = this.getConnection();
+			this.getConnection();
 
 			// Prepare the statement
 			stmt = conn.prepareStatement(query);
@@ -349,12 +373,11 @@ public class MySQLHandler implements DBHandler {
 
 	public boolean addNotification(String senderId, String receiverId, String message) {
 		String query = "INSERT INTO Notification (senderId, receiverId, isRead, message, timestamp) VALUES (?, ?, false, ?, NOW())";
-		Connection conn = null;
 		PreparedStatement stmt = null;
 
 		try {
 			// Establish connection
-			conn = this.getConnection();
+			this.getConnection();
 
 			// Prepare the statement
 			stmt = conn.prepareStatement(query);
@@ -375,6 +398,7 @@ public class MySQLHandler implements DBHandler {
 		}
 	}
 
+//////////////////////////////////////////////////////////
 	public List<Application> getApplicationList() {
 		List<Application> applicationList = new ArrayList<>();
 		String query = "SELECT applicationID, submitDate, status, feedback, studentID, interviewID, opportunityID FROM Application";
@@ -387,7 +411,7 @@ public class MySQLHandler implements DBHandler {
 			while (rs.next()) {
 				Application application = new Application(rs.getInt("applicationID"), rs.getDate("submitDate"),
 						rs.getString("status"), rs.getString("feedback"), rs.getString("studentID"),
-						rs.getString("interviewID"), rs.getInt("opportunityID"));
+						rs.getInt("interviewID"), rs.getInt("opportunityID"));
 				applicationList.add(application);
 			}
 		} catch (SQLException e) {
@@ -404,13 +428,14 @@ public class MySQLHandler implements DBHandler {
 		try {
 			this.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, status); // Set the status parameter
+			stmt.setString(1, status);
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				Application application = new Application(rs.getInt("applicationID"), rs.getDate("submitDate"),
 						rs.getString("status"), rs.getString("feedback"), rs.getString("studentID"),
-						rs.getString("interviewID"), rs.getInt("opportunityID"));
+						rs.getInt("interviewID"),
+						rs.getInt("opportunityID"));
 				applicationList.add(application);
 			}
 		} catch (SQLException e) {
@@ -426,18 +451,181 @@ public class MySQLHandler implements DBHandler {
 		try {
 			this.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, status); // Set the new status
-			stmt.setInt(2, applicationID); // Set the application ID
+			stmt.setString(1, status);
+			stmt.setInt(2, applicationID);
 
 			int rowsAffected = stmt.executeUpdate();
-			return rowsAffected > 0; // Return true if the update was successful, false otherwise
+			return rowsAffected > 0; // Return true if at least one row is updated
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return false; // Return false if an error occurs or no rows are updated
+		return false; // Return false if an error occurs
 	}
 
+	// Get all Application IDs
+	public List<Integer> getAllApplicationIDs() {
+		List<Integer> applicationIDs = new ArrayList<>();
+		String query = "SELECT applicationID FROM Application";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				applicationIDs.add(rs.getInt("applicationID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return applicationIDs;
+	}
+
+	// Get all Student IDs
+	public List<String> getAllStudentIDs() {
+		List<String> studentIDs = new ArrayList<>();
+		String query = "SELECT rollNo FROM Student";
+
+		try {
+			this.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				studentIDs.add(rs.getString("rollNo"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return studentIDs;
+	}
+
+	public boolean scheduleInterview(int applicationID, String candidateID, String dateTime, String type,
+			String location) {
+		String insertInterviewQuery = "INSERT INTO Interview (candidateID, timeSlot, type, status, location) VALUES (?, ?, ?, 'Scheduled', ?)";
+		String updateApplicationQuery = "UPDATE Application SET interviewID = ? WHERE applicationID = ?";
+
+		try {
+			this.getConnection();
+
+			// Step 1: Insert the interview details
+			PreparedStatement stmt1 = conn.prepareStatement(insertInterviewQuery);
+			stmt1.setString(1, candidateID);
+			stmt1.setString(2, dateTime); // Ensure the date is properly formatted
+			stmt1.setString(3, type);
+			stmt1.setString(4, location);
+			int rowsAffectedInterview = stmt1.executeUpdate();
+
+			if (rowsAffectedInterview > 0) {
+				// Step 2: Update the Application table with the new interviewID
+				PreparedStatement stmt2 = conn.prepareStatement("SELECT LAST_INSERT_ID()");
+				ResultSet rs = stmt2.executeQuery();
+				int newInterviewID = 0;
+				if (rs.next()) {
+					newInterviewID = rs.getInt(1); // Get the last inserted interviewID
+				}
+
+				// Step 3: Update the application with the new interviewID
+				PreparedStatement stmt3 = conn.prepareStatement(updateApplicationQuery);
+				stmt3.setInt(1, newInterviewID);
+				stmt3.setInt(2, applicationID);
+				int rowsAffectedApplication = stmt3.executeUpdate();
+
+				return rowsAffectedApplication > 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public int getOpportunitiesCount() {
+		int count = 0;
+		String query = "SELECT COUNT(*) AS count FROM Opportunity";
+
+		try {
+			this.getConnection(); // Ensure connection is established
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public int getApplicantsCount() {
+		int count = 0;
+		String query = "SELECT COUNT(DISTINCT studentID) AS count FROM Application";
+
+		try {
+			this.getConnection(); // Ensure connection is established
+			PreparedStatement stmt = conn.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+
+	public String getStudentEmail(int applicationID, String studentID) {
+		String email = null;
+		String query;
+
+		try {
+			this.getConnection(); // Ensure the connection is established
+
+			if (applicationID > 0) {
+				query = "SELECT s.email FROM Student s " + "JOIN Application a ON s.rollNo = a.studentID "
+						+ "WHERE a.applicationID = ?";
+				PreparedStatement stmt = conn.prepareStatement(query);
+				stmt.setInt(1, applicationID);
+				ResultSet rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					email = rs.getString("email");
+				}
+
+				rs.close();
+				stmt.close();
+			} else if (studentID != null && !studentID.isEmpty()) {
+				query = "SELECT email FROM Student WHERE rollNo = ?";
+				PreparedStatement stmt = conn.prepareStatement(query);
+				stmt.setString(1, studentID);
+				ResultSet rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					email = rs.getString("email");
+				}
+
+				rs.close();
+				stmt.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return email; // Return email or null if not found
+	}
+
+	//////////////////////////////////////
 	public List<String> getVerifiedOrganisations() {
 		List<String> organisations = new ArrayList<>();
 		String query = "SELECT name FROM Organisation WHERE isVerified = true";
@@ -499,16 +687,16 @@ public class MySQLHandler implements DBHandler {
 		return false;
 	}
 
-	public int insertIntoOpportunity(String title, String description, String type) throws SQLException {
-		String query = "INSERT INTO Opportunity (title, description, type) VALUES (?, ?, ?)";
-		Connection conn = null;
+	public int insertIntoOpportunity(String title, String description, String type, String orgName) throws SQLException {
+		String query = "INSERT INTO Opportunity (title, description, type, postedBy) VALUES (?, ?, ?, ?)";
 		try {
-			conn = this.getConnection();
+			this.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
 			statement.setString(1, title);
 			statement.setString(2, description);
 			statement.setString(3, type);
+			statement.setString(4, orgName);
 
 			int affectedRows = statement.executeUpdate();
 
@@ -606,7 +794,7 @@ public class MySQLHandler implements DBHandler {
 		}
 		return null;
 	}
-	
+
 	public Boolean isChatPresent(Chat chat) {
 		String query = "select 1 from Chat where studentId=? and orgId=?";
 
@@ -626,7 +814,7 @@ public class MySQLHandler implements DBHandler {
 		}
 		return false;
 	}
-	
+
 	public int createChat(Chat chat) {
 		String query = "INSERT INTO Chat (createdAt, orgId, studentId) VALUES (?, ?, ?)";
 		int chatId = -1;
@@ -788,22 +976,24 @@ public class MySQLHandler implements DBHandler {
 	}
 
 	public Boolean applyForJob(String rollNo, int oppId) {
-		String query = "insert into Application(status, studentID, opportunityID) values ('In Progress', ?, ?)";
+		String query = "INSERT INTO Application(status, studentID, opportunityID, submitDate) VALUES ('In Progress', ?, ?, ?)";
 
 		try {
 			this.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, rollNo);
-			stmt.setInt(2, oppId);
+			stmt.setString(1, rollNo); // Bind the roll number
+			stmt.setInt(2, oppId); // Bind the opportunity ID
+
+			// Bind the current date as the submit date
+			stmt.setDate(3, Date.valueOf(LocalDate.now()));
+
 			int res = stmt.executeUpdate();
-			System.out.println(res);
 			if (res > 0) {
 				return true;
 			}
 			return false;
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
 		return false;
@@ -824,7 +1014,7 @@ public class MySQLHandler implements DBHandler {
 				String status = rs.getString("status");
 				String feedback = rs.getString("feedback");
 				String studentID = rs.getString("studentID");
-				String interviewID = rs.getString("interviewID");
+				int interviewID = rs.getInt("interviewID");
 				int opportunityID = rs.getInt("opportunityID");
 
 				Application application = new Application(applicationID, status, feedback, studentID, interviewID,
@@ -856,7 +1046,7 @@ public class MySQLHandler implements DBHandler {
 				String status = rs.getString("status");
 				String feedback = rs.getString("feedback");
 				int opportunityID = rs.getInt("opportunityID");
-				String interviewID = rs.getString("interviewId");
+				int interviewID = rs.getInt("interviewId");
 				String opportunityTitle = rs.getString("title");
 				String opportunityDescription = rs.getString("description");
 				String postedBy = rs.getString("postedBy");
@@ -1203,7 +1393,7 @@ public class MySQLHandler implements DBHandler {
 		try {
 			this.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setString(1, organisationName);
+			statement.setString(1, organisationName.toLowerCase());
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				int chatBoxId = resultSet.getInt("chatBoxId");
@@ -1218,7 +1408,7 @@ public class MySQLHandler implements DBHandler {
 
 	// Method to get the list of chats associated with a organisation
 	public List<Chat> getOrganisationChats(String organisationName) {
-		List<Chat> chats = new ArrayList<>();
+		List<Chat> chats = new ArrayList<Chat>();
 		String query = "SELECT c.chatID, c.createdAt, c.studentId, c.orgId "
 				+ "FROM Chat c JOIN organisation o ON c.orgId = o.name " + "WHERE o.name = ?";
 
